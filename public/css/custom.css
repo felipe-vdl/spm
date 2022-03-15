@@ -1,0 +1,23 @@
+.tabela {
+    font-size: 14px;
+}
+
+.avaliacao {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contador {
+    border: 2px solid grey;
+}
+
+/* .imagens {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+} */
+
+#infos {
+    font-size: 18px;
+}
