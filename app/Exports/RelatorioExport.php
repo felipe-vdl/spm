@@ -23,8 +23,8 @@ class InvoicesExport implements FromView
         $relatorio = DB::table('requerimento_pericias')
                             ->where('data_agenda','>=',$dataInicio)
                             ->where('data_agenda','<=',$dataFim)
-                                ->orderBy('created_at','asc')
-                                        ->orderBy('status','asc')
+                                ->orderBy('data_agenda','asc')
+                                        ->orderBy('created_at','asc')
                                             ->get();
         
         return view('exports.invoices',compact('relatorio'));
