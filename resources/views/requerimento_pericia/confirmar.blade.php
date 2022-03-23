@@ -97,7 +97,7 @@
                             <div class="row mb-3 justify-content-between">
                                 <div class="auto">
                                     <label class="form-label fw-normal" for="protocolo">Protocolo do Requerimento</label>
-                                    <input required class="form-control" name="protocolo" type="text" id="protocolo" placeholder="Código do Protocolo">
+                                    <input required class="form-control" name="protocolo" type="text" id="protocolo" placeholder="Código do Protocolo" maxlength="12">
                                 </div>
                             </div>
                         </div>

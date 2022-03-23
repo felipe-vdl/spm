@@ -46,7 +46,7 @@
                         </select>
                     </div>
                     <div id="outro-div" style="display: none;">
-                        <textarea name="" id="outro-motivo" cols="30" rows="1" placeholder="Descreva o motivo." style="width: 100%;"></textarea>
+                        <textarea name="" id="outro-motivo" cols="30" rows="1" placeholder="Descreva o motivo." style="width: 100%;" maxlength="100"></textarea>
                     </div>
                     <button id="enviar" type="submit" class="btn btn-success">Avaliar Requerimento</button>
                 </div>
@@ -135,19 +135,19 @@
 
 <script>
     $('#timejunta').timepicker({
-        timeFormat: 'H:mm',
+        timeFormat: 'HH:mm',
         interval: 60,
         minTime: '9',
-        maxTime: '9:00',
+        maxTime: '09:00',
         defaultTime: '9',
-        startTime: '9:00',
+        startTime: '09:00',
         dynamic: false,
         dropdown: true,
         scrollbar: true
     });
 
     $('#timepsic').timepicker({
-        timeFormat: 'H:mm',
+        timeFormat: 'HH:mm',
         interval: 60,
         minTime: '10',
         maxTime: '10:00',
@@ -159,7 +159,7 @@
     });
 
     $('#timepericiater').timepicker({
-        timeFormat: 'H:mm',
+        timeFormat: 'HH:mm',
         interval: 60,
         minTime: '14',
         maxTime: '14:00',
@@ -171,7 +171,7 @@
     });
 
     $('#timepericiaqui').timepicker({
-        timeFormat: 'H:mm',
+        timeFormat: 'HH:mm',
         interval: 60,
         minTime: '13',
         maxTime: '13:00',
@@ -183,7 +183,7 @@
     });
 
     $('#timerecusado').timepicker({
-        timeFormat: 'H:mm',
+        timeFormat: 'HH:mm',
         interval: 60,
         minTime: '9',
         maxTime: '22:00',

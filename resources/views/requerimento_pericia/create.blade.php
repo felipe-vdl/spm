@@ -71,46 +71,46 @@
                             </div><br />
                             @endif
                             <div class="row mb-3 justify-content-between">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-lg-6 mb-3">
                                     <label class="form-label fw-normal" for="nomeCompleto">Nome Completo:</label>
-                                    <input required class="form-control" name="nome" type="text" id="nomeCompleto" placeholder="Nome Completo do Servidor">
+                                    <input required class="form-control" name="nome" type="text" id="nomeCompleto" placeholder="Nome Completo do Servidor" maxlength="96">
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label fw-normal" for="matricula">Matrícula:</label>
-                                    <input required class="form-control" id="matricula" name="matricula" type="text" placeholder="Matrícula do Servidor">
+                                <div class="col-lg-6">
+                                    <label class="form-label fw-normal" for="matricula">Matrícula do Servidor:</label>
+                                    <input required class="form-control" id="matricula" name="matricula" type="text" placeholder="Matrícula" maxlength="7">
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-between">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-lg-6 mb-3">
                                     <label class="form-label fw-normal" for="lotacao">Local de Lotação:</label>
                                     <select required class="form-select" name="local_lotacao" id="lotacao">
-                                        <option value="" selected>-- Unidade Organizacional --</option>
+                                        <option value="" selected>Selecione a Unidade Organizacional</option>
                                         <option value="Secretaria de Tecnologia da Informação">Secretaria de Tecnologia da Informação</option>
                                         <option value="Secretaria de Administração">Secretaria de Administração</option>
                                         <option value="Secretaria de Governança">Secretaria de Governança</option>
                                         <option value="Departamento de Perícias Médicas">Departamento de Perícias Médicas</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <label class="form-label fw-normal" for="horarioTrabalho">Horário de Trabalho no Município:</label>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <input required class="form-control timepicker" name="trabalho_inicio" id="horarioTrabalho" type="text" placeholder="Início do Expediente" autocomplete="horario" style="background-color:#fff;">
+                                        <div class="col-lg-6">
+                                            <input required class="form-control timepicker" name="trabalho_inicio" id="trabalho-inicio" type="text" placeholder="Início do Expediente" autocomplete="horario" style="background-color:#fff;" maxlength="5">
                                         </div>
-                                        <div class="col-md-6 mt-2 mt-md-0">
-                                            <input required class="form-control timepicker" name="trabalho_fim" id="horarioTrabalho" type="text" placeholder="Fim do Expediente" autocomplete="horario" style="background-color:#fff;">
+                                        <div class="col-lg-6 mt-2 mt-lg-0">
+                                            <input required class="form-control timepicker" name="trabalho_fim" id="trabalho-fim" type="text" placeholder="Fim do Expediente" autocomplete="horario" style="background-color:#fff;" maxlength="5">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-normal" for="dataInicioAtestado">Data Inicial do Atestado:</label>
-                                    <input required class="form-control datepicker" name="dt_inicio_atestado" id="dataInicioAtestado" type="text" placeholder="dd/mm/aaaa" autocomplete="datainicial" style="background-color:#fff;">
+                                <div class="col-lg-6 mb-3">
+                                    <label class="form-label fw-normal" for="data-inicio-atestado">Data Inicial do Atestado:</label>
+                                    <input required class="form-control datepicker" name="dt_inicio_atestado" id="data-inicio-atestado" type="text" placeholder="dd/mm/aaaa" autocomplete="datainicial" style="background-color:#fff;" maxlength="10">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <label for="email" class="form-label fw-normal">E-mail:</label>
-                                    <input type="email" class="form-control" required="required" name="email" id="email" placeholder="E-mail para contato">
+                                    <input type="email" class="form-control" required="required" name="email" id="email" placeholder="E-mail para contato" maxlength="96">
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
@@ -121,10 +121,10 @@
                             </div>
                             <div class="col-12 mt-4">
                                 <div class="row">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-lg-6">
                                         <span>Possui outro vínculo, ou acumula matrícula em outro local?</span>
                                     </div>
-                                    <div class="col-12 col-md-6 mt-1 mt-md-0">
+                                    <div class="col-12 col-lg-6 mt-1 mt-lg-0">
                                         <div class="row justify-around">
                                         <div class="col-2">
                                             <input class="form-check-input" type="radio" name="vinculo" id="nao" value="Não">
@@ -156,8 +156,8 @@
                 </div>
             </div>
         </div>
-        <footer class="row justify-content-center mt-3 mt-md-4 mb-3 mb-md-0 border-top">
-            <div class="col-auto text-center mt-3 mt-md-5">
+        <footer class="row justify-content-center mt-3 mt-lg-4 mb-3 mb-lg-0 border-top">
+            <div class="col-auto text-center mt-3 mt-lg-5">
                 <p class="fw-normal lh-0 mb-1" style="font-size: 17px;"><i class="fab fa-free-code-camp"></i> Equipe de Desenvolvimento de Sistemas</p>
                 <p class="fw-light lh-0 mb-0" style="font-size: 14px;"> Subsecretaria de Tecnologia da Informação - Prefeitura Municipal de Mesquita - RJ </p>
                 <p class="fw-light lh-0 mb-0" style="font-size: 14px;"> Rua Arthur Oliveira Vecchi, 120 - Centro - Mesquita - RJ - CEP: 26553-080</p>
@@ -178,13 +178,15 @@
             </div>
         </div>
     </div>
+    {{-- Bootstrap Dependencies --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    {{-- jQuery e jQueryUI Dependencies --}}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {{-- Datepicker e Timepicker --}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-
     <script>
+        /* Datepicker Data Inicial do Atestado*/
         $('.datepicker').datepicker({
             dateFormat: 'dd/mm/yy',
             dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -196,18 +198,19 @@
             prevText: 'Anterior',
             maxDate: '0'
         });
-
+        /* Timepicker Horário de Trabalho */
         $('.timepicker').timepicker({
-            timeFormat: 'H:mm',
+            timeFormat: 'HH:mm',
             interval: 60,
             minTime: '0',
             maxTime: '23:00',
-            startTime: '0:00',
+            startTime: '00:00',
             dynamic: false,
             dropdown: true,
             scrollbar: true
         });
     </script>
+    {{-- Condicional de Matrícula Acumulada --}}
     <script>
         const afastamentoDiv = document.querySelector('#afastamento');
         const afastamentoDoc = document.querySelector('#documento_afastamento');
@@ -225,6 +228,15 @@
             afastamentoDoc.setAttribute('required', 'required');
         })
     </script>
+    {{-- Mask dos Inputs --}}
+    <script src="{{ asset('js/vanillaMasker.min.js')}}"></script>
+    <script>
+        /* VMasker ($("#matricula")).maskPattern("9999999"); */
+        VMasker ($("#trabalho-inicio")).maskPattern("99:99");
+        VMasker ($("#trabalho-fim")).maskPattern("99:99");
+        VMasker ($("#data-inicio-atestado")).maskPattern("99/99/9999");
+    </script>
+    {{-- Popup de carregamento após envio do formulário --}}
     <script>
         const form = document.querySelector('form');
         const botaoEnviar = document.querySelector('#enviar');

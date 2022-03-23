@@ -15,23 +15,23 @@ class CreateRequerimentoPericiasTable extends Migration
     {
         Schema::create('requerimento_pericias', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('matricula');
-            $table->string('protocolo');
-            $table->string('local_lotacao');
-            $table->string('horario_trabalho');
-            $table->string('dt_inicio_atestado');
-            $table->string('email');
-            $table->integer('status');
-            $table->string('direcionamento');
-            $table->string('data_agenda');
-            $table->string('hora_agenda');
-            $table->string('motivo_recusa');
-            $table->string('data_confirmacao');
-            $table->string('data_avaliacao');
-            $table->integer('envio_create')->nullable()->unsigned();
-            $table->integer('envio_agenda')->nullable()->unsigned();
-            $table->string('vinculo');
+            $table->string('nome', 96);
+            $table->string('matricula', 7);
+            $table->string('protocolo', 12);
+            $table->string('local_lotacao', 64);
+            $table->string('horario_trabalho', 14);
+            $table->string('dt_inicio_atestado', 10);
+            $table->string('email', 64);
+            $table->tinyInteger('status');
+            $table->string('direcionamento', 22);
+            $table->string('data_agenda', 19);
+            $table->string('hora_agenda', 5);
+            $table->string('motivo_recusa', 96);
+            $table->string('data_confirmacao', 20);
+            $table->string('data_avaliacao', 20);
+            $table->tinyInteger('envio_create')->nullable();
+            $table->tinyInteger('envio_agenda')->nullable();
+            $table->string('vinculo', 3);
             $table->timestamps();
 
             $table->bigInteger('user_id')->nullable()->unsigned();
