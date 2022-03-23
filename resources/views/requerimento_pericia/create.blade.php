@@ -15,6 +15,28 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     {{-- jquery-timepicker --}}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <style>
+        .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        }
+        
+        /* Safari */
+        @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 
 <body class="bg-white" style="font-family: 'Roboto', sans-serif;">
@@ -126,7 +148,7 @@
                         <div class="card-footer">
                             <div class="row justify-content-center">
                                 <div class="col-auto">
-                                    <input type="submit" class="btn btn-success" value="Enviar Requerimento">
+                                    <input id="enviar" type="submit" class="btn btn-success" value="Enviar Requerimento">
                                 </div>
                             </div>
                         </div>
@@ -141,6 +163,20 @@
                 <p class="fw-light lh-0 mb-0" style="font-size: 14px;"> Rua Arthur Oliveira Vecchi, 120 - Centro - Mesquita - RJ - CEP: 26553-080</p>
             </div>
         </footer>
+    </div>
+    <div class="modal fade" id="modaleventclick" tabindex="-1" role="dialog" aria-labelledby="modaleventclickLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modaleventclickLabel">Enviando requerimento, por favor aguarde.</h5>
+            </div>
+             
+            <div class="modal-body">
+                <center>
+                    <div class="loader"></div>
+                </center>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -188,6 +224,15 @@
             afastamentoDiv.style.display = "block"
             afastamentoDoc.setAttribute('required', 'required');
         })
+    </script>
+    <script>
+        const form = document.querySelector('form');
+        const botaoEnviar = document.querySelector('#enviar');
+        botaoEnviar.addEventListener('click', (e) => {
+            e.preventDefault();
+            $("#modaleventclick").modal("show");
+            form.submit();
+        });
     </script>
 </body>
 

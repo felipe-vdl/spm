@@ -48,7 +48,7 @@
                     <div id="outro-div" style="display: none;">
                         <textarea name="" id="outro-motivo" cols="30" rows="1" placeholder="Descreva o motivo." style="width: 100%;"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success">Avaliar Requerimento</button>
+                    <button id="enviar" type="submit" class="btn btn-success">Avaliar Requerimento</button>
                 </div>
             </form>
         </div>
@@ -113,6 +113,20 @@
         </div>
     </div>
     @endif
+</div>
+<div class="modal fade" id="modaleventclick" tabindex="-1" role="dialog" aria-labelledby="modaleventclickLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modaleventclickLabel">Enviando análise, por favor aguarde.</h5>
+        </div>
+         
+        <div class="modal-body">
+            <center>
+                <div class="loader"></div>
+            </center>
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -539,5 +553,14 @@
     document.querySelector('.ui-timepicker').style.height = 'auto';
     document.querySelector('.ui-timepicker-viewport').style.height = 'auto';
     document.querySelector('.ui-timepicker-container').style.height = 'auto';
+</script>
+<script>
+    const form = document.querySelector('form');
+    const botaoEnviar = document.querySelector('#enviar');
+    botaoEnviar.addEventListener('click', (e) => {
+        e.preventDefault();
+        $("#modaleventclick").modal("show");
+        form.submit();
+    });
 </script>
 @endsection
