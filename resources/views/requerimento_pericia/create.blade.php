@@ -125,16 +125,16 @@
                                         <span>Possui outro vínculo, ou acumula matrícula em outro local?</span>
                                     </div>
                                     <div class="col-12 col-lg-6 mt-1 mt-lg-0">
-                                        <div class="row justify-around">
-                                        <div class="col-2">
-                                            <input class="form-check-input" type="radio" name="vinculo" id="nao" value="Não">
-                                            <label class="form-check-label" for="nao">Não</label>
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <input class="form-check-input" type="radio" name="vinculo" id="nao" value="Não">
+                                                <label class="form-check-label" for="nao">Não</label>
+                                            </div>
+                                            <div class="col-auto">
+                                                <input required class="form-check-input" type="radio" name="vinculo" id="sim" value="Sim">
+                                                <label class="form-check-label" for="sim">Sim</label>
+                                            </div>
                                         </div>
-                                        <div class="col-2">
-                                            <input required class="form-check-input" type="radio" name="vinculo" id="sim" value="Sim">
-                                            <label class="form-check-label" for="sim">Sim</label>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
