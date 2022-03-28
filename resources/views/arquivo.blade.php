@@ -97,6 +97,7 @@
                     { "width": "30%", "targets": 0 },
                     { "width": "15%", "targets": 6 },
                     ],
+                    order: [[3, "desc"]],
                     "responsive": true
                 });
 
