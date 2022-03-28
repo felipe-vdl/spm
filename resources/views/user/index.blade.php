@@ -78,6 +78,7 @@
                 stateSave: true,
                 stateDuration: -1,
                 responsive: true,
+				order: [[ 2, 'desc' ], [0, 'asc']]
             })
         });
     </script>
