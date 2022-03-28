@@ -16,7 +16,7 @@ class CreateDocumentoAfastamentosTable extends Migration
         Schema::create('documento_afastamentos', function (Blueprint $table) {
             $table->id();
             
-            $table->string('filename', 96);
+            $table->string('filename');
             $table->string('extensao', 16);
 
             $table->bigInteger('requerimento_id')->nullable()->unsigned();

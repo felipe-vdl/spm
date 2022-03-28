@@ -556,11 +556,8 @@
 </script>
 <script>
     const form = document.querySelector('form');
-    const botaoEnviar = document.querySelector('#enviar');
-    botaoEnviar.addEventListener('click', (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', (e) => {
         $("#modaleventclick").modal("show");
-        form.submit();
     });
 </script>
 @endsection

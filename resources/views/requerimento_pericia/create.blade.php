@@ -76,8 +76,8 @@
                                     <input required class="form-control" name="nome" type="text" id="nomeCompleto" placeholder="Nome Completo do Servidor" maxlength="96">
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label fw-normal" for="matricula">Matrícula do Servidor:</label>
-                                    <input required class="form-control" id="matricula" name="matricula" type="text" placeholder="Matrícula" maxlength="7">
+                                    <label class="form-label fw-normal" for="matricula">Matrícula (sem dígito):</label>
+                                    <input required class="form-control" id="matricula" name="matricula" type="text" placeholder="Matrícula" pattern=".{7,}" maxlength="7">
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-between">
@@ -95,10 +95,10 @@
                                     <label class="form-label fw-normal" for="horarioTrabalho">Horário de Trabalho no Município:</label>
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <input required class="form-control timepicker" name="trabalho_inicio" id="trabalho-inicio" type="text" placeholder="Início do Expediente" autocomplete="horario" style="background-color:#fff;" maxlength="5">
+                                            <input required class="form-control timepicker" name="trabalho_inicio" id="trabalho-inicio" type="text" placeholder="Início do Expediente" autocomplete="horario" style="background-color:#fff;" pattern=".{5,}" maxlength="5">
                                         </div>
                                         <div class="col-lg-6 mt-2 mt-lg-0">
-                                            <input required class="form-control timepicker" name="trabalho_fim" id="trabalho-fim" type="text" placeholder="Fim do Expediente" autocomplete="horario" style="background-color:#fff;" maxlength="5">
+                                            <input required class="form-control timepicker" name="trabalho_fim" id="trabalho-fim" type="text" placeholder="Fim do Expediente" autocomplete="horario" style="background-color:#fff;" pattern=".{5,}" maxlength="5">
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                             <div class="row">
                                 <div class="col-lg-6 mb-3">
                                     <label class="form-label fw-normal" for="data-inicio-atestado">Data Inicial do Atestado:</label>
-                                    <input required class="form-control datepicker" name="dt_inicio_atestado" id="data-inicio-atestado" type="text" placeholder="dd/mm/aaaa" autocomplete="datainicial" style="background-color:#fff;" maxlength="10">
+                                    <input required class="form-control datepicker" name="dt_inicio_atestado" id="data-inicio-atestado" type="text" placeholder="dd/mm/aaaa" autocomplete="datainicial" style="background-color:#fff;" pattern=".{10,}" maxlength="10">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="email" class="form-label fw-normal">E-mail:</label>
@@ -231,19 +231,16 @@
     {{-- Mask dos Inputs --}}
     <script src="{{ asset('js/vanillaMasker.min.js')}}"></script>
     <script>
-        /* VMasker ($("#matricula")).maskPattern("9999999"); */
         VMasker ($("#trabalho-inicio")).maskPattern("99:99");
         VMasker ($("#trabalho-fim")).maskPattern("99:99");
         VMasker ($("#data-inicio-atestado")).maskPattern("99/99/9999");
+        VMasker ($("#matricula")).maskPattern("999.999");
     </script>
     {{-- Popup de carregamento após envio do formulário --}}
     <script>
         const form = document.querySelector('form');
-        const botaoEnviar = document.querySelector('#enviar');
-        botaoEnviar.addEventListener('click', (e) => {
-            e.preventDefault();
+        form.addEventListener('submit', (e) => {
             $("#modaleventclick").modal("show");
-            form.submit();
         });
     </script>
 </body>
