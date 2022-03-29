@@ -114,9 +114,12 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
-                                <label class="form-label fw-normal" for="documento_atestado">Foto/Documento do Atestado Médico:
+                                <label class="form-label fw-normal" for="documento_atestado">Imagem/Documento do Atestado Médico:
                                     <p style="font-size: 13px; color: red;" class="mb-0">* Certifique-se de que a foto/documento do atestado é legível.</p>
                                 </label>
+                                <div id="erro-atestado" class="alert alert-danger" style="display: none;">
+                                    <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="atestado-invalido"></span></p>
+                                </div>
                                 <input class="form-control" multiple="multiple" id="documento_atestado" name="documento_atestado[]" accept=".png, .jpg, .jpeg,image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" type="file" required> 
                             </div>
                             <div class="col-12 mt-4">
@@ -139,9 +142,12 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-3" style="display: none;" id="afastamento">
-                                <label class="form-label fw-normal" for="documento_afastamento">Foto/Documento do Comprovante de Afastamento:
+                                <label class="form-label fw-normal" for="documento_afastamento">Imagem/Documento do Comprovante de Afastamento:
                                     <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: Caso o servidor possua outro vínculo ou acumule matrícula, incluir comprovante de afastamento.</p>
                                 </label>
+                                <div id="erro-afastamento" class="alert alert-danger" style="display: none;">
+                                    <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="afastamento-invalido"></span></p>
+                                </div>
                                 <input class="form-control" multiple="multiple" id="documento_afastamento" name="documento_afastamento[]" accept=".png, .jpg, .jpeg,image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" type="file"> 
                             </div>
                         </div>
@@ -242,7 +248,98 @@
         form.addEventListener('submit', (e) => {
             $("#modaleventclick").modal("show");
         });
+    </script>
+    {{-- Validação do tipo dos arquivos inseridos. --}}
+    <script>
+        // Variáveis utilizadas.
+        // Evento 1: Arquivos do Atestado Médico.
+        const atestadoInput = document.querySelector('#documento_atestado');
+        const erroAtestado = document.querySelector('#erro-atestado');
+        const atestadoInvalido = document.querySelector('#atestado-invalido');
+        let atestadosInvalidos = [];
+        let verifyAtestados = null;
 
+        // Evento 2: Arquivos de Comprovantes de Afastamento.
+        const afastamentoInput = document.querySelector('#documento_afastamento');
+        const erroAfastamento = document.querySelector('#erro-afastamento');
+        const afastamentoInvalido = document.querySelector('#afastamento-invalido');
+        let afastamentosInvalidos = [];
+        let verifyAfastamentos = null;
+        
+        // Array com os tipos de arquivo aceitos.
+        const fileTypes = ['image', 'png', 'jpg', 'jpeg', 'doc', 'docx', 'xml', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'pdf'];
+        
+        // Evento 1
+        atestadoInput.addEventListener('input', function () {
+            // Limpa o nome dos arquivos inválidos do último evento.
+            atestadosInvalidos = [];
+            atestadoInvalido.innerHTML = '';
+
+            // Compara os tipos de arquivo inseridos pelo usuário com os tipos da lista.
+            for (file of this.files) {
+                // Checa a validez do tipo de cada arquivo inserido.
+                if (!fileTypes.some(el => file.type.includes(el)) || file.type === '') {
+                    // Caso exista um arquivo inválido, insere nome dos arquivos inválidos na array e atribui true para a presença de atestados inválidos.
+                    atestadosInvalidos.push(file.name);
+                    verifyAtestados = true;
+                }
+            }
+            
+            // Checa a existência de atestados inválidos.
+            if (atestadosInvalidos.length === 0) {
+                // Caso todos os arquivos sejam válidos, esconde a mensagem de erro e atribui false para presença de atestados inválidos.
+                erroAtestado.style.display = 'none';
+                verifyAtestados = false;
+            }
+
+            // Checa o status de presença de arquivos inválidos.
+            let i = 1; // Variável de controle da formatação.
+            if (verifyAtestados) {
+                // Caso existam arquivos inválidos, insere o nome de cada arquivo inválido no alerta de erro da view.
+                for (atestado of atestadosInvalidos) {
+                    if (i < atestadosInvalidos.length) {
+                        atestadoInvalido.append(`${atestado}, `);
+                    } else {
+                        atestadoInvalido.append(`${atestado}.`)
+                    }
+                    i++;
+                }
+                erroAtestado.style.display = 'block';
+                this.value = '';
+            }
+        });
+
+        // Evento 2
+        afastamentoInput.addEventListener('input', function () {
+            afastamentosInvalidos = [];
+            afastamentoInvalido.innerHTML = '';
+
+            for (file of this.files) {
+                if (!fileTypes.some(el => file.type.includes(el)) || file.type === '') {
+                    afastamentosInvalidos.push(file.name);
+                    verifyAfastamentos = true;
+                }
+            }
+
+            if (afastamentosInvalidos.length === 0) {
+                verifyAfastamentos = false;
+                erroAfastamento.style.display = 'none';
+            }
+            
+            let j = 1;
+            if (verifyAfastamentos) {
+                for (afastamento of afastamentosInvalidos) {
+                    if (j < afastamentosInvalidos.length) {
+                        afastamentoInvalido.append(`${afastamento}, `);
+                    } else {
+                        afastamentoInvalido.append(`${afastamento}.`);
+                    }
+                    j++;
+                }
+                erroAfastamento.style.display = 'block';
+                this.value = '';
+            }
+        });
     </script>
 </body>
 
