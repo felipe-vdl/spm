@@ -278,7 +278,7 @@
             // Compara os tipos de arquivo inseridos pelo usuário com os tipos da lista.
             for (file of this.files) {
                 // Checa a validez do tipo de cada arquivo inserido.
-                if (!fileTypes.some(el => file.type.includes(el)) || file.type === '') {
+                if (!fileTypes.some(el => file.type.includes(el))) {
                     // Caso exista um arquivo inválido, insere nome dos arquivos inválidos na array e atribui true para a presença de atestados inválidos.
                     atestadosInvalidos.push(file.name);
                     verifyAtestados = true;
@@ -315,7 +315,7 @@
             afastamentoInvalido.innerHTML = '';
 
             for (file of this.files) {
-                if (!fileTypes.some(el => file.type.includes(el)) || file.type === '') {
+                if (!fileTypes.some(el => file.type.includes(el))) {
                     afastamentosInvalidos.push(file.name);
                     verifyAfastamentos = true;
                 }
