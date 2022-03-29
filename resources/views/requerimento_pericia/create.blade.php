@@ -252,14 +252,14 @@
     {{-- Validação do tipo dos arquivos inseridos. --}}
     <script>
         // Variáveis utilizadas.
-        // Evento 1: Arquivos do Atestado Médico.
+        // Variáveis do Evento 1: Arquivos do Atestado Médico.
         const atestadoInput = document.querySelector('#documento_atestado');
         const erroAtestado = document.querySelector('#erro-atestado');
         const atestadoInvalido = document.querySelector('#atestado-invalido');
         let atestadosInvalidos = [];
         let verifyAtestados = null;
 
-        // Evento 2: Arquivos de Comprovantes de Afastamento.
+        // Variáveis do Evento 2: Arquivos do Comprovante de Afastamento.
         const afastamentoInput = document.querySelector('#documento_afastamento');
         const erroAfastamento = document.querySelector('#erro-afastamento');
         const afastamentoInvalido = document.querySelector('#afastamento-invalido');
