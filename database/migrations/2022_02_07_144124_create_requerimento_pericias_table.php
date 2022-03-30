@@ -15,13 +15,13 @@ class CreateRequerimentoPericiasTable extends Migration
     {
         Schema::create('requerimento_pericias', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 96);
+            $table->string('nome', 128);
             $table->string('matricula', 7);
             $table->string('protocolo', 12);
-            $table->string('local_lotacao', 64);
+            $table->string('local_lotacao', 72);
             $table->string('horario_trabalho', 14);
             $table->string('dt_inicio_atestado', 10);
-            $table->string('email', 64);
+            $table->string('email', 128);
             $table->tinyInteger('status');
             $table->string('direcionamento', 22);
             $table->string('data_agenda', 19);

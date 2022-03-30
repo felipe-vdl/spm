@@ -58,14 +58,14 @@ class RequerimentoPericiaController extends Controller
         try {
             $requerimento = new RequerimentoPericia;
             $validatedData = $request->validate([
-                'nome' => 'required|max:255',
-                'matricula' => 'required|max:255',
-                'local_lotacao' => 'required|max:255',
-                'trabalho_inicio' => 'required|max:255',
-                'trabalho_fim' => 'required|max:255',
-                'dt_inicio_atestado' => 'required|max:255',
-                'vinculo' => 'required|max:255',
-                'email' => 'required|max:255',
+                'nome' => 'required|max:128',
+                'matricula' => 'required|max:7',
+                'local_lotacao' => 'required|max:72',
+                'trabalho_inicio' => 'required|max:14',
+                'trabalho_fim' => 'required|max:14',
+                'dt_inicio_atestado' => 'required|max:10',
+                'vinculo' => 'required|max:3',
+                'email' => 'required|max:128',
             ]);
             
             // Atribuir informações do formulário.
@@ -165,7 +165,7 @@ class RequerimentoPericiaController extends Controller
         }
         // Aplicar no banco de dados.
         DB::commit();
-        return redirect('/')->with('success', 'O protocolo do seu requerimento será informado por e-mail, fique atento e verifique a sua caixa de spam.');
+        return redirect('/')->with('success', 'Requerimento registrado com sucesso.');
     }
 
     /**

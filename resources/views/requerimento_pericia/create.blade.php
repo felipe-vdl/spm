@@ -58,8 +58,8 @@
                         <div class="card-body">
                             @if(session()->get('success'))
                             <div class="alert alert-success m-0">
-                                <h5 class="alert-heading">Requerimento registrado com sucesso.</h5>
-                                {{ session()->get('success') }}
+                                <h5 class="alert-heading">{{ session()->get('success') }}</h5>
+                                <p class="mb-0">O protocolo do seu requerimento será informado por e-mail, fique atento e <strong>VERIFIQUE SUA CAIXA DE SPAM</strong>.</p>
                                 <hr class="my-2">
                                 <p class="mb-0">A resposta com o agendamento poderá se dar em até 48 horas úteis da solicitação.</p>
                             </div><br />
@@ -76,8 +76,8 @@
                                     <input required class="form-control" name="nome" type="text" id="nomeCompleto" placeholder="Nome Completo do Servidor" maxlength="96">
                                 </div>
                                 <div class="col-lg-6">
-                                    <label class="form-label fw-normal" for="matricula">Matrícula (sem dígito):</label>
-                                    <input required class="form-control" id="matricula" name="matricula" type="text" placeholder="Matrícula" pattern=".{7,}" maxlength="7">
+                                    <label class="form-label fw-normal" for="matricula">Matrícula (6 dígitos):</label>
+                                    <input required class="form-control" id="matricula" name="matricula" type="text" placeholder="000.000" pattern=".{7,}" maxlength="7">
                                 </div>
                             </div>
                             <div class="row mb-3 justify-content-between">
@@ -85,10 +85,48 @@
                                     <label class="form-label fw-normal" for="lotacao">Local de Lotação:</label>
                                     <select required class="form-select" name="local_lotacao" id="lotacao">
                                         <option value="" selected>Selecione a Unidade Organizacional</option>
-                                        <option value="Secretaria de Tecnologia da Informação">Secretaria de Tecnologia da Informação</option>
-                                        <option value="Secretaria de Administração">Secretaria de Administração</option>
-                                        <option value="Secretaria de Governança">Secretaria de Governança</option>
-                                        <option value="Departamento de Perícias Médicas">Departamento de Perícias Médicas</option>
+                                        <option value="Arquivo Público Municipal">Arquivo Público Municipal</option>
+                                        <option value="Comissão Permanente de Licitação">Comissão Permanente de Licitação</option>
+                                        <option value="Conselho Municipal de Assistência Social">Conselho Municipal de Assistência Social</option>
+                                        <option value="Conselho Tutelar">Conselho Tutelar</option>
+                                        <option value="Controladoria Geral do Município">Controladoria Geral do Município</option>
+                                        <option value="Coordenadoria de Comunicação Social">Coordenadoria de Comunicação Social</option>
+                                        <option value="Coordenadoria de Ordem Pública">Coordenadoria de Ordem Pública</option>
+                                        <option value="Coordenadoria de Políticas para Mulheres">Coordenadoria de Políticas para Mulheres</option>
+                                        <option value="Departamento de Compras">Departamento de Compras</option>
+                                        <option value="Departamento de Contabilidade">Departamento de Contabilidade</option>
+                                        <option value="Departamento de Cultura">Departamento de Cultura</option>
+                                        <option value="Departamento de Defesa Civil">Departamento de Defesa Civil</option>
+                                        <option value="Departamento de Dívida Ativa">Departamento de Dívida Ativa</option>
+                                        <option value="Departamento de Material e Patrimônio">Departamento de Material e Patrimônio</option>
+                                        <option value="Departamento de Orçamento e Finanças">Departamento de Orçamento e Finanças</option>
+                                        <option value="Departamento de Pagamento">Departamento de Pagamento</option>
+                                        <option value="Departamento de Planejamento e Análise Econômica">Departamento de Planejamento e Análise Econômica</option>
+                                        <option value="Departamento de Projetos">Departamento de Projetos</option>
+                                        <option value="Departamento de Recursos Humanos">Departamento de Recursos Humanos</option>
+                                        <option value="Departamento de Serviços Públicos">Departamento de Serviços Públicos</option>
+                                        <option value="Departamento de Trânsito">Departamento de Trânsito</option>
+                                        <option value="Gabinete do Prefeito">Gabinete do Prefeito</option>
+                                        <option value="Gabinete do Secretário de Governança">Gabinete do Secretário de Governança</option>
+                                        <option value="Gabinete do Secretário de Infraestrutura, Mobilidade e Serviços Públicos">Gabinete do Secretário de Infraestrutura, Mobilidade e Serviços Públicos</option>
+                                        <option value="Gabinete do Subsecretário de Obras">Gabinete do Subsecretário de Obras</option>
+                                        <option value="Gabinete do Subsecretário de Trabalho, Desenvolvimento Econômico">Gabinete do Subsecretário de Trabalho, Desenvolvimento Econômico</option>
+                                        <option value="Gabinete do Vice-Prefeito">Gabinete do Vice-Prefeito</option>
+                                        <option value="Guarda Civil Municipal">Guarda Civil Municipal</option>
+                                        <option value="Junta de Alistamento Militar">Junta de Alistamento Militar</option>
+                                        <option value="PROCON - Órgão Municipal de Proteção, Orientação e Defesa do Consumidor">PROCON - Órgão Municipal de Proteção, Orientação e Defesa do Consumidor</option>
+                                        <option value="Procuradoria Geral">Procuradoria Geral</option>
+                                        <option value="Secretaria Municipal de Educação">Secretaria Municipal de Educação</option>
+                                        <option value="Secretaria Municipal de Saúde">Secretaria Municipal de Saúde</option>
+                                        <option value="Setor de Meio Ambiente">Setor de Meio Ambiente</option>
+                                        <option value="Setor de Protocolo Geral">Setor de Protocolo Geral</option>
+                                        <option value="Setor de Urbanismo">Setor de Urbanismo</option>
+                                        <option value="Subsecretaria de Fazenda">Subsecretaria de Fazenda</option>
+                                        <option value="Subsecretaria de Tecnologia da Informação">Subsecretaria de Tecnologia da Informação</option>
+                                        <option value="Subsecretaria Municipal de Administração">Subsecretaria Municipal de Administração</option>
+                                        <option value="Subsecretaria Municipal de Assistência Social">Subsecretaria Municipal de Assistência Social</option>
+                                        <option value="Subsecretaria Municipal de Planejamento Estratégico e Gestão">Subsecretaria Municipal de Planejamento Estratégico e Gestão</option>
+                                        <option value="Superintendência de Arrecadação Mercantil e Fiscalização">Superintendência de Arrecadação Mercantil e Fiscalização</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
@@ -115,7 +153,7 @@
                             </div>
                             <div class="col-12 mt-3">
                                 <label class="form-label fw-normal" for="documento_atestado">Imagem/Documento do Atestado Médico:
-                                    <p style="font-size: 13px; color: red;" class="mb-0">* Certifique-se de que a foto/documento do atestado é legível.</p>
+                                    <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: É necessário selecionar todos os arquivos de uma vez.</p>
                                 </label>
                                 <div id="erro-atestado" class="alert alert-danger" style="display: none;">
                                     <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="atestado-invalido"></span></p>
@@ -144,6 +182,7 @@
                             <div class="col-12 mt-3" style="display: none;" id="afastamento">
                                 <label class="form-label fw-normal" for="documento_afastamento">Imagem/Documento do Comprovante de Afastamento:
                                     <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: Caso o servidor possua outro vínculo ou acumule matrícula, incluir comprovante de afastamento.</p>
+                                    <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: É necessário selecionar todos os arquivos de uma vez.</p>
                                 </label>
                                 <div id="erro-afastamento" class="alert alert-danger" style="display: none;">
                                     <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="afastamento-invalido"></span></p>

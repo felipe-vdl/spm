@@ -28,16 +28,16 @@
 @else
 <p>Olá {{ substr($requerimento->nome, 0, strpos($requerimento->nome, ' ')) }}, o seu requerimento foi agendado com sucesso.</p>
 
-<p>Por favor, confirme o recebimento deste e-mail inserindo o seu protocolo em nossa <a target="_blank" rel="noopener noreferrer" href="https://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>, e siga as demais instruções deste e-mail.</p>
+<p>Por favor, confirme o recebimento deste e-mail inserindo o seu protocolo em nossa <a target="_blank" rel="noopener noreferrer" href="http://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>, e siga as demais instruções deste e-mail.</p>
 
 
-<b>Página de Confirmação:</b> https://periciamedica.mesquita.rj.gov.br/confirmar
+<b>Página de Confirmação:</b> http://periciamedica.mesquita.rj.gov.br/confirmar
 
 <h3 style="margin-bottom: 5px;">Requerimento</h3>
 <ul style="margin-top: 0;">
     <li><b>Protocolo do seu requerimento:</b> {{ $requerimento->protocolo }}</li>
     <li><b>Direcionamento:</b> {{ $requerimento->direcionamento }}</li>
-    <li><b>Data/Hora agendada:</b> {{ $requerimento->data_agenda }} às {{ $requerimento->hora_agenda }} horas.</li>
+    <li><b>Data/Hora agendada:</b> {{ date('d/m/Y', strtotime($requerimento->data_agenda)) }} às {{ $requerimento->hora_agenda }} horas.</li>
     <li><b>Endereço:</b> Subsecretaria de Administração (segundo andar) — Prefeitura Municipal de Mesquita.
         <ul>
             <li>
