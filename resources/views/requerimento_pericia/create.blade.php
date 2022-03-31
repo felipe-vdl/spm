@@ -10,6 +10,7 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     {{-- jquery-datepicker --}}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -152,13 +153,24 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
-                                <label class="form-label fw-normal" for="documento_atestado">Imagem/Documento do Atestado Médico:
-                                    <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: É necessário selecionar todos os arquivos de uma vez.</p>
+                                <label class="form-label fw-normal">Imagem/Documento do Atestado Médico:
+                                    <p style="font-size: 13px; color: red;" class="mb-0">* Certifique-se de que a foto/documento do atestado é legível.</p>
                                 </label>
-                                <div id="erro-atestado" class="alert alert-danger" style="display: none;">
+                                <p class="mb-2">
+                                    <label for="documento_atestado">
+                                        <a class="btn btn-primary text-light" type="button" role="button" aria-disabled="false">Adicionar Arquivo</a>
+                                    </label>
+                                    <input id="documento_atestado" class="form-control" name="documento_atestado[]" type="file" required multiple="multiple" style="visibility: hidden; position: absolute;" accept=".png, .jpg, .jpeg,image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf">
+                                </p>
+                                <div id="erro-atestado" class="alert alert-danger mb-2" style="display: none;">
                                     <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="atestado-invalido"></span></p>
                                 </div>
-                                <input class="form-control" multiple="multiple" id="documento_atestado" name="documento_atestado[]" accept=".png, .jpg, .jpeg,image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" type="file" required> 
+                                <p id="atestado-vermelho" style="font-size: 13px; color: red; display: none;" class="mb-2">* Atenção: Os arquivos destacados em vermelho não serão enviados.</p>
+                                <p id="atestados-area">
+                                    <span id="atestados-list">
+                                        <span id="atestados-names"></span>
+                                    </span>
+                                </p>
                             </div>
                             <div class="col-12 mt-4">
                                 <div class="row">
@@ -182,12 +194,22 @@
                             <div class="col-12 mt-3" style="display: none;" id="afastamento">
                                 <label class="form-label fw-normal" for="documento_afastamento">Imagem/Documento do Comprovante de Afastamento:
                                     <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: Caso o servidor possua outro vínculo ou acumule matrícula, incluir comprovante de afastamento.</p>
-                                    <p style="font-size: 13px; color: red;" class="mb-0">* Atenção: É necessário selecionar todos os arquivos de uma vez.</p>
                                 </label>
-                                <div id="erro-afastamento" class="alert alert-danger" style="display: none;">
+                                <p class="mb-2">
+                                    <label for="documento_afastamento">
+                                        <a class="btn btn-primary text-light" type="button" role="button" aria-disabled="false">Adicionar Arquivo</a>
+                                    </label>
+                                    <input id="documento_afastamento" class="form-control" name="documento_afastamento[]" type="file" multiple="multiple" style="visibility: hidden; position: absolute;" accept=".png, .jpg, .jpeg,image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"> 
+                                </p>
+                                <div id="erro-afastamento" class="alert alert-danger mb-2" style="display: none;">
                                     <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="afastamento-invalido"></span></p>
                                 </div>
-                                <input class="form-control" multiple="multiple" id="documento_afastamento" name="documento_afastamento[]" accept=".png, .jpg, .jpeg,image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf" type="file"> 
+                                <p id="afastamento-vermelho" style="font-size: 13px; color: red; display: none;" class="mb-2">* Atenção: Os arquivos destacados em vermelho não serão enviados.</p>
+                                <p id="afastamentos-area">
+                                    <span id="afastamentos-list">
+                                        <span id="afastamentos-names"></span>
+                                    </span>
+                                </p>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -215,7 +237,6 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="modaleventclickLabel">Enviando requerimento, por favor aguarde.</h5>
             </div>
-             
             <div class="modal-body">
                 <center>
                     <div class="loader"></div>
@@ -227,6 +248,7 @@
     <script src="{{ asset('js/bootstrap5.bundle.min.js') }}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{-- jQuery e jQueryUI Dependencies --}}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {{-- Datepicker e Timepicker --}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
@@ -275,6 +297,7 @@
     </script>
     {{-- Mask dos Inputs --}}
     <script src="{{ asset('js/vanillaMasker.min.js')}}"></script>
+    {{-- Configurações do VMasker --}}
     <script>
         VMasker ($("#trabalho-inicio")).maskPattern("99:99");
         VMasker ($("#trabalho-fim")).maskPattern("99:99");
@@ -288,42 +311,52 @@
             $("#modaleventclick").modal("show");
         });
     </script>
-    {{-- Validação do tipo dos arquivos inseridos. --}}
     <script>
-        // Variáveis utilizadas.
-        // Variáveis do Evento 1: Arquivos do Atestado Médico.
-        const atestadoInput = document.querySelector('#documento_atestado');
-        const erroAtestado = document.querySelector('#erro-atestado');
-        const atestadoInvalido = document.querySelector('#atestado-invalido');
-        let atestadosInvalidos = [];
-        let verifyAtestados = null;
-
-        // Variáveis do Evento 2: Arquivos do Comprovante de Afastamento.
-        const afastamentoInput = document.querySelector('#documento_afastamento');
-        const erroAfastamento = document.querySelector('#erro-afastamento');
-        const afastamentoInvalido = document.querySelector('#afastamento-invalido');
-        let afastamentosInvalidos = [];
-        let verifyAfastamentos = null;
-        
+        // DONE - Estilização do span com nome do arquivo e delete;
+        // DONE - Filtro de tipo de arquivo inválido: Exibir alerta com nome dos arquivos inválidos/destacar em vermelho o span dos arquivos inválidos, remover eles do objeto do DataTransfer e atualiza o input.
+        // - Filtro de tamanho de arquivo: 10MB (10485760 bytes).
         // Array com os tipos de arquivo aceitos.
         const fileTypes = ['image', 'png', 'jpg', 'jpeg', 'doc', 'docx', 'xml', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'pdf'];
-        
-        // Evento 1
-        atestadoInput.addEventListener('input', function () {
-            // Limpa o nome dos arquivos inválidos do último evento.
-            atestadosInvalidos = [];
+
+        // Input 1: Atestado Médico.
+        const dtAtestado = new DataTransfer(); // Allows you to manipulate the files of the input file
+        const atestadoInput = document.querySelector('#documento_atestado');
+        const atestadosArea = document.querySelector('#atestados-area');
+        const atestadoInvalido = document.querySelector('#atestado-invalido');
+        const erroAtestado = document.querySelector('#erro-atestado');
+        const atestadoVermelho = document.querySelector('#atestado-vermelho');
+
+        atestadoInput.addEventListener('change', function(e) {
+            let atestadosInvalidos = [];
+            let verifyAtestados = null;
             atestadoInvalido.innerHTML = '';
 
-            // Compara os tipos de arquivo inseridos pelo usuário com os tipos da lista.
-            for (file of this.files) {
-                // Checa a validez do tipo de cada arquivo inserido.
-                if (!fileTypes.some(el => file.type.includes(el))) {
+            // Nome do arquivo e botão de deletar.
+            for(let i = 0; i < this.files.length; i++) {
+                let fileBlock = document.createElement('span');
+                fileBlock.classList.add('file-block');
+                
+                let fileName = document.createElement('span');
+                fileName.classList.add('name');
+                fileName.innerHTML = `${this.files.item(i).name}`;
+                
+                let fileDelete = document.createElement('span');
+                fileDelete.classList.add('file-delete');
+                fileDelete.innerHTML = '<span>X</span>';
+                // Checa a validez do tipo do arquivo inserido.
+                if (!fileTypes.some(el => this.files[i].type.includes(el))) {
                     // Caso exista um arquivo inválido, insere nome dos arquivos inválidos na array e atribui true para a presença de atestados inválidos.
-                    atestadosInvalidos.push(file.name);
+                    atestadosInvalidos.push(this.files[i].name);
+                    fileName.classList.add('text-danger');
+                    fileDelete.classList.add('text-danger');
                     verifyAtestados = true;
+                    atestadoVermelho.style.display = 'block';
                 }
+
+                fileBlock.append(fileDelete, fileName);
+                atestadosArea.append(fileBlock);
             }
-            
+
             // Checa a existência de atestados inválidos.
             if (atestadosInvalidos.length === 0) {
                 // Caso todos os arquivos sejam válidos, esconde a mensagem de erro e atribui false para presença de atestados inválidos.
@@ -331,11 +364,19 @@
                 verifyAtestados = false;
             }
 
+            // Guarda os arquivos no objeto de DataTransfer.
+            for (let file of this.files) {
+                // Checa validez do tipo de arquivo antes de inserir.
+                if (fileTypes.some(el => file.type.includes(el))) {
+                    dtAtestado.items.add(file);
+                }
+            }
+
             // Checa o status de presença de arquivos inválidos.
             let i = 1; // Variável de controle da formatação.
             if (verifyAtestados) {
                 // Caso existam arquivos inválidos, insere o nome de cada arquivo inválido no alerta de erro da view.
-                for (atestado of atestadosInvalidos) {
+                for (let atestado of atestadosInvalidos) {
                     if (i < atestadosInvalidos.length) {
                         atestadoInvalido.append(`${atestado}, `);
                     } else {
@@ -346,37 +387,118 @@
                 erroAtestado.style.display = 'block';
                 this.value = '';
             }
+
+            // Atualizar os arquivos do input.
+            atestadoInput.files = dtAtestado.files;
+            // Atribui evento no botão de deletar arquivo.
+            let deleteButtons = document.querySelectorAll('.file-delete');
+            for (let button of deleteButtons) {
+                button.addEventListener('click', function (e) {
+                    let name = this.nextElementSibling.innerHTML;
+                    // Remove o nome do arquivo da página.
+                    this.parentElement.remove();
+                    
+                    for(let i = 0; i < dtAtestado.items.length; i++) {
+                        if (name === dtAtestado.items[i].getAsFile().name) {
+                            // Delete file on DataTransfer Object.
+                            dtAtestado.items.remove(i);
+                            continue;
+                        }
+                    }
+                    atestadoInput.files = dtAtestado.files;
+                });
+            }
         });
 
-        // Evento 2
-        afastamentoInput.addEventListener('input', function () {
-            afastamentosInvalidos = [];
+        // Input 2: Comprovante de Afastamento.
+        const dtAfastamento = new DataTransfer(); // Allows you to manipulate the files of the input file
+        const afastamentoInput = document.querySelector('#documento_afastamento');
+        const afastamentosArea = document.querySelector('#afastamentos-area');
+        const afastamentoInvalido = document.querySelector('#afastamento-invalido');
+        const erroAfastamento = document.querySelector('#erro-afastamento');
+        const afastamentoVermelho = document.querySelector('#afastamento-vermelho');
+
+        afastamentoInput.addEventListener('change', function(e) {
+            let afastamentosInvalidos = [];
+            let verifyAfastamentos = null;
             afastamentoInvalido.innerHTML = '';
 
-            for (file of this.files) {
-                if (!fileTypes.some(el => file.type.includes(el))) {
-                    afastamentosInvalidos.push(file.name);
+            // Nome do arquivo e botão de deletar.
+            for(let i = 0; i < this.files.length; i++) {
+                let fileBlock = document.createElement('span');
+                fileBlock.classList.add('file-block');
+                
+                let fileName = document.createElement('span');
+                fileName.classList.add('name');
+                fileName.innerHTML = `${this.files.item(i).name}`;
+                
+                let fileDelete = document.createElement('span');
+                fileDelete.classList.add('file-delete');
+                fileDelete.innerHTML = '<span>X</span>';
+                // Checa a validez do tipo do arquivo inserido.
+                if (!fileTypes.some(el => this.files[i].type.includes(el))) {
+                    // Caso exista um arquivo inválido, insere nome dos arquivos inválidos na array e atribui true para a presença de atestados inválidos.
+                    afastamentosInvalidos.push(this.files[i].name);
+                    fileName.classList.add('text-danger');
+                    fileDelete.classList.add('text-danger');
                     verifyAfastamentos = true;
+                    afastamentoVermelho.style.display = 'block';
+                }
+
+                fileBlock.append(fileDelete, fileName);
+                afastamentosArea.append(fileBlock);
+            }
+
+            // Checa a existência de atestados inválidos.
+            if (afastamentosInvalidos.length === 0) {
+                // Caso todos os arquivos sejam válidos, esconde a mensagem de erro e atribui false para presença de atestados inválidos.
+                erroAfastamento.style.display = 'none';
+                verifyAfastamentos = false;
+            }
+
+            // Guarda os arquivos no objeto de DataTransfer.
+            for (let file of this.files) {
+                // Checa validez do tipo de arquivo antes de inserir.
+                if (fileTypes.some(el => file.type.includes(el))) {
+                    dtAfastamento.items.add(file);
                 }
             }
 
-            if (afastamentosInvalidos.length === 0) {
-                verifyAfastamentos = false;
-                erroAfastamento.style.display = 'none';
-            }
-            
-            let j = 1;
+            // Checa o status de presença de arquivos inválidos.
+            let i = 1; // Variável de controle da formatação.
             if (verifyAfastamentos) {
-                for (afastamento of afastamentosInvalidos) {
-                    if (j < afastamentosInvalidos.length) {
+                // Caso existam arquivos inválidos, insere o nome de cada arquivo inválido no alerta de erro da view.
+                for (let afastamento of afastamentosInvalidos) {
+                    if (i < afastamentosInvalidos.length) {
                         afastamentoInvalido.append(`${afastamento}, `);
                     } else {
-                        afastamentoInvalido.append(`${afastamento}.`);
+                        afastamentoInvalido.append(`${afastamento}.`)
                     }
-                    j++;
+                    i++;
                 }
                 erroAfastamento.style.display = 'block';
                 this.value = '';
+            }
+
+            // Atualizar os arquivos do input.
+            afastamentoInput.files = dtAfastamento.files;
+            // Atribui evento no botão de deletar arquivo.
+            let deleteButtons = document.querySelectorAll('.file-delete');
+            for (let button of deleteButtons) {
+                button.addEventListener('click', function (e) {
+                    let name = this.nextElementSibling.innerHTML;
+                    // Remove o nome do arquivo da página.
+                    this.parentElement.remove();
+                    
+                    for(let i = 0; i < dtAfastamento.items.length; i++) {
+                        if (name === dtAfastamento.items[i].getAsFile().name) {
+                            // Delete file on DataTransfer Object.
+                            dtAfastamento.items.remove(i);
+                            continue;
+                        }
+                    }
+                    afastamentoInput.files = dtAfastamento.files;
+                });
             }
         });
     </script>

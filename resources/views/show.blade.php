@@ -50,7 +50,7 @@
         <div class="x-content">
             <div style="display: flex; justify-content: space-evenly; align-items: center;">
                 @foreach ($doc_atestados as $atestado)
-                    @if ($atestado->extensao === 'png' || $atestado->extensao === 'jpg' || $atestado->extensao === 'jpeg')
+                    @if ($atestado->extensao === 'png' || $atestado->extensao === 'jpg' || $atestado->extensao === 'jpeg' || $atestado->extensao === 'bmp' || $atestado->extensao === 'gif' || $atestado->extensao === 'jfif')
                     <figure>
                         <figcaption style="text-align: center; padding-bottom: 0.7rem;"><a class="btn btn-sm btn-info" href="{{ asset('storage/atestados/'.$atestado->filename) }}" target="_blank" rel="noopener noreferrer">Visualizar Imagem</a></figcaption>
                         <img style="max-width: 25vw;" src="{{ asset('storage/atestados/'.$atestado->filename) }}" alt="Atestado">
@@ -71,7 +71,7 @@
         <div class="x-content">
             <div style="display: flex; justify-content: space-evenly; align-items: center;">
                 @foreach ($doc_afastamentos as $afastamento)
-                    @if ($afastamento->extensao === 'png' || $afastamento->extensao === 'jpg' || $afastamento->extensao === 'jpeg')
+                    @if ($afastamento->extensao === 'png' || $afastamento->extensao === 'jpg' || $afastamento->extensao === 'jpeg' || $afastamento->extensao === 'bmp' || $afastamento->extensao === 'gif' || $afastamento->extensao === 'jfif')
                     <figure>
                         <figcaption style="text-align: center; padding-bottom: 0.7rem;"><a class="btn btn-sm btn-info" href="{{ asset('storage/afastamentos/'.$afastamento->filename) }}" target="_blank" rel="noopener noreferrer">Visualizar Imagem</a></figcaption>
                         <img style="max-width: 25vw;" src="{{ asset('storage/afastamentos/'.$afastamento->filename) }}" alt="Comprovante de Afastamento">
