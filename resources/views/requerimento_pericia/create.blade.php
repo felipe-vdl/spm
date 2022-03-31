@@ -165,6 +165,9 @@
                                 <div id="erro-atestado" class="alert alert-danger mb-2" style="display: none;">
                                     <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="atestado-invalido"></span></p>
                                 </div>
+                                <div id="erro-atestado-grande" class="alert alert-danger mb-2" style="display: none;">
+                                    <p class="m-0">Arquivo ultrapassa o limite de tamanho permitido: <span id="atestado-grande"></span></p>
+                                </div>
                                 <p id="atestado-vermelho" style="font-size: 13px; color: red; display: none;" class="mb-2">* Atenção: Os arquivos destacados em vermelho não serão enviados.</p>
                                 <p id="atestados-area">
                                     <span id="atestados-list">
@@ -203,6 +206,9 @@
                                 </p>
                                 <div id="erro-afastamento" class="alert alert-danger mb-2" style="display: none;">
                                     <p class="m-0">Tipo de arquivo inválido, insira apenas imagem ou documento: <span id="afastamento-invalido"></span></p>
+                                </div>
+                                <div id="erro-afastamento-grande" class="alert alert-danger mb-2" style="display: none;">
+                                    <p class="m-0">Arquivo ultrapassa o limite de tamanho permitido: <span id="afastamento-grande"></span></p>
                                 </div>
                                 <p id="afastamento-vermelho" style="font-size: 13px; color: red; display: none;" class="mb-2">* Atenção: Os arquivos destacados em vermelho não serão enviados.</p>
                                 <p id="afastamentos-area">
@@ -312,11 +318,10 @@
         });
     </script>
     <script>
-        // DONE - Estilização do span com nome do arquivo e delete;
-        // DONE - Filtro de tipo de arquivo inválido: Exibir alerta com nome dos arquivos inválidos/destacar em vermelho o span dos arquivos inválidos, remover eles do objeto do DataTransfer e atualiza o input.
-        // - Filtro de tamanho de arquivo: 10MB (10485760 bytes).
         // Array com os tipos de arquivo aceitos.
         const fileTypes = ['image', 'png', 'jpg', 'jpeg', 'doc', 'docx', 'xml', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'pdf'];
+        // Tamanho máximo de cada arquivo em bytes (1 MB = 1.000.000 bytes)
+        const tamanhoMaximo = 10000000; // 10 MB
 
         // Input 1: Atestado Médico.
         const dtAtestado = new DataTransfer(); // Allows you to manipulate the files of the input file
@@ -325,11 +330,17 @@
         const atestadoInvalido = document.querySelector('#atestado-invalido');
         const erroAtestado = document.querySelector('#erro-atestado');
         const atestadoVermelho = document.querySelector('#atestado-vermelho');
+        const erroAtestadoGrande = document.querySelector('#erro-atestado-grande');
+        const atestadoGrandeSpan = document.querySelector('#atestado-grande');
 
         atestadoInput.addEventListener('change', function(e) {
+            // Limpa os nomes de arquivo do último input feito pelo usuário.
             let atestadosInvalidos = [];
             let verifyAtestados = null;
             atestadoInvalido.innerHTML = '';
+            let atestadosGrandes = [];
+            let atestadoGrande = null;
+            atestadoGrandeSpan.innerHTML = '';
 
             // Nome do arquivo e botão de deletar.
             for(let i = 0; i < this.files.length; i++) {
@@ -351,6 +362,12 @@
                     fileDelete.classList.add('text-danger');
                     verifyAtestados = true;
                     atestadoVermelho.style.display = 'block';
+                } else if (this.files[i].size > tamanhoMaximo) {
+                    atestadosGrandes.push(this.files[i].name);
+                    fileName.classList.add('text-danger');
+                    fileDelete.classList.add('text-danger');
+                    atestadoGrande = true;
+                    atestadoVermelho.style.display = 'block';
                 }
 
                 fileBlock.append(fileDelete, fileName);
@@ -364,11 +381,20 @@
                 verifyAtestados = false;
             }
 
+            // Checa a existência de atestados com tamanho maior que o permitido.
+            if (atestadosGrandes.length === 0) {
+                // Caso todos os arquivos sejam válidos, esconde a mensagem de erro e atribui false para presença de atestados inválidos.
+                erroAtestadoGrande.style.display = 'none';
+                atestadoGrande = false;
+            }
+
             // Guarda os arquivos no objeto de DataTransfer.
             for (let file of this.files) {
                 // Checa validez do tipo de arquivo antes de inserir.
                 if (fileTypes.some(el => file.type.includes(el))) {
-                    dtAtestado.items.add(file);
+                    if (file.size < tamanhoMaximo) {
+                        dtAtestado.items.add(file);
+                    }
                 }
             }
 
@@ -388,7 +414,23 @@
                 this.value = '';
             }
 
-            // Atualizar os arquivos do input.
+            // Checa o status de presença de arquivos maiores que o tamanho máximo.
+            let j = 1; // Variável de controle da formatação.
+            if (atestadoGrande) {
+                // Caso existam arquivos inválidos, insere o nome de cada arquivo inválido no alerta de erro da view.
+                for (let atestado of atestadosGrandes) {
+                    if (j < atestadosGrandes.length) {
+                        atestadoGrandeSpan.append(`${atestado}, `);
+                    } else {
+                        atestadoGrandeSpan.append(`${atestado}.`)
+                    }
+                    j++;
+                }
+                erroAtestadoGrande.style.display = 'block';
+                this.value = '';
+            }
+
+            // Atualiza os arquivos do input.
             atestadoInput.files = dtAtestado.files;
             // Atribui evento no botão de deletar arquivo.
             let deleteButtons = document.querySelectorAll('.file-delete');
@@ -417,11 +459,17 @@
         const afastamentoInvalido = document.querySelector('#afastamento-invalido');
         const erroAfastamento = document.querySelector('#erro-afastamento');
         const afastamentoVermelho = document.querySelector('#afastamento-vermelho');
-
+        const erroAfastamentoGrande = document.querySelector('#erro-afastamento-grande');
+        const afastamentoGrandeSpan = document.querySelector('#afastamento-grande');
+        
         afastamentoInput.addEventListener('change', function(e) {
+            // Limpa os nomes de arquivo do último input feito pelo usuário.
             let afastamentosInvalidos = [];
             let verifyAfastamentos = null;
             afastamentoInvalido.innerHTML = '';
+            let afastamentosGrandes = [];
+            let afastamentoGrande = null;
+            afastamentoGrandeSpan.innerHTML = '';
 
             // Nome do arquivo e botão de deletar.
             for(let i = 0; i < this.files.length; i++) {
@@ -443,6 +491,12 @@
                     fileDelete.classList.add('text-danger');
                     verifyAfastamentos = true;
                     afastamentoVermelho.style.display = 'block';
+                } else if (this.files[i].size > tamanhoMaximo) {
+                    afastamentosGrandes.push(this.files[i].name);
+                    fileName.classList.add('text-danger');
+                    fileDelete.classList.add('text-danger');
+                    afastamentoGrande = true;
+                    afastamentoVermelho.style.display = 'block';
                 }
 
                 fileBlock.append(fileDelete, fileName);
@@ -456,11 +510,20 @@
                 verifyAfastamentos = false;
             }
 
+            // Checa a existência de atestados com tamanho maior que o permitido.
+            if (afastamentosGrandes.length === 0) {
+                // Caso todos os arquivos sejam válidos, esconde a mensagem de erro e atribui false para presença de atestados inválidos.
+                erroAfastamentoGrande.style.display = 'none';
+                afastamentoGrande = false;
+            }
+
             // Guarda os arquivos no objeto de DataTransfer.
             for (let file of this.files) {
                 // Checa validez do tipo de arquivo antes de inserir.
                 if (fileTypes.some(el => file.type.includes(el))) {
-                    dtAfastamento.items.add(file);
+                    if (file.size < tamanhoMaximo) {
+                        dtAfastamento.items.add(file);
+                    }
                 }
             }
 
@@ -480,7 +543,23 @@
                 this.value = '';
             }
 
-            // Atualizar os arquivos do input.
+            // Checa o status de presença de arquivos maiores que o tamanho máximo.
+            let j = 1; // Variável de controle da formatação.
+            if (afastamentoGrande) {
+                // Caso existam arquivos inválidos, insere o nome de cada arquivo inválido no alerta de erro da view.
+                for (let afastamento of afastamentosGrandes) {
+                    if (j < afastamentosGrandes.length) {
+                        afastamentoGrandeSpan.append(`${afastamento}, `);
+                    } else {
+                        afastamentoGrandeSpan.append(`${afastamento}.`)
+                    }
+                    j++;
+                }
+                erroAfastamentoGrande.style.display = 'block';
+                this.value = '';
+            }
+
+            // Atualiza os arquivos do input.
             afastamentoInput.files = dtAfastamento.files;
             // Atribui evento no botão de deletar arquivo.
             let deleteButtons = document.querySelectorAll('.file-delete');
