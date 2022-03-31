@@ -41,6 +41,7 @@ class RelatorioController extends Controller
         $relatorio = DB::table('requerimento_pericias')
                                 ->where('data_agenda','>=',$dataInicio)
                                 ->where('data_agenda','<=',$dataFim)
+                                ->where('status','=',4)
                                     ->orderBy('data_agenda','asc')
                                             ->orderBy('created_at','asc')
                                                 ->get();
