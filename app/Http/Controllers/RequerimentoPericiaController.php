@@ -131,6 +131,7 @@ class RequerimentoPericiaController extends Controller
 
             //Visualizar e-mail por View
             /* $requerimento->update();
+            DB::commit();
             return view('mail/requerimento', compact('requerimento')); */
             
             // Envio de E-mail após avaliação, atribui envio_agenda = 0 em caso de falha de envio.
@@ -295,6 +296,7 @@ class RequerimentoPericiaController extends Controller
 
             // Visualizar E-mail por View.
             /* $requerimento->update();
+            DB::commit();
             return view('mail/requerimento', compact('requerimento')); */
 
             // Envio de e-mail após a criação, atribui envio_create = 0 em caso de falha de envio.
