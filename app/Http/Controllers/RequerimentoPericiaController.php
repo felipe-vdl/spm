@@ -26,14 +26,14 @@ class RequerimentoPericiaController extends Controller
     {
         $requerimentos = RequerimentoPericia::with('user')->get();
 
-        return view('index', compact('requerimentos'));
+        return view('requerimento_pericia/index', compact('requerimentos'));
     }
 
     public function arquivo()
     {
         $requerimentos = RequerimentoPericia::all();
 
-        return view('arquivo', compact('requerimentos'));
+        return view('requerimento_pericia/arquivo', compact('requerimentos'));
     }
 
     /**
@@ -54,118 +54,7 @@ class RequerimentoPericiaController extends Controller
      */
     public function store(Request $request)
     {
-        DB::beginTransaction();
-        try {
-            $requerimento = new RequerimentoPericia;
-            $validatedData = $request->validate([
-                'nome' => 'required|max:128',
-                'matricula' => 'required|max:7',
-                'local_lotacao' => 'required|max:72',
-                'trabalho_inicio' => 'required|max:14',
-                'trabalho_fim' => 'required|max:14',
-                'dt_inicio_atestado' => 'required|max:10',
-                'vinculo' => 'required|max:3',
-                'email' => 'required|max:128',
-            ]);
-            
-            // Atribuir informações do formulário.
-            $requerimento->nome                     = $request->nome;
-            $requerimento->matricula                = $request->matricula;
-            $requerimento->local_lotacao            = $request->local_lotacao;
-            /* $requerimento->horario_trabalho         = $request->horario_trabalho; */
-            $requerimento->horario_trabalho         = $request->trabalho_inicio.' às '.$request->trabalho_fim;
-            $requerimento->dt_inicio_atestado       = $request->dt_inicio_atestado;
-            $requerimento->email                    = $request->email;
-            $requerimento->status                   = 0;
-            $requerimento->vinculo                  = $request->vinculo;
-
-            // Atribuir data atual.
-            $data_atual = Carbon::now('America/Sao_Paulo')->format('His');
-            
-            // Caracteres aleatórios de A-Z.
-            $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $shuffled = str_shuffle($caracteres);
-
-            // Gerar código de Protocolo:
-            $novo_protocolo = strtoupper(substr($shuffled,0,3)).rand(100,999).$data_atual;
-            
-            // Prevenir repetição de protocolos.
-            $protocolo_existe = RequerimentoPericia::where('protocolo','=',$novo_protocolo)->get();
-            while (!$protocolo_existe->isEmpty()) {
-                $data_atual = Carbon::now('America/Sao_Paulo')->format('His');
-                $shuffled = str_shuffle($caracteres);
-                $novo_protocolo = strtoupper(substr($shuffled,0,3)).rand(100,999).$data_atual;
-                $protocolo_existe = RequerimentoPericia::where('protocolo','=',$novo_protocolo)->get();
-            }
-            $requerimento->protocolo                = $novo_protocolo;
-            $requerimento->save();
-
-            // Recebimento do(s) atestado(s)
-            $atestadoFiles = [];
-            foreach($request->documento_atestado as $atestado) {
-                $filename_atestado = $atestado->store('public/atestados');
-                // Inclui o nome dos arquivos em uma array, para a função de exclusão em caso de falha.
-                array_push($atestadoFiles, substr($filename_atestado, 17));
-                DocumentoAtestado::create([
-                    'requerimento_id' => $requerimento->id,
-                    'filename' => substr($filename_atestado, 17),
-                    'extensao' => $atestado->extension()
-                ]);
-            }
-
-            // Recebimento do(s) comprovante(s) de afastamento, se incluso(s).
-            if(isset($request->documento_afastamento)) {
-                $afastamentoFiles = [];
-                foreach($request->documento_afastamento as $afastamento) {
-                    $filename_afastamento = $afastamento->store('public/afastamentos');
-                    // Inclui o nome dos arquivos em uma array, para a função de exclusão em caso de falha.
-                    array_push($afastamentoFiles, substr($filename_afastamento, 20));
-                    DocumentoAfastamento::create([
-                        'requerimento_id' => $requerimento->id,
-                        'filename' => substr($filename_afastamento, 20),
-                        'extensao' => $afastamento->extension()
-                    ]);
-                }
-            }
-
-            // Visualizar E-mail por View.
-            /* $requerimento->update();
-            return view('mail/requerimento', compact('requerimento')); */
-
-            // Envio de e-mail após a criação, atribui envio_create = 0 em caso de falha de envio.
-            try {
-                $mail = env('MAIL_FROM_ADDRESS','');
-                Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
-                    $m->from($mail, 'Perícia Médica');
-                    $m->subject('Novo Requerimento');
-                    $m->to($requerimento->email);
-                });         
-                $requerimento->envio_create = 1;
-                
-            } catch (\Throwable $th) {
-                $requerimento->envio_create = 0;
-            }
-            $requerimento->update();
-
-        } catch (\Throwable $th) {
-            // Em caso de falha: exclusão do requerimento e documentos enviados.
-            DB::rollback();
-
-            foreach($atestadoFiles as $atestado) {
-                unlink(storage_path('app/public/atestados/'.$atestado));
-            }
-
-            if(isset($afastamentoFiles)) {
-                foreach($afastamentoFiles as $afastamento) {
-                    unlink(storage_path('app/public/afastamentos/'.$afastamento));
-                }
-            }
-            
-            return redirect('/')->with('error', 'Houve um erro ao tentar criar o requerimento, tente novamente.');
-        }
-        // Aplicar no banco de dados.
-        DB::commit();
-        return redirect('/')->with('success', 'Requerimento registrado com sucesso.');
+        //
     }
 
     /**
@@ -180,7 +69,7 @@ class RequerimentoPericiaController extends Controller
         $doc_atestados = DocumentoAtestado::where('requerimento_id', $id)->get();
         $doc_afastamentos = DocumentoAfastamento::where('requerimento_id', $id)->get();
         
-        return view('show', compact('requerimento', 'doc_atestados', 'doc_afastamentos'));
+        return view('requerimento_pericia/show', compact('requerimento', 'doc_atestados', 'doc_afastamentos'));
     }
 
     /**
@@ -195,7 +84,7 @@ class RequerimentoPericiaController extends Controller
         $doc_atestados = DocumentoAtestado::where('requerimento_id', $id)->get();
         $doc_afastamentos = DocumentoAfastamento::where('requerimento_id', $id)->get();
 
-        return view('edit', compact('requerimento', 'doc_atestados', 'doc_afastamentos'));
+        return view('requerimento_pericia/edit', compact('requerimento', 'doc_atestados', 'doc_afastamentos'));
     }
 
     /**
@@ -320,6 +209,128 @@ class RequerimentoPericiaController extends Controller
         }
         DB::commit();
         return redirect('/confirmar')->with('success', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function guardar(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $requerimento = new RequerimentoPericia;
+            $validatedData = $request->validate([
+                'nome' => 'required|max:128',
+                'matricula' => 'required|max:7',
+                'local_lotacao' => 'required|max:72',
+                'trabalho_inicio' => 'required|max:14',
+                'trabalho_fim' => 'required|max:14',
+                'dt_inicio_atestado' => 'required|max:10',
+                'vinculo' => 'required|max:3',
+                'email' => 'required|max:128',
+            ]);
+            
+            // Atribuir informações do formulário.
+            $requerimento->nome                     = $request->nome;
+            $requerimento->matricula                = $request->matricula;
+            $requerimento->local_lotacao            = $request->local_lotacao;
+            /* $requerimento->horario_trabalho         = $request->horario_trabalho; */
+            $requerimento->horario_trabalho         = $request->trabalho_inicio.' às '.$request->trabalho_fim;
+            $requerimento->dt_inicio_atestado       = $request->dt_inicio_atestado;
+            $requerimento->email                    = $request->email;
+            $requerimento->status                   = 0;
+            $requerimento->vinculo                  = $request->vinculo;
+
+            // Atribuir data atual.
+            $data_atual = Carbon::now('America/Sao_Paulo')->format('His');
+            
+            // Caracteres aleatórios de A-Z.
+            $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $shuffled = str_shuffle($caracteres);
+
+            // Gerar código de Protocolo:
+            $novo_protocolo = strtoupper(substr($shuffled,0,3)).rand(100,999).$data_atual;
+            
+            // Prevenir repetição de protocolos.
+            $protocolo_existe = RequerimentoPericia::where('protocolo','=',$novo_protocolo)->get();
+            while (!$protocolo_existe->isEmpty()) {
+                $data_atual = Carbon::now('America/Sao_Paulo')->format('His');
+                $shuffled = str_shuffle($caracteres);
+                $novo_protocolo = strtoupper(substr($shuffled,0,3)).rand(100,999).$data_atual;
+                $protocolo_existe = RequerimentoPericia::where('protocolo','=',$novo_protocolo)->get();
+            }
+            $requerimento->protocolo                = $novo_protocolo;
+            $requerimento->save();
+
+            // Recebimento do(s) atestado(s)
+            $atestadoFiles = [];
+            foreach($request->documento_atestado as $atestado) {
+                $filename_atestado = $atestado->store('public/atestados');
+                // Inclui o nome dos arquivos em uma array, para a função de exclusão em caso de falha.
+                array_push($atestadoFiles, substr($filename_atestado, 17));
+                DocumentoAtestado::create([
+                    'requerimento_id' => $requerimento->id,
+                    'filename' => substr($filename_atestado, 17),
+                    'extensao' => $atestado->extension()
+                ]);
+            }
+
+            // Recebimento do(s) comprovante(s) de afastamento, se incluso(s).
+            if(isset($request->documento_afastamento)) {
+                $afastamentoFiles = [];
+                foreach($request->documento_afastamento as $afastamento) {
+                    $filename_afastamento = $afastamento->store('public/afastamentos');
+                    // Inclui o nome dos arquivos em uma array, para a função de exclusão em caso de falha.
+                    array_push($afastamentoFiles, substr($filename_afastamento, 20));
+                    DocumentoAfastamento::create([
+                        'requerimento_id' => $requerimento->id,
+                        'filename' => substr($filename_afastamento, 20),
+                        'extensao' => $afastamento->extension()
+                    ]);
+                }
+            }
+
+            // Visualizar E-mail por View.
+            /* $requerimento->update();
+            return view('mail/requerimento', compact('requerimento')); */
+
+            // Envio de e-mail após a criação, atribui envio_create = 0 em caso de falha de envio.
+            try {
+                $mail = env('MAIL_FROM_ADDRESS','');
+                Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                    $m->from($mail, 'Perícia Médica');
+                    $m->subject('Novo Requerimento');
+                    $m->to($requerimento->email);
+                });         
+                $requerimento->envio_create = 1;
+                
+            } catch (\Throwable $th) {
+                $requerimento->envio_create = 0;
+            }
+            $requerimento->update();
+
+        } catch (\Throwable $th) {
+            // Em caso de falha: exclusão do requerimento e documentos enviados.
+            DB::rollback();
+
+            foreach($atestadoFiles as $atestado) {
+                unlink(storage_path('app/public/atestados/'.$atestado));
+            }
+
+            if(isset($afastamentoFiles)) {
+                foreach($afastamentoFiles as $afastamento) {
+                    unlink(storage_path('app/public/afastamentos/'.$afastamento));
+                }
+            }
+            
+            return redirect('/')->with('error', 'Houve um erro ao tentar criar o requerimento, tente novamente.');
+        }
+        // Aplicar no banco de dados.
+        DB::commit();
+        return redirect('/')->with('success', 'Requerimento registrado com sucesso.');
     }
 
 }

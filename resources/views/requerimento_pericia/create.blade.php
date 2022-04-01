@@ -51,7 +51,7 @@
         <div class="row justify-content-center">
             <div class="col-9">
                 <div class="card bg-light text-dark">
-                    <form method="post" enctype="multipart/form-data" action="{{ route('requerimento_pericias.store') }}">
+                    <form method="post" enctype="multipart/form-data" action="{{ route('guardar') }}">
                     @csrf
                         <div class="card-header">
                                 <h5 class="text-center fw-light p-1 m-0">Requerimento de Perícia Médica</h5>

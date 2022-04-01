@@ -24,7 +24,7 @@ class HomeController extends Controller
 		$finalizados		= RequerimentoPericia::all()->where('status', '==', 4)->count();
 		$totalarq			= $recusados + $finalizados;
 
-		return view('home', compact('total', 'totalreq', 'analise', 'confirmacao', 'recusados', 'finalizados', 'totalarq'));
+		return view('requerimento_pericia/home', compact('total', 'totalreq', 'analise', 'confirmacao', 'recusados', 'finalizados', 'totalarq'));
 	}
 
 	public function embreve($rotina)

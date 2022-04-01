@@ -1,7 +1,7 @@
 
 @if ($requerimento->status === 0)
 <p>Olá {{ substr($requerimento->nome, 0, strpos($requerimento->nome, ' ')) }}, o seu requerimento foi criado com sucesso e será analisado pelo nosso departamento.</p>
-<p>Aguarde a resposta com o seu agendamento, poderá se dar em até 48 horas úteis da sua solicitação.</p>
+<p>Aguarde a resposta com o seu agendamento (poderá se dar em até 48 horas úteis da sua solicitação), fique atento e por favor verifique a sua caixa de spam periodicamente.</p>
 <p><b>Protocolo do seu requerimento:</b> {{ $requerimento->protocolo }}</p>
 
 @elseif ($requerimento->status === 1)
@@ -46,6 +46,8 @@
         </ul>
     </li>
 </ul>
+
+<p>* Atenção: Para confirmar a presença no dia e horário agendado o servidor precisa confirmar o recebimento deste e-mail, inserindo o protocolo do agendamento em nossa <a target="_blank" rel="noopener noreferrer" href="http://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>.</p>
 
 <p>I - No dia e no horário agendado o servidor deverá estar munido do atestado do médico assistente ou odontológico original, contendo informações que constatem a incapacidade laborativa do servidor, conforme preconiza a resolução do Conselho Federal de Medicina nº 1851/2008 (D.O.U. 18/08/2008);</p>
 
