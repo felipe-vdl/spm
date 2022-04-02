@@ -36,7 +36,7 @@
                         <th>Matrícula</th>
                         <th>Protocolo</th>
                         {{-- <th>E-Mail</th> --}}
-                        <th>Data/Hora do Requerimento</th>
+                        <th>Data do Requerimento</th>
                         <th>Status</th>
                         <th>Direcionamento</th>
                         <th>Data/Hora Agendada</th>
@@ -52,7 +52,7 @@
                                 <td>{{$requerimento->matricula}}</td>
                                 <td>{{$requerimento->protocolo}}</td>
                                 {{-- <td>{{$requerimento->email}}</td> --}}
-                                <td>{{date('d/m/Y H:i', strtotime($requerimento-> created_at))}}</td>
+                                <td>{{date('d/m/Y', strtotime($requerimento-> created_at))}}</td>
 
                                 <td>
                                     @if ($requerimento->status == 0)
@@ -91,7 +91,7 @@
                         <th><input class="filter-input" data-column="1" type="text" placeholder="Filtro por Matrícula"></th>
                         <th><input class="filter-input" data-column="2" type="text" placeholder="Filtro por Protocolo"></th>
                         {{-- <th><input class="filter-input" data-column="3" type="text" placeholder="Filtro por E-mail"></th> --}}
-                        <th><input class="filter-input" data-column="3" type="text" placeholder="Filtro por Data/Hora do Requerimento"></th>
+                        <th><input class="filter-input" data-column="3" type="text" placeholder="Filtro por Data do Requerimento"></th>
                         <th><input class="filter-input" data-column="4" type="text" placeholder="Filtro por Status"></th>
                         <th><input class="filter-input" data-column="5" type="text" placeholder="Filtro por Direcionamento"></th>
                         <th><input class="filter-input" data-column="6" type="text" placeholder="Filtro por Data/Hora Agendada"></th>

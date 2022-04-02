@@ -209,7 +209,8 @@ class RequerimentoPericiaController extends Controller
             return redirect('/confirmar')->with('error', 'Houve um erro ao tentar confirmar o requerimento, tente novamente.');
         }
         DB::commit();
-        return redirect('/confirmar')->with('success', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.');
+        /* return redirect('/confirmar')->with('success', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.'); */
+        return redirect('/sucesso')->with('confirmado', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.');
     }
 
     /**
@@ -332,7 +333,11 @@ class RequerimentoPericiaController extends Controller
         }
         // Aplicar no banco de dados.
         DB::commit();
-        return redirect('/')->with('success', 'Requerimento registrado com sucesso.');
+        return redirect('/sucesso')->with('success', 'Requerimento registrado com sucesso.');
     }
 
+    public function sucesso()
+    {
+        return view('requerimento_pericia/sucesso');
+    }
 }

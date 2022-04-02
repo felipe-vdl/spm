@@ -46,7 +46,6 @@
                 <img src="{{ asset('assets/logo.png') }}" height='70vh' alt="Logotipo Prefeitura de Mesquita">
         </div>
     </nav>
-
     <div class="container mt-3">
         <div class="row justify-content-center">
             <div class="col-9">
@@ -54,22 +53,14 @@
                     <form method="post" enctype="multipart/form-data" action="{{ route('guardar') }}">
                     @csrf
                         <div class="card-header">
-                                <h5 class="text-center fw-light p-1 m-0">Requerimento de Perícia Médica</h5>
+                            <h5 class="text-center fw-light p-1 m-0">Requerimento de Perícia Médica</h5>
                         </div>
                         <div class="card-body">
-                            @if(session()->get('success'))
-                            <div class="alert alert-success m-0">
-                                <h5 class="alert-heading">{{ session()->get('success') }}</h5>
-                                <p class="mb-0">O protocolo do seu requerimento será informado por e-mail, fique atento e <strong>VERIFIQUE SUA CAIXA DE SPAM</strong>.</p>
-                                <hr class="my-2">
-                                <p class="mb-0">A resposta com o agendamento poderá se dar em até 48 horas úteis da solicitação.</p>
-                            </div><br />
-                            @endif
                             @if(session()->get('error'))
                             <div class="alert alert-danger m-0">
                                 <h5 class="alert-heading">Erro ao criar requerimento.</h5>
                                 {{ session()->get('error') }}
-                            </div><br />
+                            </div><br/>
                             @endif
                             <div class="row mb-3 justify-content-between">
                                 <div class="col-lg-6 mb-3">
@@ -294,6 +285,10 @@
             afastamentoDiv.style.display = "none";
             afastamentoDoc.removeAttribute('required');
             afastamentoDoc.value = "";
+            let afastamentoSpans = document.querySelectorAll('#afastamentos-area > .file-block');
+                for (let span of afastamentoSpans) {
+                    span.remove();
+            }
         })
 
         vinculoSim.addEventListener('click', () => {
@@ -317,6 +312,7 @@
             $("#modaleventclick").modal("show");
         });
     </script>
+    {{-- Validação dos Inputs de Arquivo --}}
     <script>
         // Array com os tipos de arquivo aceitos.
         const fileTypes = ['image', 'png', 'jpg', 'jpeg', 'doc', 'docx', 'xml', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'pdf'];

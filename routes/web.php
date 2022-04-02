@@ -2,6 +2,7 @@
 
 Route::get ('/', "RequerimentoPericiaController@create");
 Route::post('/guardar', 'RequerimentoPericiaController@guardar')->name('guardar');
+Route::get('/sucesso', 'RequerimentoPericiaController@sucesso')->name('sucesso');
 
 Route::get ('/confirmar', "RequerimentoPericiaController@confirmar");
 Route::post('requerimento_pericias/confirma', 'RequerimentoPericiaController@confirmacao');
