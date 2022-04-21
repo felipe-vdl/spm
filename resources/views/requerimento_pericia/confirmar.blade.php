@@ -131,6 +131,7 @@
                         <div class="loader"></div>
                     </center>
                 </div>
+              </div>
             </div>
         </div>
     </div>

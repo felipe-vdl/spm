@@ -126,6 +126,7 @@
                 <div class="loader"></div>
             </center>
         </div>
+      </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
