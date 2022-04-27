@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
 	
 	Route::get('/requerimentos', 'RequerimentoPericiaController@index')->name('requerimentos');
+	Route::get('/diario', 'RequerimentoPericiaController@diario')->name('diario');
+	Route::post('/requerimento_pericias/{id}/presente', 'RequerimentoPericiaController@presente')->name('presente');
+	Route::post('/requerimento_pericias/{id}/ausente', 'RequerimentoPericiaController@ausente')->name('ausente');
 	Route::get('/arquivo', 'RequerimentoPericiaController@arquivo')->name('arquivo');
 
 	Route::get('relatorio/pdf/{data}',  'RelatorioController@gerarpdf');

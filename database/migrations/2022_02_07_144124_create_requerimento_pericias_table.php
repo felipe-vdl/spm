@@ -31,6 +31,7 @@ class CreateRequerimentoPericiasTable extends Migration
             $table->string('data_avaliacao', 20);
             $table->tinyInteger('envio_create')->nullable();
             $table->tinyInteger('envio_agenda')->nullable();
+            $table->tinyInteger('presenca')->nullable();
             $table->string('vinculo', 3);
             $table->timestamps();
 

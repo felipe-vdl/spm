@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Requerimento de Perícia Médica</title>
     <!-- Bootstrap 5.1.3 -->
-    <link href="{{ asset('css/bootstrap5.min.css') }}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="{{ asset('css/bootstrap5.min.css') }}" rel="stylesheet" integrity="" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="" crossorigin="anonymous">
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="" crossorigin="anonymous">
     {{-- jquery-datepicker --}}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     {{-- jquery-timepicker --}}
@@ -242,14 +243,14 @@
           </div>
         </div>
     </div>
-    {{-- Bootstrap Dependencies --}}
-    <script src="{{ asset('js/bootstrap5.bundle.min.js') }}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{-- jQuery e jQueryUI Dependencies --}}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {{-- Datepicker e Timepicker --}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    {{-- Bootstrap Dependencies --}}
+    <script src="{{ asset('js/bootstrap5.bundle.min.js') }}" integrity="" crossorigin="anonymous"></script>
     <script>
         /* Datepicker Data Inicial do Atestado*/
         $('.datepicker').datepicker({
@@ -305,13 +306,6 @@
         VMasker ($("#trabalho-fim")).maskPattern("99:99");
         VMasker ($("#data-inicio-atestado")).maskPattern("99/99/9999");
         VMasker ($("#matricula")).maskPattern("999.999");
-    </script>
-    {{-- Popup de carregamento após envio do formulário --}}
-    <script>
-        const form = document.querySelector('form');
-        form.addEventListener('submit', (e) => {
-            $("#modaleventclick").modal("show");
-        });
     </script>
     {{-- Validação dos Inputs de Arquivo --}}
     <script>
@@ -576,6 +570,13 @@
                     afastamentoInput.files = dtAfastamento.files;
                 });
             }
+        });
+    </script>
+    {{-- Popup de carregamento após envio do formulário --}}
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            $("#modaleventclick").modal("show");
         });
     </script>
 </body>

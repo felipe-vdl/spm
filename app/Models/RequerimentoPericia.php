@@ -21,6 +21,7 @@ class RequerimentoPericia extends Model
         'user_id',
         'envio_create',
         'envio_agenda',
+        'presenca',
         'email'
     ];
 

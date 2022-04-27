@@ -24,6 +24,7 @@
                         <th>Status</th>
                         <th>Direcionamento</th>
                         <th>Data/Hora Agendada</th>
+                        <th>Presença</th>
                         <th>Ações</th>
                         <th>Avaliador</th>
                     </tr>
@@ -41,7 +42,7 @@
                                     @if($requerimento->status == 1)
                                         <a style="color: red">Recusado</a>
                                     @elseif($requerimento->status == 4)
-                                        <a style="color: green">Finalizado</a>
+                                        <a style="color: green">Confirmado</a>
                                     @endif
                                 </td>
 
@@ -50,6 +51,13 @@
                                 <td>
                                     @if ($requerimento->data_agenda)
                                         {{ date('d/m/Y', strtotime($requerimento->data_agenda))." ".$requerimento->hora_agenda }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($requerimento->presenca == 0)
+                                    <a style="color: red">Ausente</a>
+                                    @elseif ($requerimento->presenca == 1)
+                                    <a style="color: green">Presente</a>
                                     @endif
                                 </td>
 
@@ -74,8 +82,9 @@
                         <th><input class="filter-input" data-column="4" type="text" placeholder="Filtro por Status"></th>
                         <th><input class="filter-input" data-column="5" type="text" placeholder="Filtro por Direcionamento"></th>
                         <th><input class="filter-input" data-column="6" type="text" placeholder="Filtro por Data/Hora Agendada"></th>
-                        <th><input class="filter-input" data-column="7" type="text" placeholder="Filtro por Ações"></th>
-                        <th><input class="filter-input" data-column="8" type="text" placeholder="Filtro por Avaliador"></th>
+                        <th><input class="filter-input" data-column="7" type="text" placeholder="Filtro por Presença"></th>
+                        <th><input class="filter-input" data-column="8" type="text" placeholder="Filtro por Ações"></th>
+                        <th><input class="filter-input" data-column="9" type="text" placeholder="Filtro por Avaliador"></th>
                     </tr>
                 </tfoot>
             </table>
@@ -148,6 +157,7 @@
                         null,
                         null,
                         { "sType": "date-uk" },
+                        null,
                         null,
                         null,
                         null,

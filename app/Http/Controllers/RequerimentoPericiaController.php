@@ -29,6 +29,55 @@ class RequerimentoPericiaController extends Controller
         return view('requerimento_pericia/index', compact('requerimentos'));
     }
 
+    public function diario()
+    {
+        $data_atual = Carbon::now('America/Sao_Paulo')->format('Y-m-d 12:00:00');
+        $requerimentos = RequerimentoPericia::where('data_agenda', $data_atual)->get();
+        return view('requerimento_pericia/diario', compact('requerimentos'));
+    }
+
+    public function presente(Request $request)
+    {   
+        DB::beginTransaction();
+        try {
+            $requerimento = RequerimentoPericia::where('id','=', $request->id)->get();
+            
+            $req = RequerimentoPericia::find($requerimento[0]->id);
+            
+            $req->presenca = 1;
+            
+            $req->save();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            
+            return redirect('/diario')->with('error', 'Houve um erro ao avaliar a presença, tente novamente.');
+        }
+        DB::commit();
+        return redirect('/diario')->with('sucess', 'Presença marcada com sucesso.');
+    }
+
+    public function ausente(Request $request)
+    {   
+        DB::beginTransaction();
+        try {
+            $requerimento = RequerimentoPericia::where('id','=', $request->id)->get();
+            
+            $req = RequerimentoPericia::find($requerimento[0]->id);
+            
+            $req->presenca = 0;
+            
+            $req->save();
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            
+            return redirect('/diario')->with('error', 'Houve um erro ao avaliar a presença, tente novamente.');
+        }
+        DB::commit();
+        return redirect('/diario')->with('sucess', 'Presença marcada com sucesso.');
+    }
+
     public function arquivo()
     {
         $requerimentos = RequerimentoPericia::all();
@@ -244,6 +293,7 @@ class RequerimentoPericiaController extends Controller
             $requerimento->dt_inicio_atestado       = $request->dt_inicio_atestado;
             $requerimento->email                    = $request->email;
             $requerimento->status                   = 0;
+            $requerimento->presenca                 = -1;
             $requerimento->vinculo                  = $request->vinculo;
 
             // Atribuir data atual.

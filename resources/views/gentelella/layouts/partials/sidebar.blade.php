@@ -4,9 +4,13 @@
 			<li>
 				<a href="{{ route('home')}}" title="Contadores"><i class="fas fa-home"></i> Principal </a>
 			</li>
-
+			
 			<li>
 				<a href="{{ url('/requerimentos')}}" title="Requerimentos Ativos"><i class="fas fa-file-contract"></i>Requerimentos</a>
+			</li>
+
+			<li>
+				<a href="{{ url('/diario')}}" title="Requerimentos Ativos"><i class="fas fa-file-contract"></i>Agenda Diária</a>
 			</li>
 
 			<li>
