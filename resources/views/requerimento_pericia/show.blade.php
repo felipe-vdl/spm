@@ -32,9 +32,17 @@
             <div>
                 <div>Data/Hora Agendada: <strong>{{ date('d/m/Y', strtotime($requerimento->data_agenda)) }} às {{ $requerimento->hora_agenda }}h.</strong></div>
             </div>
-            <br>
             <div>
                 <div>Data/Hora da Confirmação: <strong>{{ $requerimento->data_confirmacao }}</strong></div>
+            </div>
+            <div>
+                Presença do servidor no dia agendado: <strong>
+                    @if ($requerimento->presenca == 1)
+                    Presente
+                    @elseif($requerimento->presenca == 0)
+                    Ausente
+                    @endif
+                </strong>
             </div>
             @else
             <div>
