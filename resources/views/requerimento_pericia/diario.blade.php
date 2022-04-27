@@ -69,19 +69,19 @@
 
                             <td>
                                 @if ($requerimento->presenca == -1)
-                                <form action="{{ route('presente', $requerimento->id)}}" method="POST">
+                                <form style="display: inline-block" action="{{ route('presente', $requerimento->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
-                                    <a onclick="this.parentNode.submit();" style="display: inline-block;" class="btn btn-success presente" title="Marcar presença.">
+                                    <a style="display: inline-block;" class="btn btn-success presente" title="Marcar presença.">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                                         </svg>
                                     </a>
                                 </form>
-                                <form action="{{ route('ausente', $requerimento->id)}}" method="POST">
+                                <form style="display: inline-block" action="{{ route('ausente', $requerimento->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
-                                    <a onclick="this.parentNode.submit();" style="display: inline-block;" class="btn btn-danger ausente" title="Marcar ausência.">
+                                    <a style="display: inline-block;" class="btn btn-danger ausente" title="Marcar ausência.">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
                                             <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
@@ -139,7 +139,7 @@
 @endsection
 
 @push('scripts')
-    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
@@ -222,11 +222,64 @@
         } );
     </script>
     <script>
-        const allForms = document.querySelectorAll('form');
+        const presencaButtons = document.querySelectorAll('.presente');
+        const ausenciaButtons = document.querySelectorAll('.ausente');
 
-        for(let form of allForms) {
-            form.addEventListener('submit', (e) => {
-                $("#modaleventclick").modal("show");
+        for (let button of presencaButtons) {
+            button.addEventListener('click', (e) => {
+                swal({
+					title: "Atenção!",
+					text: `Você está prestes a confirmar a presença do requerimento.`,
+					icon: "warning",
+					buttons: {
+					  cancel: {
+						 text: "Cancelar",
+						 value: "cancelar",
+						 visible: true,
+						 closeModal: true,
+					  },
+					  ok: {
+						 text: "Confirmar",
+						 value: 'ok',
+						 visible: true,
+						 closeModal: true,
+					  }
+					}
+				 }).then(function(resultado){
+                    if(resultado === 'ok'){
+                        button.parentElement.submit();
+                        $("#modaleventclick").modal("show");
+                    }
+		        });
+            });
+        }
+        
+        for (let button of ausenciaButtons) {
+            button.addEventListener('click', (e) => {
+                swal({
+					title: "Atenção!",
+					text: `Você está prestes a confirmar a ausência do requerimento.`,
+					icon: "warning",
+					buttons: {
+					  cancel: {
+						 text: "Cancelar",
+						 value: "cancelar",
+						 visible: true,
+						 closeModal: true,
+					  },
+					  ok: {
+						 text: "Confirmar",
+						 value: 'ok',
+						 visible: true,
+						 closeModal: true,
+					  }
+					}
+				 }).then(function(resultado){
+                    if(resultado === 'ok'){
+                        button.parentElement.submit();
+                        $("#modaleventclick").modal("show");
+                    }
+		        });
             });
         }
     </script>
