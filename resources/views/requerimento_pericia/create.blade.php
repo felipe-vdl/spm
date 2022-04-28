@@ -42,14 +42,30 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
         }
+
+        .swal-footer {
+            text-align: center;
+        }
+
+        @media only screen and (min-width: 900px) {
+            #manual {
+                width: 185px;
+                position: absolute;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-white" style="padding-bottom: 200px; font-family: 'Roboto', sans-serif;">
     <nav class="navbar navbar-light bg-light shadow-sm mb-3">
-        <div class="container justify-content-center">
+        <div class="container">
             <img src="{{ asset('assets/logo.png') }}" height='70vh' alt="Logotipo Prefeitura de Mesquita">
-            <a class="nav-link text-primary" target="_blank" href="{{ asset('assets/manual-de-utilizacao.pdf') }}">Manual de Utilização</a>
+            <a id="manual" class="btn btn-info nav-link text-white" target="_blank" href="{{ asset('assets/manual-de-utilizacao.pdf') }}">Manual de Utilização</a>
         </div>
     </nav>
     <div class="container mt-3">
@@ -269,6 +285,8 @@
           </div>
         </div>
     </div>
+    {{-- Sweet Alert --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     {{-- jQuery e jQueryUI Dependencies --}}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="" crossorigin="anonymous"></script>
@@ -604,6 +622,29 @@
         form.addEventListener('submit', (e) => {
             $("#modaleventclick").modal("show");
         });
+    </script>
+    <script>
+        const manual = () => {
+            swal({
+                icon: 'info',
+                title: 'Olá!',
+                text: 'Consulte o nosso Manual de Utilização para aprender a criar um novo requerimento de maneira fácil e rápida.',
+                buttons: {
+                    manual: {
+                        text: 'Manual de Utilização',
+                        value: 'ok',
+                        visible: true,
+                        closeModal: true
+                    }
+                }
+            }).then(function(resultado) {
+                if (resultado === 'ok') {
+                    window.open("{{ asset('assets/manual-de-utilizacao.pdf') }}", '_blank')
+                }
+            });
+        }
+
+        manual();
     </script>
 </body>
 
