@@ -11,7 +11,11 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app4.1.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="" crossorigin="anonymous">
     {{-- jquery-datepicker --}}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -41,7 +45,7 @@
     </style>
 </head>
 
-<body class="bg-white" style="font-family: 'Roboto', sans-serif;">
+<body class="bg-white" style="padding-bottom: 200px; font-family: 'Roboto', sans-serif;">
     <nav class="navbar navbar-light bg-light shadow-sm mb-3">
         <div class="container justify-content-center">
             <img src="{{ asset('assets/logo.png') }}" height='70vh' alt="Logotipo Prefeitura de Mesquita">
@@ -222,14 +226,35 @@
                 </div>
             </div>
         </div>
-        <footer class="row justify-content-center mt-3 mt-lg-4 mb-3 mb-lg-0 border-top">
-            <div class="col-auto text-center mt-3 mt-lg-5">
-                <p class="fw-normal lh-0 mb-1" style="font-size: 17px;"><i class="fab fa-free-code-camp"></i> Equipe de Desenvolvimento de Sistemas</p>
-                <p class="fw-light lh-0 mb-0" style="font-size: 14px;"> Subsecretaria de Tecnologia da Informação - Prefeitura Municipal de Mesquita - RJ </p>
-                <p class="fw-light lh-0 mb-0" style="font-size: 14px;"> Rua Arthur Oliveira Vecchi, 120 - Centro - Mesquita - RJ - CEP: 26553-080</p>
-            </div>
-        </footer>
     </div>
+    <footer class="footer back-roxo">
+        <div class="container-fluid">
+          <nav>
+              <a style="padding-left: 30px">
+                <b> ©
+                  <script>
+                    document.write(new Date().getFullYear())
+                  </script>, EQUIPE DE DESENVOLVIMENTO DE SISTEMAS
+                      
+                </b>
+              </a>
+            
+           
+              <a style="padding-left: 30px">
+                <b><i class="fab fa-free-code-camp"></i> SUBSECRETARIA DA TECNOLOGIA DA INFORMAÇÃO - PREFEITURA MUNICIPAL DE MESQUITA - RJ</b>
+              </a>
+       
+            
+              <a style="padding-left: 30px">
+                <b>RUA ARTHUR OLIVEIRA VECCHI, 120 - CENTRO - MESQUITA - RJ - CEP: 26553-080</b>
+              </a>
+              
+              <a class="text-white" style="text-decoration: none; padding-left: 30px" href="https://lgpd.mesquita.rj.gov.br/?page_id=43" target="_blank">
+                <b>POLÍTICA DE PRIVACIDADE</b>
+              </a>
+          </nav>
+        </div>
+    </footer>
     <div class="modal fade" id="modaleventclick" tabindex="-1" role="dialog" aria-labelledby="modaleventclickLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
