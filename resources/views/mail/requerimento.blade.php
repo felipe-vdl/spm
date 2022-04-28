@@ -28,10 +28,10 @@
 @else
 <p>Olá {{ substr($requerimento->nome, 0, strpos($requerimento->nome, ' ')) }}, o seu requerimento foi agendado com sucesso.</p>
 
-<p>Por favor, confirme o recebimento deste e-mail inserindo o seu protocolo em nossa <a target="_blank" rel="noopener noreferrer" href="http://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>, e siga as demais instruções deste e-mail.</p>
+<p>Por favor, confirme o recebimento deste e-mail inserindo o seu protocolo em nossa <a target="_blank" rel="noopener noreferrer" href="https://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>, e siga as demais instruções deste e-mail.</p>
 
 
-<b>Página de Confirmação:</b> http://periciamedica.mesquita.rj.gov.br/confirmar
+<b>Página de Confirmação:</b> https://periciamedica.mesquita.rj.gov.br/confirmar
 
 <h3 style="margin-bottom: 5px;">Requerimento</h3>
 <ul style="margin-top: 0;">
@@ -47,7 +47,7 @@
     </li>
 </ul>
 
-<p>* Atenção: Para confirmar a presença no dia e horário agendado o servidor precisa confirmar o recebimento deste e-mail, inserindo o protocolo do agendamento em nossa <a target="_blank" rel="noopener noreferrer" href="http://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>.</p>
+<p>* Atenção: Para confirmar a presença no dia e horário agendado o servidor precisa confirmar o recebimento deste e-mail, inserindo o protocolo do agendamento em nossa <a target="_blank" rel="noopener noreferrer" href="https://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>.</p>
 
 <p>I - No dia e no horário agendado o servidor deverá estar munido do atestado do médico assistente ou odontológico original, contendo informações que constatem a incapacidade laborativa do servidor, conforme preconiza a resolução do Conselho Federal de Medicina nº 1851/2008 (D.O.U. 18/08/2008);</p>
 

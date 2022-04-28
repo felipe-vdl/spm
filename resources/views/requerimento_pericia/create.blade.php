@@ -45,6 +45,7 @@
     <nav class="navbar navbar-light bg-light shadow-sm mb-3">
         <div class="container">
                 <img src="{{ asset('assets/logo.png') }}" height='70vh' alt="Logotipo Prefeitura de Mesquita">
+                <a class="nav-link text-primary" target="_blank" href="{{ asset('assets/manual-de-utilizacao.pdf') }}">Manual de Utilização</a>
         </div>
     </nav>
     <div class="container mt-3">
