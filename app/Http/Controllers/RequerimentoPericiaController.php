@@ -368,7 +368,7 @@ class RequerimentoPericiaController extends Controller
         } catch (\Throwable $th) {
             // Em caso de falha: exclusão do requerimento e documentos enviados.
             DB::rollback();
-
+            
             foreach($atestadoFiles as $atestado) {
                 unlink(storage_path('app/public/atestados/'.$atestado));
             }

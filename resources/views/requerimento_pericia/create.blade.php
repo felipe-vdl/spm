@@ -47,7 +47,7 @@
             text-align: center;
         }
 
-        @media only screen and (min-width: 900px) {
+        @media only screen and (min-width: 768px) {
             #manual {
                 width: 185px;
                 position: absolute;
@@ -58,17 +58,32 @@
                 text-align: center;
             }
         }
+
+        @media only screen and (max-width: 768px) {
+            #logonav {
+                margin-bottom: 0.5rem;
+            }
+            #manual {
+                text-align: center;
+            }
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 
-<body class="bg-white" style="padding-bottom: 200px; font-family: 'Roboto', sans-serif;">
+<body class="bg-white" style="font-family: 'Roboto', sans-serif;">
     <nav class="navbar navbar-light bg-light shadow-sm mb-3">
         <div class="container">
-            <img src="{{ asset('assets/logo.png') }}" height='70vh' alt="Logotipo Prefeitura de Mesquita">
+            <img id="logonav" src="{{ asset('assets/logo.png') }}" height='70vh' alt="Logotipo Prefeitura de Mesquita">
             <a id="manual" class="btn btn-info nav-link text-white" target="_blank" href="{{ asset('assets/manual-de-utilizacao.pdf') }}">Manual de Utilização</a>
         </div>
     </nav>
-    <div class="container mt-3">
+    <div class="container mt-3 mb-5">
         <div class="row justify-content-center">
             <div class="col-9">
                 <div class="card bg-light text-dark">
@@ -147,10 +162,63 @@
                                     <label class="form-label fw-normal" for="horarioTrabalho">Horário de Trabalho no Município:</label>
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <input required class="form-control timepicker" name="trabalho_inicio" id="trabalho-inicio" type="text" placeholder="Início do Expediente" autocomplete="horario" style="background-color:#fff;" pattern=".{5,}" maxlength="5">
+                                            <select required class="form-select" name="trabalho_inicio" id="">
+                                                <option value="">Início do Expediente</option>
+                                                <option value="00:00">00:00</option>
+                                                <option value="01:00">01:00</option>
+                                                <option value="02:00">02:00</option>
+                                                <option value="03:00">03:00</option>
+                                                <option value="04:00">04:00</option>
+                                                <option value="05:00">05:00</option>
+                                                <option value="06:00">06:00</option>
+                                                <option value="07:00">07:00</option>
+                                                <option value="08:00">08:00</option>
+                                                <option value="09:00">09:00</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                                <option value="19:00">19:00</option>
+                                                <option value="20:00">20:00</option>
+                                                <option value="21:00">21:00</option>
+                                                <option value="22:00">22:00</option>
+                                                <option value="23:00">23:00</option>
+                                            </select>
                                         </div>
                                         <div class="col-lg-6 mt-2 mt-lg-0">
-                                            <input required class="form-control timepicker" name="trabalho_fim" id="trabalho-fim" type="text" placeholder="Fim do Expediente" autocomplete="horario" style="background-color:#fff;" pattern=".{5,}" maxlength="5">
+                                            <select required class="form-select" name="trabalho_fim" id="">
+                                                <option value="">Fim do Expediente</option>
+                                                <option value="00:00">00:00</option>
+                                                <option value="01:00">01:00</option>
+                                                <option value="02:00">02:00</option>
+                                                <option value="03:00">03:00</option>
+                                                <option value="04:00">04:00</option>
+                                                <option value="05:00">05:00</option>
+                                                <option value="06:00">06:00</option>
+                                                <option value="07:00">07:00</option>
+                                                <option value="08:00">08:00</option>
+                                                <option value="09:00">09:00</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="18:00">18:00</option>
+                                                <option value="19:00">19:00</option>
+                                                <option value="20:00">20:00</option>
+                                                <option value="21:00">21:00</option>
+                                                <option value="22:00">22:00</option>
+                                                <option value="23:00">23:00</option>
+                                            </select>
+                                            {{-- <input required class="form-control timepicker" name="trabalho_fim" id="trabalho-fim" type="text" placeholder="Fim do Expediente" autocomplete="horario" style="background-color:#fff;" pattern=".{5,}" maxlength="5"> --}}
                                         </div>
                                     </div>
                                 </div>
