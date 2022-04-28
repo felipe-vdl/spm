@@ -48,7 +48,7 @@
                     <div id="outro-div" style="display: none;">
                         <textarea name="" id="outro-motivo" cols="30" rows="1" placeholder="Descreva o motivo." style="width: 100%;" maxlength="100"></textarea>
                     </div>
-                    <button id="enviar" type="submit" class="btn btn-success">Avaliar Requerimento</button>
+                    <a id="enviar" title="Enviar avaliação." class="btn btn-success">Avaliar Requerimento</a>
                 </div>
             </form>
         </div>
@@ -129,10 +129,13 @@
       </div>
     </div>
 </div>
+@endsection
+
+@push('scripts')
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
     $('#timejunta').timepicker({
@@ -556,9 +559,38 @@
     document.querySelector('.ui-timepicker-container').style.height = 'auto';
 </script>
 <script>
+    const submitBtn = document.querySelector('#enviar');
     const form = document.querySelector('form');
-    form.addEventListener('submit', (e) => {
-        $("#modaleventclick").modal("show");
+
+    submitBtn.addEventListener('click', (e) => {
+        swal({
+                title: "Atenção!",
+                text: `Você está prestes a confirmar a presença do requerimento.`,
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        value: "cancelar",
+                        visible: true,
+                        closeModal: true
+                    },
+                    ok: {
+                        text: "Confirmar",
+                        value: 'ok',
+                        visible: true,
+                        closeModal: true
+                    }
+                }
+            }).then(function(resultado){
+            if(resultado === 'ok'){
+                if(form.checkValidity()) {
+                    form.submit();
+                    $("#modaleventclick").modal("show");
+                } else {
+                    form.reportValidity();
+                }
+            }
+		});
     });
 </script>
-@endsection
+@endpush
