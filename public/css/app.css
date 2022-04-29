@@ -1421,13 +1421,12 @@ textarea {
 }
 
 a {
-  color: #337ab7;
+  color: #fff;
   text-decoration: none;
 }
 
-a:hover,
-a:focus {
-  color: #23527c;
+a:hover {
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -14646,7 +14645,7 @@ h3,
 }
 
 a {
-  color: #5A738E;
+  color: #FFF;
   text-decoration: none;
 }
 
@@ -14962,7 +14961,6 @@ a:focus {
 
 footer {
   background: #fff;
-  padding: 15px 20px;
   display: block;
 }
 
@@ -15930,11 +15928,11 @@ span.right {
   position: relative;
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   footer {
     margin-left: 230px;
   }
-}
+} */
 
 @media (min-width: 992px) {
   .tile_count .tile_stats_count {

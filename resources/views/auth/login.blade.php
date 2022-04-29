@@ -23,13 +23,43 @@
 			{{-- <link rel="stylesheet" href="{{ asset('/bootstrap-datetimepicker/bootstrap-datetimepicker.css') }}">       --}}
 		
 			{{-- jquery-timepicker --}}
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.11.14/jquery.timepicker.min.css">       
-			
-			<link rel="stylesheet" href="{{ url(mix('/css/app.css')) }}">      
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.11.14/jquery.timepicker.min.css">
+			<link rel="stylesheet" href="{{ url(mix('/css/app.css')) }}">
+			<link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
+			{{-- <link rel="stylesheet" href="{{ asset('css/app4.1.css') }}"> --}}
+			<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+			<style>
+				@media only screen and (min-width: 768px) {
+					#manual {
+						width: 185px;
+						position: absolute;
+						margin-left: auto;
+						margin-right: auto;
+						left: 0;
+						right: 0;
+						text-align: center;
+					}
+				}
+
+				@media only screen and (max-width: 768px) {
+					#logonav {
+						margin-bottom: 0.5rem;
+					}
+					#manual {
+						text-align: center;
+					}
+				}
+
+				body {
+					min-height: 100vh;
+					display: flex;
+					flex-direction: column;
+				}
+			</style>
 	</head>
 
 	<body class="login">
-
+		
 		<div id="app" style="background-color: white; "> 
 			<a class="hiddenanchor" id="signup"></a>
 			<a class="hiddenanchor" id="signin"></a>
@@ -91,15 +121,35 @@
 				</div>
 		
 			</div>
-			<footer class="rodape">
-				<div class="separator">
-							
-					<h5><i  style="font-size: 18px" class="fab fa-free-code-camp"></i> Equipe de Desenvolvimento de Sistemas</h5>
-					<h6> Subsecretaria de Tecnologia da Informação - Prefeitura Municipal de Mesquita - RJ </h6>
-					<h6> Rua Arthur Oliveira Vecchi, 120 - Centro - Mesquita - RJ - CEP: 26553-080</h6>
-				</div>
-			</footer>
 		</div>
+		<footer class="footer back-roxo">
+			<div class="container-fluid">
+			  <nav>
+				  <a style="padding-left: 30px">
+					<b> ©
+					  <script>
+						document.write(new Date().getFullYear())
+					  </script>, EQUIPE DE DESENVOLVIMENTO DE SISTEMAS
+						  
+					</b>
+				  </a>
+				
+			   
+				  <a style="padding-left: 30px">
+					<b><i class="fab fa-free-code-camp"></i> SUBSECRETARIA DA TECNOLOGIA DA INFORMAÇÃO - PREFEITURA MUNICIPAL DE MESQUITA - RJ</b>
+				  </a>
+		   
+				
+				  <a style="padding-left: 30px">
+					<b>RUA ARTHUR OLIVEIRA VECCHI, 120 - CENTRO - MESQUITA - RJ - CEP: 26553-080</b>
+				  </a>
+				  
+				  <a class="text-white" style="text-decoration: none; padding-left: 30px" href="https://lgpd.mesquita.rj.gov.br/?page_id=43" target="_blank">
+					<b>POLÍTICA DE PRIVACIDADE</b>
+				  </a>
+			  </nav>
+			</div>
+		</footer>
 
 		<script src="{{ url(mix('/js/app.js'))}}"></script>
 		<script src="{{ asset('/js/components.js')}}"></script>
