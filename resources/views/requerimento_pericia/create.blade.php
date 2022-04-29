@@ -44,7 +44,28 @@
         }
 
         .swal-footer {
-            text-align: center;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .fechar-btn {
+            border-color: hsl(354, 60%, 54%);
+            background-color: hsl(354, 60%, 54%);
+        }
+
+        .fechar-btn:hover {
+            border-color: hsl(354, 60%, 40%) !important;
+            background-color: hsl(354, 60%, 40%) !important;
+        }
+
+        .manual-btn {
+            border-color: hsl(188, 78%, 50%);
+            background-color: hsl(188, 78%, 50%);
+        }
+
+        .manual-btn:hover {
+            border-color: hsl(188, 78%, 41%) !important;
+            background-color: hsl(188, 78%, 41%) !important;
         }
 
         @media only screen and (min-width: 768px) {
@@ -698,11 +719,19 @@
                 title: 'Olá!',
                 text: 'Consulte o nosso Manual de Utilização para aprender a criar um novo requerimento de maneira fácil e rápida.',
                 buttons: {
+                    fechar: {
+                        text: 'Fechar',
+                        value: 'sair',
+                        visible: true,
+                        closeModal: true,
+                        className: 'fechar-btn'
+                    },
                     manual: {
                         text: 'Manual de Utilização',
                         value: 'ok',
                         visible: true,
-                        closeModal: true
+                        closeModal: true,
+                        className: 'manual-btn'
                     }
                 }
             }).then(function(resultado) {
