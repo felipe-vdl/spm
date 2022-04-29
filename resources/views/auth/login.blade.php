@@ -24,7 +24,7 @@
 		
 			{{-- jquery-timepicker --}}
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.11.14/jquery.timepicker.min.css">
-			<link rel="stylesheet" href="{{ url(mix('/css/app.css')) }}">
+			<link rel="stylesheet" href="{{ asset('css/app2.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
 			{{-- <link rel="stylesheet" href="{{ asset('css/app4.1.css') }}"> --}}
 			<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
