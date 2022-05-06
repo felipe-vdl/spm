@@ -58,7 +58,7 @@
                                     @if ($requerimento->status == 0)
                                         <a style="color: gray">Em Análise</a>
                                     @elseif($requerimento->status == 3)
-                                        <a style="color: blue">Confirmando</a>
+                                    <a style="color: blue">Aguardando Confirmação</a>
                                     @endif
                                 </td>
 
