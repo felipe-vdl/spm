@@ -14,13 +14,17 @@ class RequerimentoPericia extends Model
         'horario_trabalho', 
         'dt_inicio_atestado', 
         'status',
-        'data_avaliazao',
+        'data_avaliacao',
+        'data_confirmacao',
+        'data_reagenda',
+        'data_pedidoreagenda',
         'motivo_recusa',
         'direcionamento',
         'agendamento',
         'user_id',
         'envio_create',
         'envio_agenda',
+        'envio_reagenda',
         'presenca',
         'email'
     ];

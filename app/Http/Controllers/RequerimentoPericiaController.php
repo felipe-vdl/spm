@@ -156,13 +156,20 @@ class RequerimentoPericiaController extends Controller
                 'avaliador' => 'max:255',
                 'motivo_recusa' => 'max:255',
                 'status',
-                'envio_agenda',
                 'data_avaliacao'
             ]);
 
             // Atribuir informações da avaliação.
             $requerimento->direcionamento           = $request->direcionamento;
             $requerimento->user_id                  = Auth::user()->id;
+
+            // Data da Avaliação/Reagendamento
+            $data_atual = Carbon::now('America/Sao_Paulo')->format('d/m/Y à\s H:i.');
+            if ($requerimento->status === 5) {
+                $requerimento->data_reagenda            = $data_atual;
+            } else {
+                $requerimento->data_avaliacao           = $data_atual;
+            }
 
             // Requerimentos recusados vs agendados.
             if ($request->direcionamento === "Recusado") {
@@ -173,10 +180,6 @@ class RequerimentoPericiaController extends Controller
                 $requerimento->hora_agenda              = $request->hora_agenda;
                 $requerimento->status               = 3;
             };
-
-            // Data da Avaliação
-            $data_atual = Carbon::now('America/Sao_Paulo')->format('d/m/Y à\s H:i.');
-            $requerimento->data_avaliacao           = $data_atual;
 
             //Visualizar e-mail por View
             /* $requerimento->update();
@@ -244,22 +247,29 @@ class RequerimentoPericiaController extends Controller
                 return redirect('/confirmar')->with('confirmado', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.');
             } elseif ($req->status === 1) {
                 return redirect('/confirmar')->with('recusado', 'Este requerimento foi recusado pela perícia médica.');
-            } elseif ($req->status === 0) {
+            } elseif ($req->status === 0 or $req->status === 5) {
                 return redirect('/confirmar')->with('analise', 'A resposta por e-mail com o agendamento poderá se dar em até 48 horas úteis da solicitação.');
             }
-            
-            $req->status = 4;
-            $req->data_confirmacao = $data_atual;
-    
-            $req->save();
+
+            if ($request->reagendar == 0) {
+                $req->data_confirmacao = $data_atual;
+                $req->status = 4;
+                $req->save();
+                DB::commit();
+                return redirect('/sucesso')->with('confirmado', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.');
+            } else {
+                $req->data_pedidoreagenda = $data_atual;
+                $req->justificativa_reagenda = $request->justificativa_reagenda;
+                $req->status = 5;
+                $req->save();
+                DB::commit();
+                return redirect('/sucesso')->with('reagendar', 'A resposta por e-mail com o agendamento poderá se dar em até 48 horas úteis da solicitação.');
+            }
 
         } catch (\Throwable $th) {
             DB::rollback();
             return redirect('/confirmar')->with('error', 'Houve um erro ao tentar confirmar o requerimento, tente novamente.');
         }
-        DB::commit();
-        /* return redirect('/confirmar')->with('success', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.'); */
-        return redirect('/sucesso')->with('confirmado', 'Compareça ao local direcionado na data e hora informados, seguindo as demais instruções informadas por e-mail.');
     }
 
     /**

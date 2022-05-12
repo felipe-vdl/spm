@@ -56,6 +56,29 @@
     <div class="x_panel">
         <div class="x_title">
             <div>Protocolo: <strong>{{$requerimento->protocolo}}</strong></div>
+            <div>Status: <strong>
+                @switch($requerimento->status)
+                    @case(0)
+                        Em Análise
+                        @break
+                    @case(1)
+                        Recusado
+                        @break
+                    @case(2)
+                        Cancelado
+                        @break
+                    @case(3)
+                        Aguardando Confirmação
+                        @break
+                    @case(4)
+                        Confirmado
+                        @break
+                    @case(5)
+                        Aguardando Reagendamento
+                        @break
+                @endswitch
+                </strong>
+            </div>
         </div>
         <div class="x_content">
             <div>
@@ -66,11 +89,30 @@
                     <div>Local de Lotação: <strong>{{$requerimento->local_lotacao}}</strong></div>
                     <div>Horário de Trabalho: <strong>{{$requerimento->horario_trabalho}}</strong></div>
                     <div>E-mail: <strong>{{$requerimento->email}}</strong></div>
-                    <br>
                     <div>O servidor acumula matrícula? <strong>{{$requerimento->vinculo}}</strong></div>
                 </div>
             </div>
         </div>
+        @if ($requerimento->justificativa_reagenda)
+        <div class="x_content">
+            <div>Avaliador: <strong>{{$requerimento->user->name}}</strong></div>
+            <div>Data/Hora da Avaliação: <strong>{{$requerimento->data_avaliacao}}</strong></div>
+            <div>
+                <div>Direcionamento: <strong>{{ $requerimento->direcionamento }}</strong></div>
+            </div>
+            <div>
+                <div>Data/Hora Agendada: <strong>{{ date('d/m/Y', strtotime($requerimento->data_agenda)) }} às {{ $requerimento->hora_agenda }}h.</strong></div>
+            </div>
+        </div>
+        <div class="x_content">
+            <div>
+                <div>Justificativa para o reagendamento: <strong>{{ $requerimento->justificativa_reagenda }}</strong></div>
+            </div>
+            <div>
+                <div>Data/Hora do pedido de reagendamento: <strong>{{ $requerimento->data_pedidoreagenda }}</strong></div>
+            </div>
+        </div>
+        @endif
     </div>
     <div class="x-panel">
         <div class="x-title">

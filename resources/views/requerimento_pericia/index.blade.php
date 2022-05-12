@@ -46,7 +46,7 @@
                 </thead>
                 <tbody class="tabela">
                     @foreach($requerimentos as $requerimento)
-                        @if ($requerimento->status === 0 OR $requerimento->status === 3)
+                        @if ($requerimento->status === 0 OR $requerimento->status === 3 OR $requerimento->status === 5)
                             <tr>
                                 <td>{{$requerimento->nome}}</td>
                                 <td>{{$requerimento->matricula}}</td>
@@ -58,7 +58,9 @@
                                     @if ($requerimento->status == 0)
                                         <a style="color: gray">Em Análise</a>
                                     @elseif($requerimento->status == 3)
-                                    <a style="color: blue">Aguardando Confirmação</a>
+                                    <a style="color: blue">Confirmando</a>
+                                    @elseif($requerimento->status == 5)
+                                    <a style="color: gray">Aguardando Reagendamento</a>
                                     @endif
                                 </td>
 
@@ -71,8 +73,11 @@
                                 </td>
 
                                 <td>
-                                    @if ($requerimento->status == 0)
+                                    @if ($requerimento->status == 0 OR $requerimento->status == 5)
                                         <a href="{{ route('requerimento_pericias.edit', $requerimento->id)}}" class="btn btn-primary">Avaliar</a>
+                                    @endif
+                                    @if (Auth::user()->nivel == "Super-Admin")
+                                    <a href="{{ route('requerimento_pericias.show', $requerimento->id)}}" class="btn btn-info">Detalhar</td>
                                     @endif
                                 </td>
 

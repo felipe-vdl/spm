@@ -52,6 +52,13 @@
                             {{ session()->get('confirmado') }}
                         </div>
                         @endif
+                        @if(session()->get('reagendar'))
+                        <div class="alert alert-success m-0">
+                            <h5 class="alert-heading">Reagendamento solicitado com sucesso.</h5>
+                            <hr class="my-2">
+                            {{ session()->get('reagendar') }}
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

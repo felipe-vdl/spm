@@ -109,11 +109,26 @@
                                     <input required class="form-control" name="protocolo" type="text" id="protocolo" placeholder="Código do Protocolo" pattern=".{12,}" maxlength="12">
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="" class="form-label fw-normal">Marque a opção desejada:</label>
+                                <div class="input-group">
+                                    <input type="radio" class="btn-check" name="reagendar" id="confirmar" value="0" required>
+                                    <label class="btn btn-outline-success" for="confirmar">Confirmar Presença</label>
+                                    <input type="radio" class="btn-check" name="reagendar" id="reagendar" value="1">
+                                    <label class="btn btn-outline-danger" for="reagendar">Solicitar Reagendamento</label>
+                                </div>
+                            </div>
+                            <div id="justificativa" class="row mb-3" style="display: none;">
+                                <label for="" class="form-label fw-normal">Justificativa:</label>
+                                <div class="input-group">
+                                    <input type="text" name="justificativa_reagenda" id="justificativa-input" class="form-control" placeholder="Escreva a justificativa para o reagendamento." maxlength="250">
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="row justify-content-center">
                                 <div class="col-auto">
-                                    <input id="enviar" type="submit" class="btn btn-success" value="Confirmar Requerimento">
+                                    <input id="enviar" type="submit" class="btn btn-success" value="Enviar">
                                 </div>
                             </div>
                         </div>
@@ -125,7 +140,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modaleventclickLabel">Confirmando requerimento, por favor aguarde.</h5>
+                    <h5 class="modal-title" id="modaleventclickLabel">Enviando, por favor aguarde.</h5>
                 </div>
                  
                 <div class="modal-body">
@@ -168,6 +183,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        const radioConfirmar = document.querySelector('#confirmar');
+        const radioReagendar = document.querySelector('#reagendar');
+        const justificativaDiv = document.querySelector('#justificativa');
+        const justificativaInput = document.querySelector('#justificativa-input');
+
+        radioConfirmar.addEventListener('click', () => {
+            justificativaDiv.style.display = "none";
+            justificativaInput.removeAttribute('required');
+            justificativaInput.value = "";
+        });
+
+        radioReagendar.addEventListener('click', () => {
+            justificativaDiv.style.display = "block";
+            justificativaInput.setAttribute('required', 'required');
+        });
+    </script>
     <script>
         const form = document.querySelector('form');
         form.addEventListener('submit', (e) => {

@@ -26,11 +26,15 @@ class CreateRequerimentoPericiasTable extends Migration
             $table->string('direcionamento', 22);
             $table->string('data_agenda', 19);
             $table->string('hora_agenda', 5);
-            $table->string('motivo_recusa', 96);
-            $table->string('data_confirmacao', 20);
-            $table->string('data_avaliacao', 20);
+            $table->string('motivo_recusa', 96)->nullable();
+            $table->string('justificativa_reagenda', 250)->nullable();
+            $table->string('data_confirmacao', 20)->nullable();
+            $table->string('data_avaliacao', 20)->nullable();
+            $table->string('data_pedidoreagenda', 20)->nullable();
+            $table->string('data_reagenda', 20)->nullable();
             $table->tinyInteger('envio_create')->nullable();
             $table->tinyInteger('envio_agenda')->nullable();
+            $table->tinyInteger('envio_reagenda')->nullable();
             $table->tinyInteger('presenca')->nullable();
             $table->string('vinculo', 3);
             $table->timestamps();
