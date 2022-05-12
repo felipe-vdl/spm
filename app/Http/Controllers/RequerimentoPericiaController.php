@@ -167,8 +167,10 @@ class RequerimentoPericiaController extends Controller
             $data_atual = Carbon::now('America/Sao_Paulo')->format('d/m/Y à\s H:i.');
             if ($requerimento->status === 5) {
                 $requerimento->data_reagenda            = $data_atual;
+                $reagenda = 1;
             } else {
                 $requerimento->data_avaliacao           = $data_atual;
+                $reagenda = 0;
             }
 
             // Requerimentos recusados vs agendados.
@@ -198,9 +200,18 @@ class RequerimentoPericiaController extends Controller
                     }
                     $m->to($requerimento->email);
                 });
-                $requerimento->envio_agenda = 1;
+                if ($reagenda === 1) {
+                    $requerimento->envio_reagenda = 1;
+                } else {
+                    $requerimento->envio_agenda = 1;
+                }
+                
             } catch (\Throwable $th) {
-                $requerimento->envio_agenda = 0;
+                if ($reagenda === 1) {
+                    $requerimento->envio_reagenda = 0;
+                } else {
+                    $requerimento->envio_agenda = 0;
+                }
             }
 
             $requerimento->update();
