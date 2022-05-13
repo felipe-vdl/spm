@@ -58,16 +58,18 @@
                                     @if ($requerimento->status == 0)
                                         <a style="color: gray">Em Análise</a>
                                     @elseif($requerimento->status == 3)
-                                    <a style="color: blue">Confirmando</a>
+                                    <a style="color: blue">Aguardando Confirmação</a>
                                     @elseif($requerimento->status == 5)
-                                    <a style="color: gray">Aguardando Reagendamento</a>
+                                    <a style="color: gray">Reagendamento Solicitado</a>
                                     @endif
                                 </td>
 
                                 <td>{{$requerimento->direcionamento}}</td>
                                 
                                 <td>
-                                    @if ($requerimento->data_agenda)
+                                    @if ($requerimento->data_reagendada)
+                                        {{ date('d/m/Y', strtotime($requerimento->data_reagendada))." ".$requerimento->hora_reagendada }}
+                                    @elseif ($requerimento->data_agenda)
                                         {{ date('d/m/Y', strtotime($requerimento->data_agenda))." ".$requerimento->hora_agenda }}
                                     @endif
                                 </td>

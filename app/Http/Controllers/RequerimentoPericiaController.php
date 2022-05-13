@@ -32,7 +32,7 @@ class RequerimentoPericiaController extends Controller
     public function diario()
     {
         $data_atual = Carbon::now('America/Sao_Paulo')->format('Y-m-d 12:00:00');
-        $requerimentos = RequerimentoPericia::where('data_agenda', $data_atual)->get();
+        $requerimentos = RequerimentoPericia::where('status', 4)->where('data_agenda', $data_atual)->orWhere([['data_reagendada', $data_atual], ['status', 4]])->get();
         return view('requerimento_pericia/diario', compact('requerimentos'));
     }
 
@@ -165,23 +165,27 @@ class RequerimentoPericiaController extends Controller
 
             // Data da Avaliação/Reagendamento
             $data_atual = Carbon::now('America/Sao_Paulo')->format('d/m/Y à\s H:i.');
-            if ($requerimento->status === 5) {
-                $requerimento->data_reagenda            = $data_atual;
-                $reagenda = 1;
-            } else {
-                $requerimento->data_avaliacao           = $data_atual;
-                $reagenda = 0;
-            }
 
-            // Requerimentos recusados vs agendados.
+            // Requerimentos recusados vs agendados vs reagendar.
             if ($request->direcionamento === "Recusado") {
-                $requerimento->status               = 1;
                 $requerimento->motivo_recusa        = $request->motivo_recusa;
-            } else {
+                $requerimento->data_avaliacao       = $data_atual;
+                $requerimento->status               = 1;
+                $reagenda = 0;
+            } else if ($requerimento->status === 0) {
                 $requerimento->data_agenda              = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
                 $requerimento->hora_agenda              = $request->hora_agenda;
                 $requerimento->status               = 3;
-            };
+                $requerimento->data_avaliacao           = $data_atual;
+                $reagenda = 0;
+            } else if ($requerimento->status === 5) {
+                $requerimento->data_reagenda            = $data_atual;
+                $requerimento->data_reagendada          = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
+                $requerimento->hora_reagendada          = $request->hora_agenda;
+                $requerimento->quant_reagendas          = $requerimento->quant_reagendas + 1;
+                $requerimento->status               = 3;
+                $reagenda = 1;
+            }
 
             //Visualizar e-mail por View
             /* $requerimento->update();
@@ -218,6 +222,7 @@ class RequerimentoPericiaController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th);
             return redirect('/requerimentos')->with('error', 'Erro ao tentar avaliar o requerimento, tente novamente.');
         }
 
@@ -263,7 +268,12 @@ class RequerimentoPericiaController extends Controller
             }
 
             if ($request->reagendar == 0) {
-                $req->data_confirmacao = $data_atual;
+                if($req->quant_reagendas == 0) {
+                    $req->data_confirmacao = $data_atual;
+                } else {
+                    $req->data_confirmacaoreagenda = $data_atual;
+                }
+                
                 $req->status = 4;
                 $req->save();
                 DB::commit();
@@ -314,6 +324,7 @@ class RequerimentoPericiaController extends Controller
             $requerimento->dt_inicio_atestado       = $request->dt_inicio_atestado;
             $requerimento->email                    = $request->email;
             $requerimento->status                   = 0;
+            $requerimento->quant_reagendas          = 0;
             $requerimento->presenca                 = -1;
             $requerimento->vinculo                  = $request->vinculo;
 
@@ -410,5 +421,52 @@ class RequerimentoPericiaController extends Controller
     public function sucesso()
     {
         return view('requerimento_pericia/sucesso');
+    }
+
+    public function reagendar()
+    {
+        return view('requerimento_pericia/reagendar');
+    }
+
+    public function reagendamento(Request $request)
+    {   
+        DB::beginTransaction();
+        try {
+            $data = str_replace('/', '-', $request->data_cancela);
+            $data_cancelada = substr($data, -4).substr($data, 2, 3).'-'.substr($data, 0, 2).' 12:00:00';
+
+            $requerimentos = RequerimentoPericia::where('data_agenda','=', $data_cancelada)->orWhere('data_reagendada','=', $data_cancelada)->get();
+            
+            foreach($requerimentos as $requerimento) {
+                $requerimento = RequerimentoPericia::find($requerimento->id);
+                $requerimento->status = 3;
+                $requerimento->data_reagendada = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_nova, 0, 10))." 12:00:00"));
+                $requerimento->hora_reagendada = $requerimento->hora_agenda;
+                $requerimento->justificativa_cancelamento = $request->justificativa;
+
+                try {
+                    $mail = env('MAIL_FROM_ADDRESS','');
+                    Mail::send('mail.reagenda', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                        $m->from($mail, 'Perícia Médica');
+                        $m->subject('Requerimento Reagendado');
+                        $m->to($requerimento->email);
+                    });
+                    $requerimento->envio_reagenda = 1;
+
+                } catch (\Throwable $th) {
+                    $requerimento->envio_reagenda = 0;
+                }
+
+                $requerimento->update();
+            }
+
+            DB::commit();
+            return redirect('/requerimento_pericias/reagendar')->with('success', 'Requerimentos reagendados com sucesso.');
+
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollback();
+            return redirect('/requerimento_pericias/reagendar')->with('error', 'Houve um erro ao reagendar os requerimentos.');
+        }
     }
 }

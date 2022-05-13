@@ -24,6 +24,9 @@
 			@if (Auth::user()->nivel == "Super-Admin")
 				<br>
 				<li>
+					<a href="{{url("requerimento_pericias/reagendar")}}"><i class="fas fa-file-import"></i> Reagendamento </a>
+				</li>
+				<li>
 					<a href="{{url("/user")}}"><i class="fas fa-user-shield"></i> Funcionários </a>
 				</li>
 			@endif

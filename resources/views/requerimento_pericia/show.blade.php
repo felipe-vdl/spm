@@ -30,7 +30,7 @@
                         Confirmado
                         @break
                     @case(5)
-                        Aguardando Reagendamento
+                        Reagendamento Solicitado
                         @break
                 @endswitch
                 </strong>
@@ -93,8 +93,23 @@
                 </div>
                 @if($requerimento->data_reagenda)
                 <div>
-                    <div>Data/Hora do Reagendamento: <strong>{{ $requerimento->data_pedidoreagenda }}</strong></div>
+                    <div>Data/Hora da Avaliação de Reagendamento: <strong>{{ $requerimento->data_reagenda }}</strong></div>
                 </div>
+                @endif
+                @if($requerimento->data_reagendada)
+                    <div>
+                        <div>Data/Hora Reagendada: <strong>{{ date('d/m/Y', strtotime($requerimento->data_reagendada)) }} às {{ $requerimento->hora_reagendada }}h.</strong></div>
+                    </div>
+                @endif
+                @if ($requerimento->data_confirmacao)
+                    <div>
+                        <div>Data/Hora da Confirmação do Reagendamento: <strong>{{ $requerimento->data_confirmacaoreagenda }}</strong></div>
+                    </div>
+                @endif
+                @if ($requerimento->quant_reagendas > 0)
+                    <div>
+                        <div>Pedidos de Reagenda (Quantidade): <strong>{{ $requerimento->quant_reagendas }}</strong></div>
+                    </div>
                 @endif
             @endif
         </div>

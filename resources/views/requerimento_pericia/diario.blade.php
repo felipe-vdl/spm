@@ -64,14 +64,16 @@
                             <td>{{$requerimento->direcionamento}}</td>
                             
                             <td>
-                                @if ($requerimento->data_agenda)
+                                @if ($requerimento->data_reagendada)
+                                    {{ date('d/m/Y', strtotime($requerimento->data_reagendada))." ".$requerimento->hora_reagendada }}
+                                @elseif ($requerimento->data_agenda)
                                     {{ date('d/m/Y', strtotime($requerimento->data_agenda))." ".$requerimento->hora_agenda }}
                                 @endif
                             </td>
 
                             <td>
                                 @if ($requerimento->presenca == -1)
-                                <form style="display: inline-block" action="{{ route('presente', $requerimento->id)}}" method="POST">
+                                <form style="display: inline" action="{{ route('presente', $requerimento->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
                                     <a style="display: inline-block;" class="btn btn-success presente" title="Marcar presença.">
@@ -80,7 +82,7 @@
                                         </svg>
                                     </a>
                                 </form>
-                                <form style="display: inline-block" action="{{ route('ausente', $requerimento->id)}}" method="POST">
+                                <form style="display: inline" action="{{ route('ausente', $requerimento->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
                                     <a style="display: inline-block;" class="btn btn-danger ausente" title="Marcar ausência.">

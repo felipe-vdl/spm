@@ -49,7 +49,9 @@
                                 <td>{{$requerimento->direcionamento}}</td>
 
                                 <td>
-                                    @if ($requerimento->data_agenda)
+                                    @if ($requerimento->data_reagendada)
+                                        {{ date('d/m/Y', strtotime($requerimento->data_reagendada))." ".$requerimento->hora_reagendada }}
+                                    @elseif ($requerimento->data_agenda)
                                         {{ date('d/m/Y', strtotime($requerimento->data_agenda))." ".$requerimento->hora_agenda }}
                                     @endif
                                 </td>

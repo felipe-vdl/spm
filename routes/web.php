@@ -21,10 +21,14 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
 	
 	Route::get('/requerimentos', 'RequerimentoPericiaController@index')->name('requerimentos');
+	Route::get('/arquivo', 'RequerimentoPericiaController@arquivo')->name('arquivo');
+	
 	Route::get('/diario', 'RequerimentoPericiaController@diario')->name('diario');
 	Route::post('/requerimento_pericias/{id}/presente', 'RequerimentoPericiaController@presente')->name('presente');
 	Route::post('/requerimento_pericias/{id}/ausente', 'RequerimentoPericiaController@ausente')->name('ausente');
-	Route::get('/arquivo', 'RequerimentoPericiaController@arquivo')->name('arquivo');
+
+	Route::get('/requerimento_pericias/reagendar', 'RequerimentoPericiaController@reagendar')->name('reagendar');
+	Route::post('/requerimento_pericias/reagendar', 'RequerimentoPericiaController@reagendamento')->name('reagendamento');
 
 	Route::get('relatorio/pdf/{data}',  'RelatorioController@gerarpdf');
 	Route::get('export-the-docx/{data}', 'RelatorioController@exportDocsFile');
