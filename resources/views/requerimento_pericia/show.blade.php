@@ -101,7 +101,7 @@
                         <div>Data/Hora Reagendada: <strong>{{ date('d/m/Y', strtotime($requerimento->data_reagendada)) }} às {{ $requerimento->hora_reagendada }}h.</strong></div>
                     </div>
                 @endif
-                @if ($requerimento->data_confirmacao)
+                @if ($requerimento->data_confirmacaoreagenda)
                     <div>
                         <div>Data/Hora da Confirmação do Reagendamento: <strong>{{ $requerimento->data_confirmacaoreagenda }}</strong></div>
                     </div>
