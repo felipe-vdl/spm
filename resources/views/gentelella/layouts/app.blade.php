@@ -167,9 +167,9 @@
 		
 		<!-- scripts -->
 		<script src="{{ url(mix('/js/app.js'))}}"></script>
-		
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<!-- Datatables -->
 		{{-- <script src="{{asset('pdfmake/pdfmake.min.js')}}"></script>
 		<script src="{{asset('pdfmake/vfs_fonts.js')}}"></script> --}}
@@ -180,8 +180,6 @@
 
 		{{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> --}}
 		<script src="{{ asset('js/tinymce/tinymce.js') }}"></script>
-		
-		<script src="{{asset('datatables/datetime-moment.js')}}"></script>
 		
 		{{-- icheck --}}
 		<script src="{{asset('icheck/icheck.min.js')}}"></script>
@@ -242,7 +240,9 @@
 				@endforeach
 			@endif
 		</script>
-
+		<script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+		<script src="{{asset('datatables/moment.min.js')}}"></script>
+		<script src="{{asset('datatables/datetime-moment.js')}}"></script>
 		@stack('scripts')
 
 		

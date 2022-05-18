@@ -113,26 +113,7 @@
 @endsection
 
 @push('scripts')
-    <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-
     <script>
-        // Datatables Plugin: Ordenar data em formato britânico. dd/mm/yyyy
-        jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-        "date-uk-pre": function ( a ) {
-            var ukDatea = a.split('/');
-            return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-        },
-
-        "date-uk-asc": function ( a, b ) {
-            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-        },
-
-        "date-uk-desc": function ( a, b ) {
-            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-        }
-        } );
-
-        // Datatables Plugin: Ordenar data + hora em formato britânico. dd/mm/yyyy hh:mm:ss
         jQuery.extend( jQuery.fn.dataTableExt.oSort, {
             "date-euro-pre": function ( a ) {
                 var x;
@@ -160,6 +141,7 @@
         } );
 
         $(document).ready( function () {
+            $.fn.dataTable.moment('DD/MM/YYYY');
             var table = $('#tb_requerimentos').DataTable({
                     "language" : {
                         "url" : "{{ asset('js/portugues.json') }}"
@@ -171,17 +153,6 @@
                     ],
                     order: [[3, "desc"]],
                     "responsive": true,
-                    "aoColumns": [
-                        null,
-                        null,
-                        null,
-                        { "sType": "date-uk" },
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                    ]
                 });
 
                 $('.filter-input').keyup(function() {
