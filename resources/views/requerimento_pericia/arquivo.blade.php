@@ -33,7 +33,7 @@
                     @foreach($requerimentos as $requerimento)
                         @if($requerimento->status === 4 OR $requerimento->status === 1)
                             <tr>
-                                <td>{{$requerimento->nome}}</td>
+                                <td>{{substr($requerimento->nome, 0, 12).'...'}}</td>
                                 <td>{{$requerimento->matricula}}</td>
                                 <td>{{$requerimento->protocolo}}</td>
                                 {{-- <td>{{$requerimento->email}}</td> --}}
@@ -63,7 +63,12 @@
                                     @endif
                                 </td>
 
-                                <td><a href="{{ route('requerimento_pericias.show', $requerimento->id)}}" class="btn btn-info">Detalhar</a></td>
+                                <td><a href="{{ route('requerimento_pericias.show', $requerimento->id)}}" class="btn btn-info btn-xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                    </svg>
+                                </a></td>
                                 
                                 <td>
                                     @if ($requerimento->status != 0)
@@ -130,8 +135,9 @@
                         "url" : "{{ asset('js/portugues.json') }}"
                     },
                     "columnDefs": [
-                    { "width": "25%", "targets": 0 },
-                    { "width": "15%", "targets": 6 },
+                    { "width": "12%", "targets": 0 },
+                    { "width": "16%", "targets": 6 },
+                    { "width": "12%", "targets": 7 },
                     { "type": 'date-euro', "targets": 6}
                     ],
                     order: [[3, "desc"]],

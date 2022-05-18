@@ -76,7 +76,7 @@
                                 <form style="display: inline" action="{{ route('presente', $requerimento->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
-                                    <a style="display: inline-block;" class="btn btn-success presente" title="Marcar presença.">
+                                    <a style="display: inline-block;" class="btn btn-success presente btn-xs" title="Marcar presença.">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                                         </svg>
@@ -85,7 +85,7 @@
                                 <form style="display: inline" action="{{ route('ausente', $requerimento->id)}}" method="POST">
                                     @csrf
                                     <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
-                                    <a style="display: inline-block;" class="btn btn-danger ausente" title="Marcar ausência.">
+                                    <a style="display: inline-block;" class="btn btn-danger ausente btn-xs" title="Marcar ausência.">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
                                             <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
@@ -178,8 +178,8 @@
                     },
                     "columnDefs": [
                     { "width": "25%", "targets": 0 },
-                    { "width": "15%", "targets": 6 },
-                    { "width": "10%", "targets": 7 },
+                    { "width": "16%", "targets": 6 },
+                    { "width": "12%", "targets": 7 },
                     { "type": 'date-euro', "targets": 6}
                     ],
                     order: [[3, "desc"]],
