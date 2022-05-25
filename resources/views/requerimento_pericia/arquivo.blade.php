@@ -72,7 +72,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($requerimento->presenca == -1)
+                                    @if ($requerimento->presenca == -1 AND Auth::user()->nivel == "Super-Admin")
                                     <form style="display: inline-block" action="{{ route('presente', $requerimento->id)}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="hiddeninput" value="{{ $requerimento->id }}">
