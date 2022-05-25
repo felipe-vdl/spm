@@ -51,10 +51,10 @@ class RequerimentoPericiaController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             
-            return redirect('/diario')->with('error', 'Houve um erro ao marcar a presença, tente novamente.');
+            return redirect()->back()->with('error', 'Houve um erro ao marcar a presença, tente novamente.');
         }
         DB::commit();
-        return redirect('/diario')->with('success', 'Presença marcada com sucesso.');
+        return redirect()->back()->with('success', 'Presença marcada com sucesso.');
     }
 
     public function ausente(Request $request)
@@ -72,10 +72,10 @@ class RequerimentoPericiaController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             
-            return redirect('/diario')->with('error', 'Houve um erro ao marcar a ausência, tente novamente.');
+            return redirect()->back()->with('error', 'Houve um erro ao marcar a ausência, tente novamente.');
         }
         DB::commit();
-        return redirect('/diario')->with('success', 'Ausência marcada com sucesso.');
+        return redirect()->back()->with('success', 'Ausência marcada com sucesso.');
     }
 
     public function arquivo()
