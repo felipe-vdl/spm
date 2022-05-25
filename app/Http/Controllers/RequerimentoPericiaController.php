@@ -293,6 +293,34 @@ class RequerimentoPericiaController extends Controller
         }
     }
 
+    public function confirmacaointerna(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $data_atual = Carbon::now('America/Sao_Paulo')->format('d/m/Y à\s H:i.');
+            $requerimento = RequerimentoPericia::where('protocolo','=', $request->protocolo)->first();
+            
+            /* Único vs Reagendado */
+            if($requerimento->quant_reagendas == 0) {
+                $requerimento->data_confirmacao = $data_atual;
+            } else {
+                $requerimento->data_confirmacaoreagenda = $data_atual;
+            }
+
+            $requerimento->presenca  = $request->presenca;
+            $requerimento->status    = 4;
+            $requerimento->save();
+
+            DB::commit();
+            return redirect('/requerimentos')->with('success', 'Requerimento finalizado com sucesso.');
+
+        } catch(\Throwable $th) {
+            dd($th);
+            DB::rollback();
+            return redirect('/requerimentos')->with('error', 'Houve um erro ao finalizar o requerimento, tente novamente.');
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
