@@ -198,10 +198,10 @@
     $('#timejunta').timepicker({
         timeFormat: 'HH:mm',
         interval: 60,
-        minTime: '9',
+        minTime: '8',
         maxTime: '09:00',
         defaultTime: '9',
-        startTime: '09:00',
+        startTime: '08:00',
         dynamic: false,
         dropdown: true,
         scrollbar: true
@@ -210,10 +210,10 @@
     $('#timepsic').timepicker({
         timeFormat: 'HH:mm',
         interval: 60,
-        minTime: '10',
+        minTime: '8',
         maxTime: '10:00',
         defaultTime: '10',
-        startTime: '10:00',
+        startTime: '08:00',
         dynamic: false,
         dropdown: true,
         scrollbar: true
