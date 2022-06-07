@@ -194,19 +194,27 @@ class RequerimentoPericiaController extends Controller
             
             // Envio de E-mail após avaliação, atribui envio_agenda = 0 em caso de falha de envio.
             try {
-                $mail = env('MAIL_FROM_ADDRESS','');
-                Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
-                    $m->from($mail, 'Perícia Médica');
-                    if ($requerimento->direcionamento === "Recusado") {
-                        $m->subject('Requerimento Recusado');
-                    } else {
-                        $m->subject('Requerimento Agendado');
-                    }
-                    $m->to($requerimento->email);
-                });
+                
                 if ($reagenda === 1) {
+                    $mail = env('MAIL_FROM_ADDRESS','');
+                    Mail::send('mail.reagenda', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                        $m->from($mail, 'Perícia Médica');
+                        $m->subject('Requerimento Reagendado');
+                        $m->to($requerimento->email);
+                    });
                     $requerimento->envio_reagenda = 1;
+
                 } else {
+                    $mail = env('MAIL_FROM_ADDRESS','');
+                    Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                        $m->from($mail, 'Perícia Médica');
+                        if ($requerimento->direcionamento === "Recusado") {
+                            $m->subject('Requerimento Recusado');
+                        } else {
+                            $m->subject('Requerimento Agendado');
+                        }
+                        $m->to($requerimento->email);
+                    });
                     $requerimento->envio_agenda = 1;
                 }
                 
@@ -417,9 +425,9 @@ class RequerimentoPericiaController extends Controller
                     $m->from($mail, 'Perícia Médica');
                     $m->subject('Novo Requerimento');
                     $m->to($requerimento->email);
-                });         
+                });
                 $requerimento->envio_create = 1;
-                
+
             } catch (\Throwable $th) {
                 $requerimento->envio_create = 0;
             }
@@ -474,7 +482,7 @@ class RequerimentoPericiaController extends Controller
 
                 try {
                     $mail = env('MAIL_FROM_ADDRESS','');
-                    Mail::send('mail.reagenda', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                    Mail::send('mail.massa', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                         $m->from($mail, 'Perícia Médica');
                         $m->subject('Requerimento Reagendado');
                         $m->to($requerimento->email);

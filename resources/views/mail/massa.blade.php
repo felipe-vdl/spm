@@ -1,6 +1,8 @@
-<p>Olá {{ substr($requerimento->nome, 0, strpos($requerimento->nome, ' ')) }}, o seu requerimento foi reagendado pelo nosso setor.</p>
+<p>Olá {{ substr($requerimento->nome, 0, strpos($requerimento->nome, ' ')) }}, o seu requerimento precisou ser reagendado pelo nosso setor.</p>
+<li><b>Motivo do Reagendamento:</b> {{ $requerimento->justificativa_cancelamento }}</li>
 
 <p>Por favor, confirme o recebimento deste e-mail inserindo o seu protocolo em nossa <a target="_blank" rel="noopener noreferrer" href="https://periciamedica.mesquita.rj.gov.br/confirmar">página de confirmação</a>, e siga as demais instruções deste e-mail.</p>
+
 
 <b>Página de Confirmação:</b> https://periciamedica.mesquita.rj.gov.br/confirmar
 
