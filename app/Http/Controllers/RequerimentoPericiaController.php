@@ -171,20 +171,27 @@ class RequerimentoPericiaController extends Controller
                 $requerimento->motivo_recusa        = $request->motivo_recusa;
                 $requerimento->data_avaliacao       = $data_atual;
                 $requerimento->status               = 1;
-                $reagenda = 0;
+                $reagenda                           = 0;
+
+            } else if ($request->direcionamento === "COVID") {
+                $requerimento->data_avaliacao       = $data_atual;
+                $requerimento->status               = 4;
+                $reagenda                           = 0;
+
             } else if ($requerimento->status === 0) {
-                $requerimento->data_agenda              = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
-                $requerimento->hora_agenda              = $request->hora_agenda;
+                $requerimento->data_agenda          = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
+                $requerimento->hora_agenda          = $request->hora_agenda;
                 $requerimento->status               = 3;
-                $requerimento->data_avaliacao           = $data_atual;
-                $reagenda = 0;
+                $requerimento->data_avaliacao       = $data_atual;
+                $reagenda                           = 0;
+
             } else if ($requerimento->status === 5) {
-                $requerimento->data_reagenda            = $data_atual;
-                $requerimento->data_reagendada          = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
-                $requerimento->hora_reagendada          = $request->hora_agenda;
-                $requerimento->quant_reagendas          = $requerimento->quant_reagendas + 1;
+                $requerimento->data_reagenda        = $data_atual;
+                $requerimento->data_reagendada      = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
+                $requerimento->hora_reagendada      = $request->hora_agenda;
+                $requerimento->quant_reagendas      = $requerimento->quant_reagendas + 1;
                 $requerimento->status               = 3;
-                $reagenda = 1;
+                $reagenda                           = 1;
             }
 
             //Visualizar e-mail por View
@@ -192,7 +199,7 @@ class RequerimentoPericiaController extends Controller
             DB::commit();
             return view('mail/requerimento', compact('requerimento')); */
             
-            // Envio de E-mail após avaliação, atribui envio_agenda = 0 em caso de falha de envio.
+            // Envio de E-mail após avaliação, atribui envio = 0 em caso de falha de envio.
             try {
                 
                 if ($reagenda === 1) {
@@ -203,6 +210,20 @@ class RequerimentoPericiaController extends Controller
                         $m->to($requerimento->email);
                     });
                     $requerimento->envio_reagenda = 1;
+
+                } else if ($requerimento->direcionamento === "COVID") {
+                    // Visualizar por View:
+                    /* $requerimento->update();
+                    DB::commit();
+                    return view('mail/covid', compact('requerimento')); */
+
+                    $mail = env('MAIL_FROM_ADDRESS','');
+                    Mail::send('mail.covid', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                        $m->from($mail, 'Perícia Médica');
+                        $m->subject('Requerimento Finalizado');
+                        $m->to($requerimento->email);
+                    });
+                    $requerimento->envio_agenda = 1;
 
                 } else {
                     $mail = env('MAIL_FROM_ADDRESS','');

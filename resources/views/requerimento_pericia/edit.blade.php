@@ -18,6 +18,7 @@
                             <option value="Atendimento Pericial">Atendimento Pericial</option>
                             <option value="Avaliação Psiquiátrica">Avaliação Psiquiátrica</option>
                             <option value="Junta Médica">Junta Médica</option>
+                            <option value="COVID">COVID</option>
                             <option value="Recusado">Recusado</option>
                         </select>
                     </div>

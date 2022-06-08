@@ -55,7 +55,7 @@
             <div>
                 <div>Direcionamento: <strong>{{ $requerimento->direcionamento }}</strong></div>
             </div>
-            @if ($requerimento->direcionamento != "Recusado")
+            @if ($requerimento->direcionamento != "Recusado" AND $requerimento->direcionamento != "COVID")
                 <div>
                     <div>Data/Hora Agendada: <strong>{{ date('d/m/Y', strtotime($requerimento->data_agenda)) }} às {{ $requerimento->hora_agenda }}h.</strong></div>
                 </div>
