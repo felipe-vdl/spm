@@ -35,7 +35,7 @@
                         <input autocomplete="off" id="timejunta" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepsic" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepericiaqui" type="text" placeholder="hh:mm" style="display: none;">
-                        <input autocomplete="off" id="timepericiater" type="text" placeholder="hh:mm" style="display: none;">
+                        <input autocomplete="off" id="timepericiasex" type="text" placeholder="hh:mm" style="display: none;">
                     </div>
                     <div class="motivo" style="display: none;">
                         <label>Motivo de Recusa:</label>
@@ -220,13 +220,13 @@
         scrollbar: true
     });
 
-    $('#timepericiater').timepicker({
+    $('#timepericiasex').timepicker({
         timeFormat: 'HH:mm',
         interval: 60,
-        minTime: '14',
-        maxTime: '14:00',
-        defaultTime: '14',
-        startTime: '14:00',
+        minTime: '09',
+        maxTime: '09:00',
+        defaultTime: '09',
+        startTime: '09:00',
         dynamic: false,
         dropdown: true,
         scrollbar: true
@@ -285,7 +285,7 @@
     $('#datepericia').datepicker({
         beforeShowDay: function(date) {
             var day = date.getDay();
-            return [(day != 1 && day != 3 && day != 5 && day != 6 && day)];
+            return [(day != 1 && day != 2 && day != 3 && day != 6 && day)];
         },
         dateFormat: 'dd/mm/yy D',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -318,7 +318,7 @@
         let timeRecusado = document.querySelector('#timerecusado');
         let timePsic = document.querySelector('#timepsic');
         let timePericiaQui = document.querySelector('#timepericiaqui');
-        let timePericiaTer = document.querySelector('#timepericiater');
+        let timePericiaSex = document.querySelector('#timepericiasex');
 
         if(direcionamento.value == "Junta Médica") {
             datahora[0].style.display = "inline-block";
@@ -344,12 +344,12 @@
             timeRecusado.name = ""
             timePsic.name = ""
             timePericiaQui.name = ""
-            timePericiaTer.name = ""
+            timePericiaSex.name = ""
 
             timeJunta.style.display = "inline-block"
             timeRecusado.style.display = "none"
             timePsic.style.display = "none"
-            timePericiaTer.style.display = "none"
+            timePericiaSex.style.display = "none"
             timePericiaQui.style.display = "none"
 
             dateRecusado.value = ""
@@ -360,7 +360,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaTer.value = ""
+            timePericiaSex.value = ""
             timePericiaQui.value = ""
 
             dateJunta.setAttribute('required', 'required')
@@ -372,7 +372,7 @@
             timeRecusado.removeAttribute('required')
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
-            timePericiaTer.removeAttribute('required')
+            timePericiaSex.removeAttribute('required')
 
         } else if (direcionamento.value == "Avaliação Psiquiátrica") {
             datahora[0].style.display = "inline-block"
@@ -397,13 +397,13 @@
             timePsic.name = "hora_agenda"
             timeRecusado.name = ""
             timeJunta.name = ""
-            timePericiaTer.name = ""
+            timePericiaSex.name = ""
             timePericiaQui.name = ""
 
             timePsic.style.display = "inline-block"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
-            timePericiaTer.style.display = "none"
+            timePericiaSex.style.display = "none"
             timePericiaQui.style.display = "none"
 
             dateRecusado.value = ""
@@ -414,7 +414,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaTer.value = ""
+            timePericiaSex.value = ""
             timePericiaQui.value = ""
 
             datePsic.setAttribute('required', 'required')
@@ -426,7 +426,7 @@
             timeRecusado.removeAttribute('required')
             timeJunta.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
-            timePericiaTer.removeAttribute('required')
+            timePericiaSex.removeAttribute('required')
 
         } else if (direcionamento.value == "Atendimento Pericial") {
             datahora[0].style.display = "inline-block"
@@ -464,7 +464,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaTer.value = ""
+            timePericiaSex.value = ""
             timePericiaQui.value = ""
 
             datePericia.setAttribute('required', 'required')
@@ -474,7 +474,7 @@
             timeRecusado.removeAttribute('required')
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
-            timePericiaTer.removeAttribute('required')
+            timePericiaSex.removeAttribute('required')
 
         } else {
             datahora[0].style.display = "inline-block"
@@ -499,13 +499,13 @@
             timeRecusado.name = "hora_agenda"
             timeJunta.name = ""
             timePsic.name = ""
-            timePericiaTer.name = ""
+            timePericiaSex.name = ""
             timePericiaQui.name = ""
 
             timeRecusado.style.display = "inline-block"
             timeJunta.style.display = "none"
             timePsic.style.display = "none"
-            timePericiaTer.style.display = "none"
+            timePericiaSex.style.display = "none"
             timePericiaQui.style.display = "none"
 
             dateRecusado.value = ""
@@ -516,7 +516,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaTer.value = ""
+            timePericiaSex.value = ""
             timePericiaQui.value = ""
 
             dateJunta.removeAttribute('required')
@@ -528,7 +528,7 @@
             timeRecusado.removeAttribute('required')
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
-            timePericiaTer.removeAttribute('required')
+            timePericiaSex.removeAttribute('required')
 
             if (direcionamento.value == "Recusado") {
                 datahora[0].style.display = "none"
@@ -545,16 +545,16 @@
         let timeRecusado = document.querySelector('#timerecusado');
         let timePsic = document.querySelector('#timepsic');
         let timePericiaQui = document.querySelector('#timepericiaqui');
-        let timePericiaTer = document.querySelector('#timepericiater');
+        let timePericiaSex = document.querySelector('#timepericiasex');
 
-        if (diaSemana.includes('Ter')) {
-            timePericiaTer.name = "hora_agenda"
+        if (diaSemana.includes('Sex')) {
+            timePericiaSex.name = "hora_agenda"
             timePericiaQui.name = ""
             timeRecusado.name = ""
             timeJunta.name = ""
             timePsic.name = ""
             
-            timePericiaTer.style.display = "inline-block"
+            timePericiaSex.style.display = "inline-block"
             timePericiaQui.style.display = "none"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
@@ -565,18 +565,18 @@
             timePsic.value = ""
             timePericiaQui.value = ""
 
-            timePericiaTer.setAttribute('required', 'required')
+            timePericiaSex.setAttribute('required', 'required')
             timePericiaQui.removeAttribute('required')
 
         } else if (diaSemana.includes('Qui')) {
             timePericiaQui.name = "hora_agenda"
-            timePericiaTer.name = ""
+            timePericiaSex.name = ""
             timeRecusado.name = ""
             timeJunta.name = ""
             timePsic.name = ""
             
             timePericiaQui.style.display = "inline-block"
-            timePericiaTer.style.display = "none"
+            timePericiaSex.style.display = "none"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
             timePsic.style.display = "none"
@@ -584,10 +584,10 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaTer.value = ""
+            timePericiaSex.value = ""
 
             timePericiaQui.setAttribute('required', 'required')
-            timePericiaTer.removeAttribute('required')
+            timePericiaSex.removeAttribute('required')
         }
     }
 
