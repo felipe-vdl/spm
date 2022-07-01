@@ -119,7 +119,7 @@
             <h5 class="text-center fw-light p-1 m-0">Imagem/Documento do Atestado</h5>
         </div>
         <div class="x-content">
-            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+            <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; row-gap: 20px;">
                 @foreach ($doc_atestados as $atestado)
                     @if ($atestado->extensao === 'png' || $atestado->extensao === 'jpg' || $atestado->extensao === 'jpeg' || $atestado->extensao === 'bmp' || $atestado->extensao === 'gif' || $atestado->extensao === 'jfif')
                     <figure>
@@ -140,7 +140,7 @@
             <h5 class="text-center fw-light p-1 m-0">Comprovante de Afastamento</h5>
         </div>
         <div class="x-content">
-            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+            <div style="display: flex; justify-content: space-evenly; flex-wrap: wrap; row-gap: 20px;">
                 @foreach ($doc_afastamentos as $afastamento)
                     @if ($afastamento->extensao === 'png' || $afastamento->extensao === 'jpg' || $afastamento->extensao === 'jpeg' || $afastamento->extensao === 'bmp' || $afastamento->extensao === 'gif' || $afastamento->extensao === 'jfif')
                     <figure>
