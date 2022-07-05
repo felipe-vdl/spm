@@ -171,16 +171,19 @@ class RequerimentoPericiaController extends Controller
                 $requerimento->motivo_recusa        = $request->motivo_recusa;
                 $requerimento->data_avaliacao       = $data_atual;
                 $requerimento->status               = 1;
+                $requerimento->observacao           = $request->observacao;
                 $reagenda                           = 0;
 
             } else if ($request->direcionamento === "COVID") {
                 $requerimento->data_avaliacao       = $data_atual;
                 $requerimento->status               = 4;
+                $requerimento->observacao           = $request->observacao;
                 $reagenda                           = 0;
 
             } else if ($requerimento->status === 0) {
                 $requerimento->data_agenda          = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
                 $requerimento->hora_agenda          = $request->hora_agenda;
+                $requerimento->observacao           = $request->observacao;
                 $requerimento->status               = 3;
                 $requerimento->data_avaliacao       = $data_atual;
                 $reagenda                           = 0;
@@ -189,6 +192,7 @@ class RequerimentoPericiaController extends Controller
                 $requerimento->data_reagenda        = $data_atual;
                 $requerimento->data_reagendada      = date("Y-m-d H:i:s", strtotime(str_replace('/','-',substr($request->data_agenda, 0, 10))." 12:00:00"));
                 $requerimento->hora_reagendada      = $request->hora_agenda;
+                $requerimento->observacao_reagenda  = $request->observacao;
                 $requerimento->quant_reagendas      = $requerimento->quant_reagendas + 1;
                 $requerimento->status               = 3;
                 $reagenda                           = 1;
@@ -201,8 +205,12 @@ class RequerimentoPericiaController extends Controller
             
             // Envio de E-mail após avaliação, atribui envio = 0 em caso de falha de envio.
             try {
-                
                 if ($reagenda === 1) {
+                    // Visualizar por View
+                    /* $requerimento->update();
+                    DB::commit();
+                    return view('mail/reagenda', compact('requerimento')); */
+                    
                     $mail = env('MAIL_FROM_ADDRESS','');
                     Mail::send('mail.reagenda', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                         $m->from($mail, 'Perícia Médica');

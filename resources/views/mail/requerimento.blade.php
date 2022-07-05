@@ -36,6 +36,9 @@
 <h3 style="margin-bottom: 5px;">Requerimento</h3>
 <ul style="margin-top: 0;">
     <li><b>Protocolo do seu requerimento:</b> {{ $requerimento->protocolo }}</li>
+    @if($requerimento->observacao)
+    <li><b>Observação do avaliador:</b> {{ $requerimento->observacao }}
+    @endif
     <li><b>Direcionamento:</b> {{ $requerimento->direcionamento }}</li>
     <li><b>Data/Hora agendada:</b> {{ date('d/m/Y', strtotime($requerimento->data_agenda)) }} às {{ $requerimento->hora_agenda }} horas.</li>
     <li><b>Endereço:</b> Subsecretaria de Administração (segundo andar) — Prefeitura Municipal de Mesquita.

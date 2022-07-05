@@ -7,6 +7,9 @@
 <h3 style="margin-bottom: 5px;">Requerimento Reagendado</h3>
 <ul style="margin-top: 0;">
     <li><b>Protocolo do seu requerimento:</b> {{ $requerimento->protocolo }}</li>
+    @if($requerimento->observacao_reagenda)
+    <li><b>Observação do avaliador: </b> {{ $requerimento->observacao_reagenda }}
+    @endif
     <li><b>Direcionamento:</b> {{ $requerimento->direcionamento }}</li>
     <li><b>Data/Hora Reagendada:</b> {{ date('d/m/Y', strtotime($requerimento->data_reagendada)) }} às {{ $requerimento->hora_reagendada }} horas.</li>
     <li><b>Endereço:</b> Subsecretaria de Administração (segundo andar) — Prefeitura Municipal de Mesquita.

@@ -12,11 +12,15 @@
     border: 2px solid grey;
 }
 
-/* .imagens {
+#observacao-div {
+    margin-top: 2rem;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-} */
+    flex-direction: column;
+    align-items: flex-start;
+}
+.observacao {
+    width: 100%;
+}
 
 #infos {
     font-size: 18px;

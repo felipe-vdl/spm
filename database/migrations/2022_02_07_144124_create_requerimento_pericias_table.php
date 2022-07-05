@@ -36,6 +36,8 @@ class CreateRequerimentoPericiasTable extends Migration
             $table->string('hora_reagendada', 5)->nullable();
             $table->string('data_confirmacaoreagenda', 20)->nullable();
             $table->text('justificativa_cancelamento')->nullable();
+            $table->text('observacao')->nullable();
+            $table->text('observacao_reagenda')->nullable();
             $table->tinyInteger('quant_reagendas')->nullable();
             $table->tinyInteger('envio_create')->nullable();
             $table->tinyInteger('envio_agenda')->nullable();

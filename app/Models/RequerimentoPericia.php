@@ -28,6 +28,8 @@ class RequerimentoPericia extends Model
         'hora_reagendada',
         'data_confirmacaoreagenda',
         'justificativa_cancelamento',
+        'observacao',
+        'observacao_reagenda',
         'quant_reagendas',
         'user_id',
         'envio_create',

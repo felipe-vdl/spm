@@ -55,6 +55,11 @@
             <div>
                 <div>Direcionamento: <strong>{{ $requerimento->direcionamento }}</strong></div>
             </div>
+            @if($requerimento->observacao)
+                <div>
+                    <div>Observação do Avaliador: <strong>{{ $requerimento->observacao }}</strong></div>
+                </div>
+            @endif
             @if ($requerimento->direcionamento != "Recusado" AND $requerimento->direcionamento != "COVID")
                 <div>
                     <div>Data/Hora Agendada: <strong>{{ date('d/m/Y', strtotime($requerimento->data_agenda)) }} às {{ $requerimento->hora_agenda }}h.</strong></div>
@@ -94,6 +99,11 @@
                 @if($requerimento->data_reagenda)
                 <div>
                     <div>Data/Hora da Avaliação de Reagendamento: <strong>{{ $requerimento->data_reagenda }}</strong></div>
+                </div>
+                @endif
+                @if($requerimento->observacao_reagenda)
+                <div>
+                    <div>Observação do Avaliador (reagendamento): <strong>{{ $requerimento->observacao_reagenda }}</strong></div>
                 </div>
                 @endif
                 @if($requerimento->data_reagendada)
