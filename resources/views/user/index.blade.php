@@ -64,8 +64,10 @@
 @endsection
 
 @push('scripts')
-	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/date-uk.js"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	{{-- <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/date-uk.js"></script> --}}
+	<script type="text/javascript" src="{{ asset('js/date-uk.js') }}"></script>
+	{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+	<script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
     <script>
         $(document).ready(function(){

@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet"> --}}
+    <link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     {{-- jquery-datepicker --}}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('css/basejquery-ui.css') }}">
     {{-- jquery-timepicker --}}
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('css/jquery.timepicker.min.css') }}">
     <style>
         .loader {
         border: 16px solid #f3f3f3;
@@ -180,9 +180,12 @@
           </nav>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
+    <script src="{{ asset('js/bootstrap5.bundle.min.js') }}" integrity="" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
+    <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
+    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script>
         const radioConfirmar = document.querySelector('#confirmar');
         const radioReagendar = document.querySelector('#reagendar');
