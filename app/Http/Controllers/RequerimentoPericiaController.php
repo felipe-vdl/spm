@@ -165,7 +165,7 @@ class RequerimentoPericiaController extends Controller
 
             // Data da Avaliação/Reagendamento
             $data_atual = Carbon::now('America/Sao_Paulo')->format('d/m/Y à\s H:i.');
-
+            
             // Requerimentos recusados vs agendados vs reagendar.
             if ($request->direcionamento === "Recusado") {
                 $requerimento->motivo_recusa        = $request->motivo_recusa;

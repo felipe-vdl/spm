@@ -34,6 +34,7 @@
                         <input autocomplete="off" id="timerecusado" type="text" disabled placeholder="hh:mm" style="display: inline-block;">
                         <input autocomplete="off" id="timejunta" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepsic" type="text" placeholder="hh:mm" style="display: none;">
+                        <input autocomplete="off" id="timepericiaqua" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepericiaqui" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepericiasex" type="text" placeholder="hh:mm" style="display: none;">
                     </div>
@@ -260,6 +261,18 @@
         scrollbar: true
     });
 
+    $('#timepericiaqua').timepicker({
+        timeFormat: 'HH:mm',
+        interval: 60,
+        minTime: '9',
+        maxTime: '09:00',
+        defaultTime: '9',
+        startTime: '09:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+
     $('#timerecusado').timepicker({
         timeFormat: 'HH:mm',
         interval: 60,
@@ -273,7 +286,10 @@
     });
     
     $('#datejunta').datepicker({
-        beforeShowDay: function (a){a=a.getDay();return[a==1,""]},
+        beforeShowDay: function(date) {
+            var day = date.getDay();
+            return [(day == 1 || day == 3)];
+        },
         dateFormat: 'dd/mm/yy',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
         dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
@@ -285,8 +301,11 @@
         minDate: '1'
     });
 
-    $('#datepsic').datepicker({ beforeShowDay: function (a){a=a.getDay();return[a==1,""]},
-        beforeShowDay: function (a){a=a.getDay();return[a==1,""]},
+    $('#datepsic').datepicker({
+        beforeShowDay: function(date) {
+            var day = date.getDay();
+            return [(day == 1 || day == 3)];
+        },
         dateFormat: 'dd/mm/yy',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
         dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
@@ -299,9 +318,13 @@
     });
 
     $('#datepericia').datepicker({
+        /* beforeShowDay: function(date) {
+            var day = date.getDay();
+            return [(day = 1 && day != 2 && day != 6 && day)];
+        }, */
         beforeShowDay: function(date) {
             var day = date.getDay();
-            return [(day != 1 && day != 2 && day != 3 && day != 6 && day)];
+            return [(day == 3 || day == 4 || day == 5)];
         },
         dateFormat: 'dd/mm/yy D',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -333,6 +356,7 @@
         let timeJunta = document.querySelector('#timejunta');
         let timeRecusado = document.querySelector('#timerecusado');
         let timePsic = document.querySelector('#timepsic');
+        let timePericiaQua = document.querySelector('#timepericiaqua');
         let timePericiaQui = document.querySelector('#timepericiaqui');
         let timePericiaSex = document.querySelector('#timepericiasex');
 
@@ -359,6 +383,7 @@
             timeJunta.name = "hora_agenda"
             timeRecusado.name = ""
             timePsic.name = ""
+            timePericiaQua.name = ""
             timePericiaQui.name = ""
             timePericiaSex.name = ""
 
@@ -367,6 +392,7 @@
             timePsic.style.display = "none"
             timePericiaSex.style.display = "none"
             timePericiaQui.style.display = "none"
+            timePericiaQua.style.display = "none"
 
             dateRecusado.value = ""
             dateJunta.value = ""
@@ -378,6 +404,7 @@
             timePsic.value = ""
             timePericiaSex.value = ""
             timePericiaQui.value = ""
+            timePericiaQua.value = ""
 
             dateJunta.setAttribute('required', 'required')
             dateRecusado.removeAttribute('required')
@@ -388,6 +415,7 @@
             timeRecusado.removeAttribute('required')
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
+            timePericiaQua.removeAttribute('required')
             timePericiaSex.removeAttribute('required')
 
         } else if (direcionamento.value == "Avaliação Psiquiátrica") {
@@ -415,12 +443,14 @@
             timeJunta.name = ""
             timePericiaSex.name = ""
             timePericiaQui.name = ""
+            timePericiaQua.name = ""
 
             timePsic.style.display = "inline-block"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
             timePericiaSex.style.display = "none"
             timePericiaQui.style.display = "none"
+            timePericiaQua.style.display = "none"
 
             dateRecusado.value = ""
             dateJunta.value = ""
@@ -432,6 +462,7 @@
             timePsic.value = ""
             timePericiaSex.value = ""
             timePericiaQui.value = ""
+            timePericiaQua.value = ""
 
             datePsic.setAttribute('required', 'required')
             dateRecusado.removeAttribute('required')
@@ -441,6 +472,7 @@
             timePsic.setAttribute('required', 'required')
             timeRecusado.removeAttribute('required')
             timeJunta.removeAttribute('required')
+            timePericiaQua.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
             timePericiaSex.removeAttribute('required')
 
@@ -481,6 +513,7 @@
             timeJunta.value = ""
             timePsic.value = ""
             timePericiaSex.value = ""
+            timePericiaQua.value = ""
             timePericiaQui.value = ""
 
             datePericia.setAttribute('required', 'required')
@@ -489,6 +522,7 @@
 
             timeRecusado.removeAttribute('required')
             timePsic.removeAttribute('required')
+            timePericiaQua.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
             timePericiaSex.removeAttribute('required')
 
@@ -517,12 +551,14 @@
             timePsic.name = ""
             timePericiaSex.name = ""
             timePericiaQui.name = ""
+            timePericiaQua.name = ""
 
             timeRecusado.style.display = "inline-block"
             timeJunta.style.display = "none"
             timePsic.style.display = "none"
             timePericiaSex.style.display = "none"
             timePericiaQui.style.display = "none"
+            timePericiaQua.style.display = "none"
 
             dateRecusado.value = ""
             dateJunta.value = ""
@@ -534,6 +570,7 @@
             timePsic.value = ""
             timePericiaSex.value = ""
             timePericiaQui.value = ""
+            timePericiaQua.value = ""
 
             dateJunta.removeAttribute('required')
             dateRecusado.removeAttribute('required')
@@ -544,6 +581,7 @@
             timeRecusado.removeAttribute('required')
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
+            timePericiaQua.removeAttribute('required')
             timePericiaSex.removeAttribute('required')
 
             if (direcionamento.value == "Recusado") {
@@ -560,17 +598,20 @@
         let timeJunta = document.querySelector('#timejunta');
         let timeRecusado = document.querySelector('#timerecusado');
         let timePsic = document.querySelector('#timepsic');
+        let timePericiaQua = document.querySelector('#timepericiaqua');
         let timePericiaQui = document.querySelector('#timepericiaqui');
         let timePericiaSex = document.querySelector('#timepericiasex');
 
         if (diaSemana.includes('Sex')) {
             timePericiaSex.name = "hora_agenda"
+            timePericiaQua.name = ""
             timePericiaQui.name = ""
             timeRecusado.name = ""
             timeJunta.name = ""
             timePsic.name = ""
             
             timePericiaSex.style.display = "inline-block"
+            timePericiaQua.style.display = "none"
             timePericiaQui.style.display = "none"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
@@ -580,18 +621,22 @@
             timeJunta.value = ""
             timePsic.value = ""
             timePericiaQui.value = ""
+            timePericiaSex.value = ""
 
             timePericiaSex.setAttribute('required', 'required')
+            timePericiaQua.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
 
         } else if (diaSemana.includes('Qui')) {
             timePericiaQui.name = "hora_agenda"
+            timePericiaQua.name = ""
             timePericiaSex.name = ""
             timeRecusado.name = ""
             timeJunta.name = ""
             timePsic.name = ""
             
             timePericiaQui.style.display = "inline-block"
+            timePericiaQua.style.display = "none"
             timePericiaSex.style.display = "none"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
@@ -601,8 +646,35 @@
             timeJunta.value = ""
             timePsic.value = ""
             timePericiaSex.value = ""
+            timePericiaQua.value = ""
 
             timePericiaQui.setAttribute('required', 'required')
+            timePericiaQua.removeAttribute('required')
+            timePericiaSex.removeAttribute('required')
+
+        } else if (diaSemana.includes('Qua')) {
+            timePericiaQua.name = "hora_agenda"
+            timePericiaQui.name = ""
+            timePericiaSex.name = ""
+            timeRecusado.name = ""
+            timeJunta.name = ""
+            timePsic.name = ""
+            
+            timePericiaQua.style.display = "inline-block"
+            timePericiaQui.style.display = "none"
+            timePericiaSex.style.display = "none"
+            timeRecusado.style.display = "none"
+            timeJunta.style.display = "none"
+            timePsic.style.display = "none"
+            
+            timeRecusado.value = ""
+            timeJunta.value = ""
+            timePsic.value = ""
+            timePericiaSex.value = ""
+            timePericiaQui.value = ""
+
+            timePericiaQua.setAttribute('required', 'required')
+            timePericiaQui.removeAttribute('required')
             timePericiaSex.removeAttribute('required')
         }
     }
