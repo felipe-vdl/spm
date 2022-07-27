@@ -36,7 +36,7 @@
                         <input autocomplete="off" id="timepsic" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepericiaqua" type="text" placeholder="hh:mm" style="display: none;">
                         <input autocomplete="off" id="timepericiaqui" type="text" placeholder="hh:mm" style="display: none;">
-                        <input autocomplete="off" id="timepericiasex" type="text" placeholder="hh:mm" style="display: none;">
+                        {{-- <input autocomplete="off" id="timepericiasex" type="text" placeholder="hh:mm" style="display: none;"> --}}
                     </div>
                     <div class="motivo" style="display: none;">
                         <label>Motivo de Recusa:</label>
@@ -237,7 +237,7 @@
         scrollbar: true
     });
 
-    $('#timepericiasex').timepicker({
+    /* $('#timepericiasex').timepicker({
         timeFormat: 'HH:mm',
         interval: 60,
         minTime: '09',
@@ -247,7 +247,7 @@
         dynamic: false,
         dropdown: true,
         scrollbar: true
-    });
+    }); */
 
     $('#timepericiaqui').timepicker({
         timeFormat: 'HH:mm',
@@ -324,7 +324,7 @@
         }, */
         beforeShowDay: function(date) {
             var day = date.getDay();
-            return [(day == 3 || day == 4 || day == 5)];
+            return [(day == 3 || day == 4)];
         },
         dateFormat: 'dd/mm/yy D',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
@@ -358,7 +358,7 @@
         let timePsic = document.querySelector('#timepsic');
         let timePericiaQua = document.querySelector('#timepericiaqua');
         let timePericiaQui = document.querySelector('#timepericiaqui');
-        let timePericiaSex = document.querySelector('#timepericiasex');
+        /* let timePericiaSex = document.querySelector('#timepericiasex'); */
 
         if(direcionamento.value == "Junta Médica") {
             datahora[0].style.display = "inline-block";
@@ -385,12 +385,12 @@
             timePsic.name = ""
             timePericiaQua.name = ""
             timePericiaQui.name = ""
-            timePericiaSex.name = ""
+            /* timePericiaSex.name = "" */
 
             timeJunta.style.display = "inline-block"
             timeRecusado.style.display = "none"
             timePsic.style.display = "none"
-            timePericiaSex.style.display = "none"
+            /* timePericiaSex.style.display = "none" */
             timePericiaQui.style.display = "none"
             timePericiaQua.style.display = "none"
 
@@ -402,7 +402,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaSex.value = ""
+            /* timePericiaSex.value = "" */
             timePericiaQui.value = ""
             timePericiaQua.value = ""
 
@@ -416,7 +416,7 @@
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
             timePericiaQua.removeAttribute('required')
-            timePericiaSex.removeAttribute('required')
+            /* timePericiaSex.removeAttribute('required') */
 
         } else if (direcionamento.value == "Avaliação Psiquiátrica") {
             datahora[0].style.display = "inline-block"
@@ -441,14 +441,14 @@
             timePsic.name = "hora_agenda"
             timeRecusado.name = ""
             timeJunta.name = ""
-            timePericiaSex.name = ""
+            /* timePericiaSex.name = "" */
             timePericiaQui.name = ""
             timePericiaQua.name = ""
 
             timePsic.style.display = "inline-block"
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
-            timePericiaSex.style.display = "none"
+            /* timePericiaSex.style.display = "none" */
             timePericiaQui.style.display = "none"
             timePericiaQua.style.display = "none"
 
@@ -460,7 +460,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaSex.value = ""
+            /* timePericiaSex.value = "" */
             timePericiaQui.value = ""
             timePericiaQua.value = ""
 
@@ -474,7 +474,7 @@
             timeJunta.removeAttribute('required')
             timePericiaQua.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
-            timePericiaSex.removeAttribute('required')
+            /* timePericiaSex.removeAttribute('required') */
 
         } else if (direcionamento.value == "Atendimento Pericial") {
             datahora[0].style.display = "inline-block"
@@ -512,7 +512,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaSex.value = ""
+            /* timePericiaSex.value = "" */
             timePericiaQua.value = ""
             timePericiaQui.value = ""
 
@@ -524,7 +524,7 @@
             timePsic.removeAttribute('required')
             timePericiaQua.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
-            timePericiaSex.removeAttribute('required')
+            /* timePericiaSex.removeAttribute('required') */
 
         } else {
             datahora[0].style.display = "inline-block"
@@ -549,14 +549,14 @@
             timeRecusado.name = "hora_agenda"
             timeJunta.name = ""
             timePsic.name = ""
-            timePericiaSex.name = ""
+            /* timePericiaSex.name = "" */
             timePericiaQui.name = ""
             timePericiaQua.name = ""
 
             timeRecusado.style.display = "inline-block"
             timeJunta.style.display = "none"
             timePsic.style.display = "none"
-            timePericiaSex.style.display = "none"
+            /* timePericiaSex.style.display = "none" */
             timePericiaQui.style.display = "none"
             timePericiaQua.style.display = "none"
 
@@ -568,7 +568,7 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaSex.value = ""
+            /* timePericiaSex.value = "" */
             timePericiaQui.value = ""
             timePericiaQua.value = ""
 
@@ -582,7 +582,7 @@
             timePsic.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
             timePericiaQua.removeAttribute('required')
-            timePericiaSex.removeAttribute('required')
+            /* timePericiaSex.removeAttribute('required') */
 
             if (direcionamento.value == "Recusado") {
                 datahora[0].style.display = "none"
@@ -600,9 +600,9 @@
         let timePsic = document.querySelector('#timepsic');
         let timePericiaQua = document.querySelector('#timepericiaqua');
         let timePericiaQui = document.querySelector('#timepericiaqui');
-        let timePericiaSex = document.querySelector('#timepericiasex');
+        /* let timePericiaSex = document.querySelector('#timepericiasex'); */
 
-        if (diaSemana.includes('Sex')) {
+        /* if (diaSemana.includes('Sex')) {
             timePericiaSex.name = "hora_agenda"
             timePericiaQua.name = ""
             timePericiaQui.name = ""
@@ -627,17 +627,17 @@
             timePericiaQua.removeAttribute('required')
             timePericiaQui.removeAttribute('required')
 
-        } else if (diaSemana.includes('Qui')) {
+        } else */ if (diaSemana.includes('Qui')) {
             timePericiaQui.name = "hora_agenda"
             timePericiaQua.name = ""
-            timePericiaSex.name = ""
+            /* timePericiaSex.name = "" */
             timeRecusado.name = ""
             timeJunta.name = ""
             timePsic.name = ""
             
             timePericiaQui.style.display = "inline-block"
             timePericiaQua.style.display = "none"
-            timePericiaSex.style.display = "none"
+            /* timePericiaSex.style.display = "none" */
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
             timePsic.style.display = "none"
@@ -645,24 +645,24 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaSex.value = ""
+            /* timePericiaSex.value = "" */
             timePericiaQua.value = ""
 
             timePericiaQui.setAttribute('required', 'required')
             timePericiaQua.removeAttribute('required')
-            timePericiaSex.removeAttribute('required')
+            /* timePericiaSex.removeAttribute('required') */
 
         } else if (diaSemana.includes('Qua')) {
             timePericiaQua.name = "hora_agenda"
             timePericiaQui.name = ""
-            timePericiaSex.name = ""
+            /* timePericiaSex.name = "" */
             timeRecusado.name = ""
             timeJunta.name = ""
             timePsic.name = ""
             
             timePericiaQua.style.display = "inline-block"
             timePericiaQui.style.display = "none"
-            timePericiaSex.style.display = "none"
+            /* timePericiaSex.style.display = "none" */
             timeRecusado.style.display = "none"
             timeJunta.style.display = "none"
             timePsic.style.display = "none"
@@ -670,12 +670,12 @@
             timeRecusado.value = ""
             timeJunta.value = ""
             timePsic.value = ""
-            timePericiaSex.value = ""
+            /* timePericiaSex.value = "" */
             timePericiaQui.value = ""
 
             timePericiaQua.setAttribute('required', 'required')
             timePericiaQui.removeAttribute('required')
-            timePericiaSex.removeAttribute('required')
+            /* timePericiaSex.removeAttribute('required') */
         }
     }
 
