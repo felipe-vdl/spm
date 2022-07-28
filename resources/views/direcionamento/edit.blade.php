@@ -88,7 +88,7 @@
                 <input autocomplete="off" value="{{ $config[4]->inicio }}" name="qui[inicio]" class="timepickers" type="text" placeholder="hh:mm">
               </td>
               <td style="width: 25%;" class="text-center">
-                <input autocomplete="off" value="{{ $config[4]->inicio }}" name="qui[fim]" class="timepickers" type="text" placeholder="hh:mm">
+                <input autocomplete="off" value="{{ $config[4]->fim }}" name="qui[fim]" class="timepickers" type="text" placeholder="hh:mm">
               </td>
             </tr>
             <tr>
@@ -101,7 +101,7 @@
                 <input autocomplete="off" value="{{ $config[5]->inicio }}" name="sex[inicio]" class="timepickers" type="text" placeholder="hh:mm">
               </td>
               <td style="width: 25%;" class="text-center">
-                <input autocomplete="off" value="{{ $config[5]->inicio }}" name="sex[fim]" class="timepickers" type="text" placeholder="hh:mm">
+                <input autocomplete="off" value="{{ $config[5]->fim }}" name="sex[fim]" class="timepickers" type="text" placeholder="hh:mm">
               </td>
             </tr>
             <tr>
@@ -114,7 +114,7 @@
                 <input autocomplete="off" value="{{ $config[6]->inicio }}" name="sab[inicio]" class="timepickers" type="text" placeholder="hh:mm">
               </td>
               <td style="width: 25%;" class="text-center">
-                <input autocomplete="off" value="{{ $config[6]->inicio }}" name="sab[fim]" class="timepickers" type="text" placeholder="hh:mm">
+                <input autocomplete="off" value="{{ $config[6]->fim }}" name="sab[fim]" class="timepickers" type="text" placeholder="hh:mm">
               </td>
             </tr>
           </tbody>
