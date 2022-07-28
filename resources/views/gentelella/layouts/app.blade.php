@@ -91,7 +91,7 @@
 								</div> --}}
 
 								<span style="color: #bfa15f; ">Perícia Médica</span>
-								<span style="font-size: 8px">V 0.1</span> 
+								<span style="font-size: 8px">V 0.9</span> 
 							</a>
 						</div>
 

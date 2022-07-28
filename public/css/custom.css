@@ -25,3 +25,28 @@
 #infos {
     font-size: 18px;
 }
+
+.config-div {
+  display: flex;
+  flex-direction: column;
+}
+.config-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0.25rem 0;
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+.config-btns {
+  margin-top: 1rem;
+  margin-left: auto;
+}
+.config-day {
+  width: 12rem;
+}
+
+.wid-25 {
+  width: 25% !important;
+}

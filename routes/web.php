@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('export-the-docx/{data}', 'RelatorioController@exportDocsFile');
 
 	Route::resource('requerimento_pericias', 'RequerimentoPericiaController');
+	Route::resource('direcionamentos', 'DirecionamentoController');
 	Route::resource('user', 'UserController');
 	Route::resource('relatorio', 'RelatorioController');
 });
