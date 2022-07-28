@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RequerimentoPericia;
+use App\Models\Direcionamento;
 use App\Models\DocumentoAtestado;
 use App\Models\DocumentoAfastamento;
 use App\Models\User;
@@ -132,8 +133,18 @@ class RequerimentoPericiaController extends Controller
         $requerimento = RequerimentoPericia::with('doc_atestado', 'doc_afastamento')->find($id);
         $doc_atestados = DocumentoAtestado::where('requerimento_id', $id)->get();
         $doc_afastamentos = DocumentoAfastamento::where('requerimento_id', $id)->get();
+        
+        $avPsiquiatrica = Direcionamento::where('nome', "Avaliação Psiquiátrica")->first();
+        $atPericial = Direcionamento::where('nome', "Atendimento Pericial")->first();
+        $jtMedica = Direcionamento::where('nome', "Junta Médica")->first();
 
-        return view('requerimento_pericia/edit', compact('requerimento', 'doc_atestados', 'doc_afastamentos'));
+        $avPsiquiatricaConfig = json_decode($avPsiquiatrica->config);
+        $atPericialConfig     = json_decode($atPericial->config);
+        $jtMedicaConfig       = json_decode($jtMedica->config);
+
+        // dd($avPsiquiatricaConfig, $atPericialConfig, $jtMedicaConfig);
+
+        return view('requerimento_pericia/edit', compact('requerimento', 'doc_atestados', 'doc_afastamentos', 'avPsiquiatricaConfig', 'atPericialConfig', 'jtMedicaConfig'));
     }
 
     /**
