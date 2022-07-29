@@ -11,25 +11,30 @@
 		<title>Perícia Médica</title>
   
 		<!--     Fonts and icons     -->
-		<link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
+		{{-- <link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet"> --}}
 
-		<link rel="stylesheet" href="{{ asset('css/all531.css') }}" integrity="" crossorigin="anonymous">
-				
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		{{-- <link rel="stylesheet" href="{{ asset('css/all531.css') }}" integrity="" crossorigin="anonymous"> --}}
+
 		{{-- datatables --}}
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}"/>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/b-1.5.6/b-colvis-1.5.6/b-flash-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.css"/>
+		{{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}"/> --}}
 
-	  	{{-- bootstrap-datetimepicker --}}
-	  	<link rel="stylesheet" href="{{ asset('bootstrap-datetimepicker/bootstrap-datetimepicker.css') }}"> 
-	 
+		{{-- bootstrap-datetimepicker --}}
+		<link rel="stylesheet" href="{{ asset('bootstrap-datetimepicker/bootstrap-datetimepicker.css') }}"> 
+
 	 	{{-- jquery-datepicker --}}
-		 <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-		 <link rel="stylesheet" href="{{ asset('css/basejquery-ui.css') }}">
+		 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		 {{-- <link rel="stylesheet" href="{{ asset('css/basejquery-ui.css') }}"> --}}
 
 		{{-- jquery-timepicker --}}
-		<link rel="stylesheet" href="{{ asset('css/jquery.timepicker.min.css') }}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+		{{-- <link rel="stylesheet" href="{{ asset('css/jquery.timepicker.min.css') }}"> --}}
 
 		{{-- jquery-daterangepicker --}}
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+		{{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/daterangepicker.css') }}" /> --}}
 
 		
 		{{-- icheck --}}

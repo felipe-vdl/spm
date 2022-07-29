@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <!--     Fonts and icons     -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet"> --}}
-    <link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="" crossorigin="anonymous">
+    {{-- <link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     {{-- jquery-datepicker --}}
     <link rel="stylesheet" href="{{ asset('css/basejquery-ui.css') }}">

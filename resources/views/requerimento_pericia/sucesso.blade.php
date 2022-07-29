@@ -8,16 +8,16 @@
     <!-- Bootstrap 5.1.3 -->
     <link href="{{ asset('css/bootstrap5.min.css') }}" rel="stylesheet" integrity="" crossorigin="anonymous">
     <!--     Fonts and icons     -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet"> --}}
-    <link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel="stylesheet">
+    {{-- <link href="{{ asset('css/fontsicons.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ asset('css/all.css') }}" integrity="" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{{ asset('css/inputstyle.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('css/app4.1.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
-    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="" crossorigin="anonymous"> --}}
-    <link rel="stylesheet" href="{{ asset('css/all531.css') }}" integrity="" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="{{ asset('css/all531.css') }}" integrity="" crossorigin="anonymous"> --}}
     <style>
       body {
             min-height: 100vh;
