@@ -151,8 +151,7 @@
 
 <script>
   const config = @json($config);
-  console.log(config);
-
+  
   /* timePicker */
   $('.timepickers').timepicker({
     timeFormat: 'HH:mm',

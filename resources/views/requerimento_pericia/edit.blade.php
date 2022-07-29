@@ -229,8 +229,6 @@
     const atPericial = @json($atPericialConfig);
     const jtMedica = @json($jtMedicaConfig);
     
-    console.log(avPsiquiatrica, atPericial, jtMedica);
-
     /* jtMedica */
         $('#timejuntadom').timepicker({
             timeFormat: 'HH:mm',
