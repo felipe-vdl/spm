@@ -6,16 +6,16 @@
 			</li>
 			
 			<li>
-				<a><i class="fas fa-solid fa-folder"></i> Requerimentos<span class="fa fa-chevron-down"></span></a>
+				<a><i class="fas fa-solid fa-folder-open"></i> Requerimentos<span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li>
-						<a href="{{ url('/requerimentos')}}" title="Requerimentos Ativos"><i class="fas fa-file-contract"></i>Análise</a>
+						<a href="{{ url('/requerimentos')}}" title="Requerimentos Ativos"><i class="fas fa-file-contract"></i>Em Análise</a>
 					</li>
 					<li>
 						<a href="{{ url('/diario')}}" title="Requerimentos Ativos"><i class="fas fa-address-book"></i>Agenda Diária</a>
 					</li>
 					<li>
-						<a href="{{ url('/arquivo')}}" title="Requerimentos Arquivados"><i class="fas fa-solid fa-folder-open"></i>Arquivo</a>
+						<a href="{{ url('/arquivo')}}" title="Requerimentos Arquivados"><i class="fas fa-solid fa-folder"></i>Arquivados</a>
 					</li>
 					<li>
 						<a href="{{url("/relatorio")}}" title="Relatórios"><i class="fas fa-solid fa-file-pdf"></i>Relatório</a>

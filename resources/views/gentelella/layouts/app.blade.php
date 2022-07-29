@@ -39,11 +39,8 @@
 		
 		{{-- icheck --}}
 		<link rel="stylesheet" href="{{ asset('icheck/skins/all.css') }}">
-
-		  
-		 
-	  	<link rel="stylesheet" href="{{ url(mix('/css/app.css')) }}">
-	  	<link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+		<link rel="stylesheet" href="{{ url(mix('/css/app.css')) }}">
+		<link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
 		<style>
 		.loader {
 		border: 16px solid #f3f3f3;
