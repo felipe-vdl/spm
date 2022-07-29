@@ -7,6 +7,14 @@
 </style>
 @section('content')
 <div class="x_panel modal-content">
+    @if(session()->get('success'))
+      <div class="alert alert-success">
+        {{ session()->get('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
     <div class="x_title">
         <h5><i class="fas fa-file-contract"></i> Direcionamentos</h5>
     </div>
