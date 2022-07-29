@@ -72,11 +72,6 @@
 <script>
 
     $('#datecancela').datepicker({
-            /* beforeShowDay: function(date) {
-                let show = true;
-                if(date.getDay()==6||date.getDay()==0||date.getDay()==3||date.getDay()==5) show=false
-                return [show];
-            }, */
             dateFormat: 'dd/mm/yy',
             dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
             dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
@@ -88,11 +83,6 @@
         });
     
     $('#datenova').datepicker({
-        /* beforeShowDay: function(date) {
-            let show = true;
-            if(date.getDay()==6||date.getDay()==0||date.getDay()==3||date.getDay()==5) show=false
-            return [show];
-        }, */
         dateFormat: 'dd/mm/yy',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
         dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
