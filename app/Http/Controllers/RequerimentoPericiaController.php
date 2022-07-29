@@ -97,17 +97,6 @@ class RequerimentoPericiaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -276,17 +265,6 @@ class RequerimentoPericiaController extends Controller
 
         DB::commit();
         return redirect('/requerimentos')->with('success', 'Requerimento avaliado com sucesso.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function confirmar()
