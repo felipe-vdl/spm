@@ -38,10 +38,13 @@ class RelatorioController extends Controller
         $dataFim = date("Y-m-d H:i:s", strtotime(substr($data, 10, 10)." 23:59:59"));
         /* dd($dataInicio, $dataFim, $dataInt); */
 
+
+
         $relatorio = DB::table('requerimento_pericias')
                                 ->where('data_agenda','>=',$dataInicio)
                                 ->where('data_agenda','<=',$dataFim)
-                                ->where('status','=',4)
+                                ->whereIn('status',[3,4])
+                                
                                     ->orderBy('data_agenda','asc')
                                             ->orderBy('created_at','asc')
                                                 ->get();

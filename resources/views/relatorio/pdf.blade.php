@@ -132,7 +132,14 @@ hr {
               <td>{{$item->email}}</td>
               <td>{{$item->direcionamento}}</td>
               <td>{{$item->protocolo}}</td>
-              <td>{{substr(date('d/m/Y H:i', strtotime($item->data_agenda)), 0, 10).' às '.$item->hora_agenda.' horas'}}</td>
+              <td>
+                @if ($item->status == 4)
+                  {{substr(date('d/m/Y H:i', strtotime($item->data_agenda)), 0, 10).' às '.$item->hora_agenda.' horas'}}
+                @elseif($item->status == 3)
+                  Recusado
+                @endif  
+              
+              </td>
               <td>
               @if ($item->presenca == 0)
               <a>Ausente</a>
