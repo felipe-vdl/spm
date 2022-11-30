@@ -133,11 +133,12 @@ hr {
               <td>{{$item->direcionamento}}</td>
               <td>{{$item->protocolo}}</td>
               <td>
-                @if ($item->status == 4)
+                {{substr(date('d/m/Y H:i', strtotime($item->data_agenda)), 0, 10).' às '.$item->hora_agenda.' horas'}}
+                {{-- @if ($item->status == 4)
                   {{substr(date('d/m/Y H:i', strtotime($item->data_agenda)), 0, 10).' às '.$item->hora_agenda.' horas'}}
-                @elseif($item->status == 3)
+                @elseif($item->status == 1)
                   Recusado
-                @endif  
+                @endif   --}}
               
               </td>
               <td>
