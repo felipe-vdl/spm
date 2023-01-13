@@ -117,6 +117,7 @@ hr {
             <th>Nº</th>
             <th>Nome</th>
             <th>Matrícula</th>
+            <th>Outro Vínculo</th>
             <th>E-mail</th>
             <th>Direcionamento</th>
             <th>Protocolo</th>
@@ -129,6 +130,7 @@ hr {
               <td>{{$i++}}</td>
               <td>{{$item->nome}}</td>
               <td>{{$item->matricula}}</td>
+              <td>{{$item->vinculo}}</td>
               <td>{{$item->email}}</td>
               <td>{{$item->direcionamento}}</td>
               <td>{{$item->protocolo}}</td>
