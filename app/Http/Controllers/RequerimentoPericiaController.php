@@ -593,6 +593,8 @@ class RequerimentoPericiaController extends Controller
                 }
                 $requerimento->update();
             }
+            DB::commit();
+            return json_encode("E-mails reenviados!");
 
         } catch (Throwable $th) {
             dd($th);
