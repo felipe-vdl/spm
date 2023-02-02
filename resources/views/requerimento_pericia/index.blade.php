@@ -42,6 +42,7 @@
                         <th>Data/Hora Agendada</th>
                         <th>Ações</th>
                         <th>Avaliador</th>
+                        <th>Email Enviado</th>
                     </tr>
                 </thead>
                 <tbody class="tabela">
@@ -120,6 +121,32 @@
                                         {{ substr($requerimento->user->name, 0, strpos($requerimento->user->name, ' ')) }}
                                     @endif
                                 </td>
+
+                                <td>
+                                    @if ($requerimento->envio_create == 1)
+                                        Sim /
+                                    @else
+                                        Não /
+                                    @endif
+
+                                    @if ($requerimento->envio_agenda == 1)
+                                        Sim /
+                                    @else
+                                        Não /
+                                    @endif
+
+                                    
+                                    @if ($requerimento->envio_reagenda != null)
+                                        @if ($requerimento->envio_reagenda == 1)
+                                            Sim
+                                        @elseif($requerimento->envio_reagenda == 0)
+                                            Não
+                                        @endif    
+                                    @endif
+                                    
+
+
+                                </td>
                             </tr>
                         @endif
                     @endforeach
@@ -136,6 +163,7 @@
                         <th><input class="filter-input" data-column="6" type="text" placeholder="Filtro por Data/Hora Agendada"></th>
                         <th><input class="filter-input" data-column="7" type="text" placeholder="Filtro por Ações"></th>
                         <th><input class="filter-input" data-column="8" type="text" placeholder="Filtro por Avaliador"></th>
+                        <th><input class="filter-input" data-column="9" type="text" placeholder="Filtro por Email"></th>
                     </tr>
                 </tfoot>
             </table>
@@ -216,9 +244,16 @@
                         "url" : "{{ asset('js/portugues.json') }}"
                     },
                     "columnDefs": [
-                    { "width": "12%", "targets": 0 },
-                    { "width": "16%", "targets": 6 },
+                    { "width": "10%", "targets": 0 },
+                    { "width": "5%",  "targets": 1 },
+                    { "width": "10%",  "targets": 2 },
+                    { "width": "9%",  "targets": 3 },
+                    { "width": "10%", "targets": 4 },
+                    { "width": "10%", "targets": 5 },
+                    { "width": "10%", "targets": 6 },
                     { "width": "12%", "targets": 7 },
+                    { "width": "7%",  "targets": 8 },
+                    { "width": "5%",  "targets": 9 },
                     { "type": 'date-euro', "targets": 6}
                     ],
                     order: [[3, "desc"]],
