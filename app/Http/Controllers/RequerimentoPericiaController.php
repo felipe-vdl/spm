@@ -211,7 +211,7 @@ class RequerimentoPericiaController extends Controller
                     DB::commit();
                     return view('mail/reagenda', compact('requerimento')); */
                     
-                    $mail = env('MAIL_FROM_ADDRESS','');
+                    $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
                     Mail::send('mail.reagenda', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                         $m->from($mail, 'Perícia Médica');
                         $m->subject('Requerimento Reagendado');
@@ -225,7 +225,7 @@ class RequerimentoPericiaController extends Controller
                     DB::commit();
                     return view('mail/covid', compact('requerimento')); */
 
-                    $mail = env('MAIL_FROM_ADDRESS','');
+                    $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
                     Mail::send('mail.covid', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                         $m->from($mail, 'Perícia Médica');
                         $m->subject('Requerimento Finalizado');
@@ -234,7 +234,7 @@ class RequerimentoPericiaController extends Controller
                     $requerimento->envio_agenda = 1;
 
                 } else {
-                    $mail = env('MAIL_FROM_ADDRESS','');
+                    $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
                     Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                         $m->from($mail, 'Perícia Médica');
                         if ($requerimento->direcionamento === "Recusado") {
@@ -438,7 +438,7 @@ class RequerimentoPericiaController extends Controller
 
             // Envio de e-mail após a criação, atribui envio_create = 0 em caso de falha de envio.
             try {
-                $mail = env('MAIL_FROM_ADDRESS','');
+                $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
                 Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                     $m->from($mail, 'Perícia Médica');
                     $m->subject('Novo Requerimento');
@@ -499,7 +499,7 @@ class RequerimentoPericiaController extends Controller
                 $requerimento->justificativa_cancelamento = $request->justificativa;
 
                 try {
-                    $mail = env('MAIL_FROM_ADDRESS','');
+                    $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
                     Mail::send('mail.massa', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
                         $m->from($mail, 'Perícia Médica');
                         $m->subject('Requerimento Reagendado');
@@ -521,6 +521,83 @@ class RequerimentoPericiaController extends Controller
             dd($th);
             DB::rollback();
             return redirect('/requerimento_pericias/reagendar')->with('error', 'Houve um erro ao reagendar os requerimentos.');
+        }
+    }
+
+    public function reenviar()
+    {
+        DB::beginTransaction();
+        try {
+            $requerimentos = RequerimentoPericia::where('envio_create', 0)
+            ->orWhere('envio_agenda', 0)
+            ->orWhere('envio_reagenda', 0)
+            ->get();
+
+            foreach($requerimentos as $requerimento) {
+                if($requerimento->envio_create === 0) {
+                    try {
+                        $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
+                        Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                            $m->from($mail, 'Perícia Médica');
+                            $m->subject('Novo Requerimento');
+                            $m->to($requerimento->email);
+                        });
+                        $requerimento->envio_create = 1;
+
+                    } catch (Throwable $th) {
+                        $requerimento->envio_create = 0;
+                    }
+                }
+                if($requerimento->envio_agenda === 0) {
+                    try {
+                        if ($requerimento->direcionamento === "COVID") {
+                            $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
+                            Mail::send('mail.covid', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                                $m->from($mail, 'Perícia Médica');
+                                $m->subject('Requerimento Finalizado');
+                                $m->to($requerimento->email);
+                            });
+                            $requerimento->envio_agenda = 1;
+        
+                        } else {
+                            $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
+                            Mail::send('mail.requerimento', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                                $m->from($mail, 'Perícia Médica');
+                                if ($requerimento->direcionamento === "Recusado") {
+                                    $m->subject('Requerimento Recusado');
+                                } else {
+                                    $m->subject('Requerimento Agendado');
+                                }
+                                $m->to($requerimento->email);
+                            });
+                            $requerimento->envio_agenda = 1;
+                        }
+
+                    } catch (Throwable $th) {
+                        $requerimento->envio_agenda = 0;
+                    }
+                }
+                if($requerimento->envio_reagenda === 0) {
+                    try {
+                        $mail = env('MAIL_FROM_ADDRESS','gesol@mesquita.rj.gov.br');
+                        Mail::send('mail.reagenda', ['requerimento' => $requerimento], function($m) use ($requerimento, $mail) {
+                            $m->from($mail, 'Perícia Médica');
+                            $m->subject('Requerimento Reagendado');
+                            $m->to($requerimento->email);
+                        });
+                        $requerimento->envio_reagenda = 1;
+
+                    } catch (Throwable $th) {
+                        $requerimento->envio_reagenda = 0;
+                    }
+                }
+                $requerimento->update();
+            }
+
+        } catch (Throwable $th) {
+            dd($th);
+            DB::rollback();
+            return json_encode($th);
         }
     }
 }

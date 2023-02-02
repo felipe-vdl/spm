@@ -22,7 +22,7 @@
     <h5 class="text-center fw-light p-1 m-0"><i class="fas fa-file-contract"></i> Reagendamento em Massa</h5>
   </div>
     <div class="x_panel">
-        <form method="post" action="{{ url('/requerimento_pericias/reagendar') }}">
+        <form method="post" id="reagenda-form" action="{{ url('/requerimento_pericias/reagendar') }}">
         @csrf
             <div class="x_title">
                 <label for="data">Data a ser cancelada:</label>
@@ -41,6 +41,21 @@
                     <div>
                         <a id="enviar" title="Enviar reagendamentos." class="btn btn-success">Enviar Reagendamentos</a>
                     </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="x_panel modal-content" style="margin-top: 3rem;">
+  <div class="x_title">
+    <h5 class="text-center fw-light p-1 m-0"><i class="fas fa-file-contract"></i> Reenviar E-mails</h5>
+  </div>
+    <div class="x_panel">
+        <form method="GET" id="reenvio-form" action="{{ url('/requerimento_pericias/reenviar') }}">
+        @csrf
+            <div class="x_content">
+                <div>
+                    <a id="reenviar" title="Reenviar E-mail." class="btn btn-success">Reenviar</a>
                 </div>
             </div>
         </form>
@@ -96,7 +111,7 @@
 </script>
 <script defer>
     const submitBtn = document.querySelector('#enviar');
-    const form = document.querySelector('form');
+    const form = document.querySelector('#reagenda-form');
 
     submitBtn.addEventListener('click', (e) => {
         swal({
@@ -124,6 +139,41 @@
                     $("#modaleventclick").modal("show");
                 } else {
                     form.reportValidity();
+                }
+            }
+		});
+    });
+</script>
+<script defer>
+    const submitReenvioBtn = document.querySelector('#reenviar');
+    const formReenvio = document.querySelector('#reenvio-form');
+
+    submitReenvioBtn.addEventListener('click', (e) => {
+        swal({
+                title: "Atenção!",
+                text: `Você está prestes a reenviar os e-mails.`,
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        value: "cancelar",
+                        visible: true,
+                        closeModal: true
+                    },
+                    ok: {
+                        text: "Confirmar",
+                        value: 'ok',
+                        visible: true,
+                        closeModal: true
+                    }
+                }
+            }).then(function(resultado){
+            if(resultado === 'ok'){
+                if(formReenvio.checkValidity()) {
+                    formReenvio.submit();
+                    $("#modaleventclick").modal("show");
+                } else {
+                    formReenvio.reportValidity();
                 }
             }
 		});

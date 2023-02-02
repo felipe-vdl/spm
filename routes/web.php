@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/requerimento_pericias/reagendar', 'RequerimentoPericiaController@reagendar')->name('reagendar');
 	Route::post('/requerimento_pericias/reagendar', 'RequerimentoPericiaController@reagendamento')->name('reagendamento');
 	Route::post('/requerimento_pericias/confirmar', 'RequerimentoPericiaController@confirmacaointerna')->name('requerimentos.confirmacaointerna');
+	Route::get('/requerimento_pericias/reenviar', 'RequerimentoPericiaController@reenviar')->name('requerimentos.reenviar');
 
 	Route::get('relatorio/pdf/{data}',  'RelatorioController@gerarpdf');
 	Route::get('export-the-docx/{data}', 'RelatorioController@exportDocsFile');
